@@ -102,7 +102,8 @@
      "created_at": "2026-09-09",
      "quote": "Please reduce the verbosity here, just mentioning this is for registering the pyarrow extension types at import is good enough"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "test-organization-and-structure",
@@ -192,7 +193,8 @@
      "created_at": "2026-08-24",
      "quote": "Good point. what about something like\r\n\r\n```\r\n@pytest.fixture\r\ndef mpl(self, request):\r\n    self.skip_if_no_matplotlib()\r\n    return request.getfixturevalue(\"mpl_cleanup\")\r\n\r\n@pytest.fixture(params=[True, False], ids=[\"skipna\", \"no_skipna\"])\r\ndef plot_data(self, data, request, mp"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "parametrize-over-repetition",
@@ -266,7 +268,8 @@
      "created_at": "2026-09-10",
      "quote": "There are a few different paths through the code here. Can you parametrize over three cases: single EA block; two EA blocks; and a NumPy block. Something like:\n\n```\n\"data, dtype\",\n[\n    ({\"a\": [1, 2, 3]}, \"Int64\"),\n    ({\"a\": [1, 2, 3], \"b\": [4, 5, 6]}, \"Int64\"),\n    ({\"a\": [1, 2"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "github-issue-linking-in-tests",
@@ -332,7 +335,8 @@
      "created_at": "2026-09-07",
      "quote": "```suggestion\n        # GH#66372\n```\n\nI don't think we need to repeat the comment again; the GitHub reference is enough. In addition, the format I'm suggesting is more common."
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "prefer-full-object-equality-assertions",
@@ -382,7 +386,8 @@
      "created_at": "2026-07-14",
      "quote": "Please check the full state of the result.\n\n```python\nexpected = MultIndex(...)\ntm.assert_index_equal(result, expected)\n```"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "test-edge-cases-and-coverage",
@@ -432,7 +437,8 @@
      "created_at": "2026-09-04",
      "quote": "Also, does it have test coverage small sample size, where `bias=False` returns `NAN` and `bias=True` doesn't?"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "use-descriptive-variables-and-comments",
@@ -482,7 +488,8 @@
      "created_at": "2026-08-12",
      "quote": "this comment isnt adding anything"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "avoid-unnecessary-complexity-in-tests",
@@ -524,7 +531,8 @@
      "created_at": "2026-07-16",
      "quote": "Let's remove unnecessary indirections like this"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "check-dtype-and-index-codes-correctly",
@@ -558,7 +566,12 @@
      "created_at": "2026-09-05",
      "quote": "Can you instead compare to a hard-coded dict and drop `check_dtype=False`."
     }
-   ]
+   ],
+   "documented_in": null
   }
- ]
+ ],
+ "docs_checked": [
+  "AGENTS.md"
+ ],
+ "unwritten": 9
 }

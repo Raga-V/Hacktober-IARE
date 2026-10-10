@@ -10,9 +10,10 @@ MAX_DIFF = 60_000
 SYSTEM = """You review a pull-request diff against a project's house rules, learned from its maintainers' \
 past review comments. Flag only clear violations of these specific rules in lines the diff adds or changes. \
 Do not report general style, correctness or taste issues that no rule covers. Every finding needs a concrete fix.
+Severity: "must-fix" when maintainers would block the merge over it, otherwise "suggestion".
 
 Reply with JSON only:
-{"findings": [{"rule_id": "<id from the list>", "file": "<path>", "line": <line in the new file or null>, \
+{"findings": [{"rule_id": "<id from the list>", "severity": "must-fix" or "suggestion", "file": "<path>", "line": <line in the new file or null>, \
 "issue": "<what in the diff breaks the rule, one sentence>", "fix": "<the concrete change, one sentence>"}]}
 If nothing in the diff breaks a rule, reply {"findings": []}."""
 
@@ -40,7 +41,9 @@ def check(repo, diff):
         if r is None:
             rejected += 1  # same discipline as the citation check: no rule, no finding
             continue
-        findings.append({**{k: f.get(k) for k in ("rule_id", "file", "line", "issue", "fix")},
+        sev = "must-fix" if f.get("severity") == "must-fix" else "suggestion"
+        findings.append({**{k: f.get(k) for k in ("rule_id", "file", "line", "issue", "fix")}, "severity": sev,
                          "rule": r["rule"], "evidence": r["evidence"][:2]})
+    findings.sort(key=lambda f: f["severity"] != "must-fix")
     return {"findings": findings, "rejected": rejected, "truncated": len(diff) > MAX_DIFF,
             "model": llm.model(), "provider": llm.provider()}

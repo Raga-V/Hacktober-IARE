@@ -118,7 +118,8 @@
      "created_at": "2026-09-24",
      "quote": "we shouldn't create an entity directly but instead use the one created by the integration"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "config-flow-test-expectations",
@@ -224,7 +225,8 @@
      "created_at": "2026-09-25",
      "quote": "Let's make sure it finishes with a happy flow so we also test that it can recover"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "fixture-management",
@@ -330,7 +332,8 @@
      "created_at": "2026-09-18",
      "quote": "Instead make the mock config entry a common fixture"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "pr-scope",
@@ -436,7 +439,8 @@
      "created_at": "2026-09-28",
      "quote": "The coordinator is a total new feature here. Please add this in a separate PR."
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "avoid-reauth-reconfig-initial-pr",
@@ -518,7 +522,8 @@
      "created_at": "2026-09-28",
      "quote": "No we want to keep reauth out of the initial PR. You can add it in a later PT"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "avoid-direct-coordinator-interaction-in",
@@ -584,7 +589,8 @@
      "created_at": "2026-09-24",
      "quote": "Do not get and trigger the coordinator directly. Use a freezer to let it tick instead."
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "snapshot-testing-complex-data",
@@ -642,7 +648,8 @@
      "created_at": "2026-09-08",
      "quote": "instead use `snapshot_platform`"
     }
-   ]
+   ],
+   "documented_in": "AGENTS.md"
   },
   {
    "id": "avoid-inline-patching",
@@ -692,7 +699,8 @@
      "created_at": "2026-09-18",
      "quote": "This is stuff I would recommend to move to conftest.py"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "avoid-using-if-statements-in-tests",
@@ -742,7 +750,8 @@
      "created_at": "2026-09-18",
      "quote": "as this is a direct test helper, let's not add if statements"
     }
-   ]
+   ],
+   "documented_in": "AGENTS.md"
   },
   {
    "id": "avoid-bumping-dependencies-with-function",
@@ -792,7 +801,8 @@
      "created_at": "2026-09-28",
      "quote": "Dependency bumps need to be in their own dedicated PR."
     }
-   ]
+   ],
+   "documented_in": ".github/copilot-instructions.md"
   },
   {
    "id": "implement-consistent-patterns-by-inlinin",
@@ -842,7 +852,8 @@
      "created_at": "2026-09-04",
      "quote": "I see, thanks for explaining. That make sense. This function is also a perfect candidate to be a lambda, so that would be good to follow-up. :)"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "use-entity-category-diagnostic",
@@ -892,7 +903,8 @@
      "created_at": "2026-09-01",
      "quote": "This one also needs entity category diagnostic."
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "use-common-translation-keys",
@@ -942,7 +954,8 @@
      "created_at": "2026-09-28",
      "quote": "These 2 as well (off I'm sure, the other one I'm not)"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "avoid-patching-integration-internals",
@@ -984,7 +997,8 @@
      "created_at": "2026-09-18",
      "quote": "can we avoid patching internals?"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "avoid-accessing-runtime-data-in-tests",
@@ -1026,7 +1040,8 @@
      "created_at": "2026-09-16",
      "quote": "we shouldn't touch the runtime_data"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "avoid-calculating-entity-states-in-integ",
@@ -1068,7 +1083,8 @@
      "created_at": "2026-08-31",
      "quote": "This is still a calculated value that is used for a entity state. That's not allowed. I suggest removing that entity for now, and we can discuss separately how to best expose the corresponding data point."
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "avoid-putting-logic-in-try-blocks",
@@ -1110,7 +1126,8 @@
      "created_at": "2026-09-11",
      "quote": "only keep things in the try block that can raise"
     }
-   ]
+   ],
+   "documented_in": "AGENTS.md"
   },
   {
    "id": "parametrize-tests-instead-of-writing-sep",
@@ -1152,7 +1169,8 @@
      "created_at": "2026-09-15",
      "quote": "This test and `test_entry_reload_from_migration_error_fails` below both cover the same `OperationNotAllowed` branch, just from different states. Since the method raises before touching the integration, the `mock_integration`/`mock_platform` setup and the `async_*` mocks are not n"
     }
-   ]
+   ],
+   "documented_in": "AGENTS.md"
   },
   {
    "id": "assert-unique-id-in-config-flow",
@@ -1186,7 +1204,8 @@
      "created_at": "2026-09-14",
      "quote": "also assert the unique id"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "avoid-using-parametrize-single-case",
@@ -1220,7 +1239,8 @@
      "created_at": "2026-08-29",
      "quote": "`parametrize` is not needed with only one test case."
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "avoid-manual-coordinator-refresh",
@@ -1254,7 +1274,8 @@
      "created_at": "2026-09-22",
      "quote": "Freeze and skip time instead"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "merge-related-test-cases-into-a-single-t",
@@ -1288,7 +1309,8 @@
      "created_at": "2026-09-26",
      "quote": "I think `test_existing_unique_id_is_kept` and `test_migrate_empty_unique_id` could be merged into one test."
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "avoid-unnecessary-data-parsing-in-models",
@@ -1322,7 +1344,8 @@
      "created_at": "2026-08-30",
      "quote": "I think the parsing part is something for the library to do, and then I think this can just be read in the entity.py"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "entity-name-handling",
@@ -1356,7 +1379,8 @@
      "created_at": "2026-08-26",
      "quote": "```suggestion\n        self._attr_name = None\n```"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "test-data-storage",
@@ -1390,7 +1414,8 @@
      "created_at": "2026-09-17",
      "quote": "We could use `get_fixture_path`.\n\n```suggestion\nfrom tests.common import extract_stack_to_frame, get_fixture_path\n\nINCLUDE_DIRS_FIXTURE = str(get_fixture_path(\"core/config/annotations/include_dirs\"))\n```"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "use-consistent-naming",
@@ -1424,7 +1449,8 @@
      "created_at": "2026-09-27",
      "quote": "Nitpicking here,  but this is no async function. Renaming would be suggested."
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "use-extended-config-entry-types",
@@ -1458,7 +1484,8 @@
      "created_at": "2026-09-16",
      "quote": "Use the extended config entry"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "use-freezer-to-advance-time-in-tests",
@@ -1492,7 +1519,8 @@
      "created_at": "2026-09-16",
      "quote": "Please use the freezer to skip time"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "typing-type-checking",
@@ -1526,7 +1554,8 @@
      "created_at": "2026-09-15",
      "quote": "lets wrap this on a TYPE_CHECKING condition: developers.home-assistant.io/docs/development_guidelines#using-assert-to-narrow-types"
     }
-   ]
+   ],
+   "documented_in": null
   },
   {
    "id": "wait-background-tasks-testing",
@@ -1560,7 +1589,14 @@
      "created_at": "2026-09-08",
      "quote": "The coordinator refresh runs as a background task so we need to wait for background tasks here."
     }
-   ]
+   ],
+   "documented_in": null
   }
- ]
+ ],
+ "docs_checked": [
+  "CONTRIBUTING.md",
+  "AGENTS.md",
+  ".github/copilot-instructions.md"
+ ],
+ "unwritten": 25
 }

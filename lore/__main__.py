@@ -5,14 +5,17 @@ import os
 import time
 from pathlib import Path
 
-from . import emit_skill, evaluate, extract, llm, merge, mine
+from . import documented, emit_skill, evaluate, extract, llm, merge, mine
 from .common import load_env, parse_repo, progress
 
 
 def write_index():
     """out/index.json lists every repo with finished results, for the web page."""
     root = Path(os.environ.get("LORE_OUT", "out"))
-    runs = sorted(p.name for p in root.iterdir() if (p / "rules.json").exists()) if root.exists() else []
+    # Runs that found no rules (too little review history) are kept on disk but not offered as examples.
+    runs = sorted(p.name for p in root.iterdir()
+                  if (p / "rules.json").exists() and json.loads((p / "rules.json").read_text(encoding="utf-8"))["rules"]
+                  ) if root.exists() else []
     (root / "index.json").write_text(json.dumps(runs), encoding="utf-8")
 
 
@@ -27,6 +30,7 @@ def pipeline(repo, max_comments=3000, review_prs=300, holdout_days=60, eval_n=15
                      max_pages=max_pages)
         extract.run(repo)
         merge.run(repo, verify_evidence=verify)
+        documented.run(repo)
         errors = emit_skill.run(repo)
         evaluate.run(repo, eval_n=eval_n)
         write_index()
@@ -58,6 +62,7 @@ def main():
     run_p.add_argument("--no-verify", action="store_true", help="skip the per-rule grounding check")
     add("extract", "F4: map step")
     add("merge", "F5-F6: reduce + citation check").add_argument("--no-verify", action="store_true")
+    add("docs", "mark which rules are already in CONTRIBUTING / AGENTS.md")
     add("emit", "F7: write and validate the skill")
     add("eval", "F8: holdout evaluation").add_argument("--eval-n", type=int, default=150)
     chk = add("check", "review a PR (number, URL or diff file) against the learned rules")
@@ -84,6 +89,8 @@ def main():
         extract.run(a.repo)
     elif a.cmd == "merge":
         merge.run(a.repo, verify_evidence=not a.no_verify)
+    elif a.cmd == "docs":
+        documented.run(a.repo)
     elif a.cmd == "emit":
         raise SystemExit(1 if emit_skill.run(a.repo) else 0)
     elif a.cmd == "eval":

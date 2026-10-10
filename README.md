@@ -30,8 +30,13 @@ project's unwritten rules.
    `skills-ref`.
 7. **Evaluate.** For each held-out comment, the same model and prompt decide whether any rule anticipates it,
    once for Lore's rules and once for a generic 20-rule code-review skill.
-8. **Check a PR.** `python -m lore check owner/repo <PR number | URL | file.diff>` reviews a diff against the
-   learned rules. Every finding names a rule id, a concrete fix and the precedent comment; findings citing a rule
+8. **Unwritten or documented?** Lore reads the repo's CONTRIBUTING.md, AGENTS.md, CLAUDE.md and Copilot
+   instructions and marks which learned rules are not written down anywhere. On pandas, 9 of 9 rules are missing
+   from its AGENTS.md; on home-assistant, 25 of 30 are missing from all three of its docs (and the 5 that are
+   documented were rediscovered from review comments alone).
+9. **Check a PR.** `python -m lore check owner/repo <PR number | URL | file.diff>` reviews a diff against the
+   learned rules. Every finding is ranked must-fix or suggestion and names a rule id, a concrete fix and the
+   precedent comment; findings citing a rule
    that doesn't exist are dropped, the same discipline as the citation check. The generated `SKILL.md` carries the
    same review instructions, so any agent can run it.
 

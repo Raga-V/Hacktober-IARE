@@ -6,114 +6,136 @@
 <title>Lore</title>
 <meta name="description" content="Lore turns a repository's pull-request review history into an Agent Skill of the rules its maintainers actually enforce.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --page: #faf6ef; --card: #ffffff; --soft: #f4ede1; --ink: #2b1d16; --ink-2: #6b5a4e; --line: #e8dfcf;
-  --walnut: #3d2a1f; --butter: #fbf2d5; --butter-line: #eed68e; --butter-ink: #785611; --gold: #e8b030;
-  --blue: #3882a8; --blue-soft: #eaf3f8; --grey: #cfc3b3; --ok: #2f7d4f;
-  --sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --bg: #f6f5f1; --surface: #ffffff; --surface-2: #efede7; --ink: #1b1b19; --ink-2: #5c5b55; --ink-3: #8d8c85;
+  --line: #e3e1da; --line-2: #d3d1c8; --link: #1f5fbf;
+  --mark: #fbe9a0; --mark-ink: #5e4a00; --bad-soft: #f9e3df; --bad-ink: #a3261a; --ok: #2b7a4b;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --page: #17120e; --card: #211a15; --soft: #2a211a; --ink: #f3ebe1; --ink-2: #b6a493; --line: #372b22;
-    --walnut: #fbf2d5; --butter: #3a2f17; --butter-line: #6b5520; --butter-ink: #f1d488;
-    --blue-soft: #16262f; --grey: #5e5247; --ok: #6cc391;
+    --bg: #131312; --surface: #1b1b1a; --surface-2: #262624; --ink: #ecebe6; --ink-2: #a8a69e; --ink-3: #75736c;
+    --line: #2c2c29; --line-2: #3a3a36; --link: #7fb0ff;
+    --mark: #4a3e10; --mark-ink: #f2d675; --bad-soft: #3a1d19; --bad-ink: #f19a8f; --ok: #6fc395;
   }
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--page); color: var(--ink); font: 16px/1.6 var(--sans); }
-a { color: var(--blue); }
-code { font-family: var(--mono); font-size: .9em; }
-.wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15.5px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+code { font-family: var(--mono); font-size: .88em; }
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
 
-header.top { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
-.brand { display: flex; align-items: center; gap: 10px; font: 800 20px var(--mono); color: var(--ink); text-decoration: none; }
-.logo { width: 32px; height: 32px; border-radius: 9px; background: #3d2a1f; color: #f5d565; display: grid; place-items: center; font-size: 15px; }
-.engine { font-size: 12px; color: var(--ink-2); }
+header.top { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.brand { font: 600 21px var(--serif); color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+.engine { font: 12px var(--mono); color: var(--ink-3); }
 
 /* Hero */
-.hero { padding: 56px 0 28px; text-align: center; }
-.hero h1 { font-size: clamp(30px, 5vw, 48px); line-height: 1.08; letter-spacing: -0.035em; margin: 0 auto 14px; max-width: 720px; }
-.hero p { color: var(--ink-2); font-size: 18px; max-width: 600px; margin: 0 auto 28px; }
-.search { display: flex; gap: 8px; max-width: 620px; margin: 0 auto; background: var(--card); border: 1px solid var(--line);
-  border-radius: 14px; padding: 6px; box-shadow: 0 6px 24px rgba(61, 42, 31, .07); }
-.search input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--ink); font: 16px var(--sans); padding: 10px 12px; outline: none; }
-.btn { all: unset; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 11px 18px; border-radius: 10px; background: #3d2a1f; color: #fbf2d5; font: 600 15px var(--sans); white-space: nowrap; }
-.btn:hover { background: #523829; }
-.btn.light { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
-.btn.light:hover { background: var(--soft); }
-.btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-.btn[disabled] { opacity: .55; pointer-events: none; }
-.examples { margin-top: 14px; font-size: 14px; color: var(--ink-2); display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; align-items: center; }
-.pill { all: unset; cursor: pointer; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font: 500 13px var(--mono); }
-.pill:hover, .pill[aria-pressed="true"] { border-color: var(--gold); background: var(--butter); }
-.progress { max-width: 620px; margin: 18px auto 0; text-align: left; }
+.hero { padding: 64px 0 40px; }
+.hero h1 { font: 600 clamp(34px, 5.2vw, 52px)/1.08 var(--serif); letter-spacing: -0.02em; margin: 0 0 18px; max-width: 760px; }
+.hero h1 em { font-style: italic; }
+.hero p { color: var(--ink-2); font-size: 18px; max-width: 600px; margin: 0 0 32px; }
+.search { display: flex; gap: 6px; max-width: 620px; background: var(--surface); border: 1px solid var(--line-2); border-radius: 8px; padding: 5px; }
+.search:focus-within { border-color: var(--ink); }
+.search span { display: grid; place-items: center; padding-left: 10px; color: var(--ink-3); font: 14px var(--mono); }
+.search input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--ink); font: 15px var(--mono); padding: 9px 4px; outline: none; }
+.btn { all: unset; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 16px;
+  border-radius: 6px; background: var(--ink); color: var(--bg); font: 500 14px var(--sans); white-space: nowrap; border: 1px solid var(--ink); }
+.btn:hover { opacity: .88; }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
+.btn.ghost:hover { background: var(--surface-2); opacity: 1; }
+.btn:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.btn[disabled] { opacity: .5; pointer-events: none; }
+.examples { margin-top: 14px; font-size: 13.5px; color: var(--ink-3); display: flex; gap: 6px 14px; flex-wrap: wrap; align-items: center; }
+.pill { all: unset; cursor: pointer; color: var(--ink-2); font: 13px var(--mono); border-bottom: 1px dashed var(--line-2); padding-bottom: 1px; }
+.pill:hover { color: var(--ink); border-bottom-color: var(--ink-2); }
+.pill[aria-pressed="true"] { color: var(--ink); border-bottom: 1px solid var(--ink); }
+.pill:focus-visible { outline: 2px solid var(--link); }
+.progress { max-width: 620px; margin-top: 20px; }
 .progress[hidden] { display: none; }
-.pbar { height: 6px; background: var(--soft); border-radius: 99px; overflow: hidden; }
-.pbar div { height: 100%; width: 0; background: var(--gold); transition: width .5s; }
-.pmsg { font: 13px var(--mono); color: var(--ink-2); margin-top: 8px; }
+.pbar { height: 3px; background: var(--line); overflow: hidden; }
+.pbar div { height: 100%; width: 0; background: var(--ink); transition: width .5s; }
+.pmsg { font: 12px var(--mono); color: var(--ink-2); margin-top: 8px; }
 
 /* Result */
 #result[hidden] { display: none; }
-.result-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap;
-  padding: 28px 0 18px; border-top: 1px solid var(--line); }
-.result-head h2 { margin: 0; font-size: clamp(22px, 3vw, 28px); letter-spacing: -0.02em; line-height: 1.2; }
-.result-head p { margin: 4px 0 0; color: var(--ink-2); font-size: 14px; }
+#result { border-top: 1px solid var(--line); padding-top: 36px; }
+.head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin: 0 0 22px; }
+.head .repo { font: 13px var(--mono); color: var(--ink-3); }
+.head h2 { margin: 4px 0 0; font: 600 clamp(24px, 3.2vw, 32px)/1.15 var(--serif); letter-spacing: -0.015em; }
 .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.kpis { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); margin-bottom: 32px; }
+.kpi { padding: 16px 18px 18px 0; }
+.kpi + .kpi { padding-left: 18px; border-left: 1px solid var(--line); }
+.kpi b { display: inline-block; font: 600 30px/1.2 var(--serif); font-variant-numeric: tabular-nums; }
+.kpi span { display: block; color: var(--ink-2); font-size: 13.5px; margin-top: 2px; }
+.kpi.mark b { background: linear-gradient(transparent 58%, var(--mark) 58%); padding: 0 3px; margin-left: -3px; }
 
-.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 20px; }
-.tabs button { all: unset; cursor: pointer; padding: 10px 14px; font: 600 14px var(--sans); color: var(--ink-2); border-bottom: 2px solid transparent; margin-bottom: -1px; }
-.tabs button[aria-selected="true"] { color: var(--ink); border-color: var(--gold); }
-.tabs button:focus-visible { outline: 2px solid var(--gold); }
+.tabs { display: flex; gap: 24px; border-bottom: 1px solid var(--line); }
+.tabs button { all: unset; cursor: pointer; padding: 10px 0; font: 500 14px var(--sans); color: var(--ink-3); border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
+.tabs button[aria-selected="true"] { color: var(--ink); border-color: var(--ink); }
+.tabs button:focus-visible { outline: 2px solid var(--link); }
+.tabs .count { font: 12px var(--mono); color: var(--ink-3); margin-left: 6px; }
 .panel[hidden] { display: none; }
 
-.rule { display: grid; grid-template-columns: 34px 1fr; gap: 4px 12px; padding: 16px 0; border-bottom: 1px solid var(--line); }
-.rule .n { font: 600 13px var(--mono); color: var(--ink-2); padding-top: 2px; }
-.rule h3 { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; }
-.rule .why { margin: 2px 0 0; color: var(--ink-2); font-size: 14px; }
-.meta { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 8px; font-size: 13px; color: var(--ink-2); }
-.meta .badge { background: var(--butter); color: var(--butter-ink); border-radius: 6px; padding: 1px 8px; font-weight: 600; }
-.meta button { all: unset; cursor: pointer; color: var(--blue); font-weight: 600; }
-.ev { grid-column: 2; margin-top: 8px; }
+.filters { display: flex; gap: 18px; padding: 16px 0 4px; flex-wrap: wrap; font-size: 13px; color: var(--ink-3); }
+.rule { display: grid; grid-template-columns: 34px 1fr; gap: 2px 12px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.rule[hidden] { display: none; }
+.rule .n { font: 13px var(--mono); color: var(--ink-3); padding-top: 3px; }
+.rule h3 { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.5; }
+.rule .why { margin: 3px 0 0; color: var(--ink-2); font-size: 14.5px; }
+.meta { display: flex; gap: 6px 12px; align-items: center; flex-wrap: wrap; margin-top: 10px; font-size: 13px; color: var(--ink-3); }
+.tag { font: 500 12.5px var(--sans); color: var(--ink-2); }
+.tag.mark { background: var(--mark); color: var(--mark-ink); padding: 1px 6px; border-radius: 2px; font-weight: 600; }
+.tag.bad { background: var(--bad-soft); color: var(--bad-ink); padding: 1px 6px; border-radius: 2px; font-weight: 600; }
+.tag.acc { font: 12.5px var(--mono); color: var(--ink-3); }
+.sep::before { content: "·"; color: var(--ink-3); margin-right: 12px; }
+.link { all: unset; cursor: pointer; color: var(--link); font-size: 13px; }
+.link:hover { text-decoration: underline; }
+.link:focus-visible { outline: 2px solid var(--link); }
+.ev { grid-column: 2; margin-top: 12px; display: grid; gap: 12px; }
 .ev[hidden] { display: none; }
-.quote { border-left: 3px solid var(--gold); padding: 4px 0 4px 12px; margin: 10px 0; font-size: 14px; }
-.quote q { display: block; quotes: none; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 7.5em; overflow: hidden; }
-.quote a { font-size: 12px; }
+.quote { border-left: 2px solid var(--line-2); padding: 2px 0 2px 14px; font-size: 14px; }
+.quote q { display: block; quotes: none; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 7.2em; overflow: hidden; color: var(--ink); }
+.quote a { display: inline-block; margin-top: 4px; font: 12px var(--mono); color: var(--ink-3); }
 
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
-textarea { width: 100%; min-height: 96px; font: 13px var(--mono); padding: 12px; border-radius: 10px; border: 1px solid var(--line);
-  background: var(--page); color: var(--ink); resize: vertical; }
-.finding { padding: 14px 0; border-bottom: 1px solid var(--line); }
-.finding:last-child { border-bottom: 0; }
-.finding .loc { font: 12px var(--mono); color: var(--ink-2); overflow-wrap: anywhere; }
-.status { font-size: 13px; color: var(--ink-2); margin-top: 10px; min-height: 20px; }
-pre { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow: auto; max-height: 560px;
-  font: 12.5px/1.6 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; }
-.valid { color: var(--ok); font-weight: 600; font-size: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 22px; }
+#p-check, #p-skill { padding-top: 20px; }
+textarea { width: 100%; min-height: 100px; font: 13px var(--mono); padding: 12px 14px; border-radius: 6px; border: 1px solid var(--line-2);
+  background: var(--bg); color: var(--ink); resize: vertical; outline: none; }
+textarea:focus { border-color: var(--ink); }
+.finding { padding: 16px 0; border-top: 1px solid var(--line); }
+.finding .loc { font: 12.5px var(--mono); color: var(--ink-3); overflow-wrap: anywhere; }
+.status { font-size: 13px; color: var(--ink-2); margin-top: 12px; min-height: 20px; }
+pre { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px; overflow: auto; max-height: 560px;
+  font: 12.5px/1.65 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; color: var(--ink-2); }
+.valid { color: var(--ok); font-weight: 500; font-size: 14px; margin: 0 0 12px; }
 
 /* Proof */
-.proof { margin: 36px 0 12px; }
-.proof h2 { font-size: 18px; margin: 0 0 4px; }
-.proof .sub { color: var(--ink-2); font-size: 14px; margin: 0 0 16px; }
-.bar { display: grid; grid-template-columns: 130px 1fr 56px; gap: 12px; align-items: center; margin: 8px 0; font-size: 14px; }
-.track { height: 12px; background: var(--soft); border-radius: 99px; overflow: hidden; }
-.fill { height: 100%; width: 0; border-radius: 99px; transition: width 1s cubic-bezier(.2,.8,.2,1); }
-.pct { font: 600 14px var(--mono); text-align: right; }
-.bar.hi span:first-child, .bar.hi .pct { font-weight: 700; color: var(--ink); }
-details { margin-top: 16px; font-size: 14px; color: var(--ink-2); }
-details summary { cursor: pointer; color: var(--ink); font-weight: 600; }
-.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 12px; }
-.steps div { background: var(--soft); border-radius: 10px; padding: 10px 12px; }
-.steps b { display: block; font-size: 20px; color: var(--ink); font-variant-numeric: tabular-nums; }
-footer { color: var(--ink-2); font-size: 13px; padding: 40px 0 48px; text-align: center; }
+.proof { margin-top: 44px; }
+.proof h2 { font: 600 22px var(--serif); margin: 0 0 4px; }
+.proof .sub { color: var(--ink-2); font-size: 14.5px; margin: 0 0 20px; }
+.bar { display: grid; grid-template-columns: 170px 1fr 60px; gap: 14px; align-items: center; margin: 10px 0; font-size: 14px; color: var(--ink-2); }
+.track { height: 14px; background: var(--surface-2); }
+.fill { height: 100%; width: 0; transition: width 1s ease; }
+.pct { font: 500 14px var(--mono); text-align: right; color: var(--ink-2); }
+.bar.hi span:first-child, .bar.hi .pct { color: var(--ink); font-weight: 600; }
+.verdict { margin: 16px 0 0; font-size: 15px; }
+details { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 14px; font-size: 13.5px; color: var(--ink-2); }
+details summary { cursor: pointer; color: var(--ink); font-weight: 500; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin: 14px 0; border-top: 1px solid var(--line); }
+.steps div { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.steps b { display: block; font: 600 20px var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
+footer { color: var(--ink-3); font-size: 12.5px; padding: 32px 0 56px; border-top: 1px solid var(--line); margin-top: 56px; }
 
-@media (max-width: 600px) {
-  .hero { padding-top: 28px; }
-  .search { flex-direction: column; }
-  .bar { grid-template-columns: 96px 1fr 48px; }
+@media (max-width: 640px) {
+  .hero { padding-top: 36px; }
+  .search { flex-direction: column; } .search span { display: none; }
+  .kpis { grid-template-columns: 1fr; } .kpi + .kpi { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .bar { grid-template-columns: 100px 1fr 50px; }
   .engine { display: none; }
 }
 </style>
@@ -121,15 +143,16 @@ footer { color: var(--ink-2); font-size: 13px; padding: 40px 0 48px; text-align:
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="brand" href="./"><span class="logo">L</span>Lore</a>
+    <a class="brand" href="./">Lore</a>
     <span class="engine" id="engine"></span>
   </header>
 
   <section class="hero">
-    <h1>Your maintainers' unwritten rules, as a skill every AI agent follows.</h1>
-    <p>Lore reads a project's pull-request reviews and writes down the rules maintainers keep repeating, each one linked to the comments behind it.</p>
+    <h1>Your maintainers' <em>unwritten</em> rules, as a skill every coding agent follows.</h1>
+    <p>Lore reads a project's pull-request reviews and writes down what maintainers keep asking for, each rule linked to the comments behind it.</p>
     <form class="search" id="form">
-      <input id="repoInput" placeholder="github.com/owner/repo" aria-label="GitHub repository" autocomplete="off" spellcheck="false">
+      <span>github.com/</span>
+      <input id="repoInput" placeholder="owner/repo" aria-label="GitHub repository" autocomplete="off" spellcheck="false">
       <button class="btn" id="go" type="submit">Learn the rules</button>
     </form>
     <div class="examples" id="examples"></div>
@@ -138,7 +161,7 @@ footer { color: var(--ink-2); font-size: 13px; padding: 40px 0 48px; text-align:
 
   <section id="result" hidden></section>
 
-  <footer>Open source (Apache-2.0) · open-weight models only · uses public review comments</footer>
+  <footer>Apache-2.0 · runs on open-weight models · reads only public review comments</footer>
 </div>
 
 <script>
@@ -147,15 +170,15 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":
 const get = async (p) => { const r = await fetch(p, {cache: "no-store"}); if (!r.ok) throw new Error(p); return p.endsWith(".json") ? r.json() : r.text(); };
 const PROVIDERS = {digitalocean: "DigitalOcean", groq: "Groq", cerebras: "Cerebras", openrouter: "OpenRouter",
   google: "Google AI Studio", vertex: "Google Cloud Vertex AI", ollama: "Ollama"};
-const STAGES = {queued: 2, start: 5, mine: 15, extract: 45, merge: 70, verify: 80, emit: 85, eval: 95, done: 100};
-const toSlug = (repo) => repo.replace(/^https?:\/\/github\.com\//, "").replace(/\.git$/, "").split("/").slice(0, 2).join("__");
-let runs = [], current = null;
+const STAGES = {queued: 2, start: 5, mine: 15, extract: 45, merge: 65, verify: 75, docs: 80, emit: 85, eval: 95, done: 100};
+const toSlug = (repo) => repo.trim().replace(/^https?:\/\/github\.com\//, "").replace(/^github\.com\//, "").replace(/\.git$/, "").split("/").slice(0, 2).join("__");
 const since = (r) => r.evidence?.[0]?.created_at
   ? new Date(r.evidence[0].created_at).toLocaleDateString("en", {month: "short", year: "numeric"}) : r.since;
+let runs = [], current = null;
 
 async function init() {
   try { runs = await get("../out/index.json"); } catch {}
-  $("#examples").innerHTML = runs.length ? `Try: ${runs.map((s) =>
+  $("#examples").innerHTML = runs.length ? `Try ${runs.map((s) =>
     `<button class="pill" data-slug="${esc(s)}">${esc(s.replace("__", "/"))}</button>`).join("")}` : "";
   document.querySelectorAll(".pill").forEach((b) => b.addEventListener("click", () => open(b.dataset.slug)));
   const want = new URLSearchParams(location.search).get("repo");
@@ -167,7 +190,7 @@ $("#form").addEventListener("submit", (e) => {
   const v = $("#repoInput").value.trim();
   if (!v) return;
   const slug = toSlug(v);
-  runs.includes(slug) ? open(slug) : runLive(v);
+  runs.includes(slug) ? open(slug) : runLive(slug.replace("__", "/"));
 });
 
 async function open(slug, scroll = true) {
@@ -181,86 +204,105 @@ async function open(slug, scroll = true) {
   if (!rules) return;
   const md = skill ? await get(`${base}${skill.path}/SKILL.md`).catch(() => "") : "";
   render({rules, ev, meta, skill, md, base});
-  if (scroll) $("#result").scrollIntoView({behavior: "smooth", block: "start"});
+  if (scroll) setTimeout(() => $("#result").scrollIntoView({behavior: "smooth", block: "start"}), 50);
 }
 
 function render({rules, ev, meta, skill, md, base}) {
   const short = rules.repo.split("/")[1];
-  const name = short.length <= 4 ? rules.repo : short;  // "core" alone says nothing
-  $("#engine").textContent = `${rules.model.split("/").pop()} · ${PROVIDERS[rules.provider] || rules.provider || ""}`;
+  const name = short.length <= 4 ? rules.repo : short;
+  const n = rules.rules.length;
+  $("#engine").textContent = `${rules.model.split("/").pop().replace(/-maas$/, "")} on ${PROVIDERS[rules.provider] || rules.provider || ""}`;
   const openPr = skill && meta ? `https://github.com/${rules.repo}/new/${encodeURIComponent(meta.default_branch)}?filename=${
     encodeURIComponent(`.agents/skills/${skill.name}/SKILL.md`)}&value=${encodeURIComponent(md)}` : null;
   const lift = ev?.combined_pct != null ? (ev.combined_pct - ev.generic_pct).toFixed(1) : null;
-  const bar = (label, pct, color, hi) => `<div class="bar${hi ? " hi" : ""}"><span>${label}</span>
-    <div class="track"><div class="fill" data-w="${pct}" style="background:${color}"></div></div><span class="pct">${pct}%</span></div>`;
+  const docs = rules.docs_checked || [];
+  const docsLabel = docs.length ? docs.map((d) => d.split("/").pop()).join(", ") : "contributor docs";
+  const bar = (label, pct, bg, hi) => `<div class="bar${hi ? " hi" : ""}"><span>${label}</span>
+    <div class="track"><div class="fill" data-w="${pct}" style="background:${bg}"></div></div><span class="pct">${pct}%</span></div>`;
 
   $("#result").innerHTML = `
-    <div class="result-head">
-      <div>
-        <h2>${rules.rules.length} rules ${esc(name)} maintainers keep repeating</h2>
-        <p>Learned from ${rules.mined.toLocaleString()} maintainer review comments across ${meta ? meta.prs.toLocaleString() : "–"} pull requests.</p>
-      </div>
+    <div class="head">
+      <div><div class="repo">${esc(rules.repo)}</div>
+        <h2>${n} rules ${esc(name)} maintainers keep repeating</h2></div>
       <div class="actions">
         ${skill ? `<a class="btn" href="${base}${esc(skill.zip)}" download>Download skill</a>` : ""}
-        ${openPr ? `<a class="btn light" href="${esc(openPr)}" target="_blank" rel="noopener">Open PR ↗</a>` : ""}
+        ${openPr ? `<a class="btn ghost" href="${esc(openPr)}" target="_blank" rel="noopener">Contribute as PR ↗</a>` : ""}
       </div>
     </div>
 
+    <div class="kpis">
+      <div class="kpi"><b>${rules.mined.toLocaleString()}</b><span>maintainer comments read, ${meta ? meta.prs.toLocaleString() : "–"} PRs</span></div>
+      ${rules.unwritten != null ? `<div class="kpi mark"><b>${rules.unwritten} of ${n}</b><span>not written in ${esc(docsLabel)}</span></div>`
+        : `<div class="kpi"><b>${n}</b><span>rules, each with 3+ comments in 2+ PRs</span></div>`}
+      ${lift != null ? `<div class="kpi"><b>+${lift} pts</b><span>more unseen review comments anticipated</span></div>`
+        : `<div class="kpi"><b>${rules.rejected_rules}</b><span>invented rules rejected</span></div>`}
+    </div>
+
     <div class="tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-tab="rules">Rules</button>
+      <button role="tab" aria-selected="true" data-tab="rules">Rules<span class="count">${n}</span></button>
       <button role="tab" aria-selected="false" data-tab="check">Check a PR</button>
       <button role="tab" aria-selected="false" data-tab="skill">SKILL.md</button>
     </div>
 
     <div class="panel" id="p-rules">
-      ${rules.rules.map((r, i) => `<div class="rule">
-        <span class="n">${String(i + 1).padStart(2, "0")}</span>
-        <div>
-          <h3>${esc(r.rule)}</h3>
-          ${r.why ? `<p class="why">${esc(r.why)}</p>` : ""}
-          <div class="meta"><span class="badge">${r.support} comments · ${r.prs} PRs</span><span>since ${esc(since(r))}</span>
-            <button data-ev="${i}" aria-expanded="false">See the comments</button></div>
-        </div>
-        <div class="ev" id="ev-${i}" hidden>
-          ${r.evidence.slice(0, 5).map((e) => `<div class="quote"><q>${esc(e.quote)}</q>
-            <a href="${esc(e.url)}" target="_blank" rel="noopener">@${esc(e.author)} on PR #${e.pr} · ${esc(e.created_at)} ↗</a></div>`).join("")}
-          ${r.evidence.length > 5 ? `<p class="why">+ ${r.evidence.length - 5} more in references/rules.md</p>` : ""}
-        </div>
-      </div>`).join("") || `<p class="why">No rule met the evidence threshold.</p>`}
+      <div>
+        ${rules.unwritten != null && rules.unwritten < n ? `<div class="filters">
+          <button class="pill" data-filter="all" aria-pressed="true">All ${n}</button>
+          <button class="pill" data-filter="unwritten" aria-pressed="false">Unwritten ${rules.unwritten}</button>
+          <button class="pill" data-filter="written" aria-pressed="false">Already documented ${n - rules.unwritten}</button></div>` : ""}
+        ${rules.rules.map((r, i) => `<div class="rule" data-written="${r.documented_in ? 1 : 0}">
+          <span class="n">${String(i + 1).padStart(2, "0")}</span>
+          <div>
+            <h3>${esc(r.rule)}</h3>
+            ${r.why ? `<p class="why">${esc(r.why)}</p>` : ""}
+            <div class="meta">
+              ${r.documented_in === null ? `<span class="tag mark">Unwritten</span>` : r.documented_in ? `<span class="tag">Documented in ${esc(r.documented_in.split("/").pop())}</span>` : ""}
+              <span class="sep tag acc">${r.support} comments · ${r.prs} PRs</span>
+              <span class="sep">since ${esc(since(r))}</span>
+              <button class="link" data-ev="${i}" aria-expanded="false">Show comments</button>
+            </div>
+          </div>
+          <div class="ev" id="ev-${i}" hidden>
+            ${r.evidence.slice(0, 4).map((e) => `<div class="quote"><q>${esc(e.quote)}</q>
+              <a href="${esc(e.url)}" target="_blank" rel="noopener">@${esc(e.author)} · PR #${e.pr} · ${esc(e.created_at)} ↗</a></div>`).join("")}
+            ${r.evidence.length > 4 ? `<span class="meta" style="margin:0">+ ${r.evidence.length - 4} more in references/rules.md</span>` : ""}
+          </div>
+        </div>`).join("") || `<p class="rule">No rule met the evidence threshold.</p>`}
+      </div>
     </div>
 
     <div class="panel" id="p-check" hidden>
       <div class="card">
-        <p style="margin:0 0 12px">Paste a pull request and Lore points out anything ${esc(name)} maintainers would ask to change, with the comment that set the precedent.</p>
+        <p style="margin:0 0 14px;color:var(--ink-2)">Paste a pull request. Lore flags what ${esc(name)} maintainers would ask to change, ranked by severity, each with the comment that set the precedent.</p>
         <textarea id="prInput" placeholder="PR number, https://github.com/${esc(rules.repo)}/pull/…, or a diff"></textarea>
-        <div style="margin-top:12px"><button class="btn" id="checkBtn">Check this PR</button></div>
+        <div style="margin-top:12px"><button class="btn" id="checkBtn">Review against ${n} rules</button></div>
         <div class="status" id="checkStatus"></div>
         <div id="findings"></div>
       </div>
     </div>
 
     <div class="panel" id="p-skill" hidden>
-      ${skill ? `<p class="valid">✓ Valid Agent Skill (passes skills-ref validate) · <code>${esc(skill.name)}</code></p><pre>${esc(md)}</pre>` : ""}
+      ${skill ? `<p class="valid">✓ Valid Agent Skill · passes skills-ref validate · <code>${esc(skill.name)}</code></p><pre>${esc(md)}</pre>` : ""}
     </div>
 
     ${ev ? `<div class="proof card">
       <h2>Does it work?</h2>
       <p class="sub">We held back the ${ev.holdout_comments} most recent maintainer comments, then asked which skill would have anticipated each one.</p>
-      ${bar("Generic review skill", ev.generic_pct, "var(--grey)")}
-      ${ev.combined_pct != null ? bar("Generic + Lore", ev.combined_pct, "var(--gold)", true) : ""}
-      <p style="margin:14px 0 0">${lift != null ? `<b>+${lift} points</b> from rules no general skill can know` : ""}${
+      ${bar("Generic review skill", ev.generic_pct, "var(--line-2)")}
+      ${ev.combined_pct != null ? bar("Generic + Lore", ev.combined_pct, "var(--ink)", true) : ""}
+      <p class="verdict">${lift != null ? `<b>+${lift} points</b> from rules no general review skill can know` : ""}${
         ev.examples?.[0] ? `, like <a href="${esc(ev.examples[0].url)}" target="_blank" rel="noopener">this comment</a>.` : "."}</p>
       <details>
-        <summary>How Lore checks itself</summary>
+        <summary>How Lore keeps the model honest</summary>
         <div class="steps">
-          <div><b>${rules.candidates}</b>candidate rules proposed by the model</div>
+          <div><b>${rules.candidates}</b>candidate rules proposed</div>
           <div><b>${rules.rejected_rules}</b>rejected for citing comments that don't exist</div>
-          <div><b>${rules.unsupported_citations ?? 0}</b>citations dropped after a second model check</div>
-          <div><b>${rules.below_threshold}</b>dropped for fewer than 3 comments in 2 PRs</div>
-          <div><b>${ev.lore_pct}%</b>coverage by Lore's rules alone</div>
+          <div><b>${rules.unsupported_citations ?? 0}</b>citations dropped by a second check</div>
+          <div><b>${rules.below_threshold}</b>dropped: fewer than 3 comments in 2 PRs</div>
+          <div><b>${ev.lore_pct}%</b>covered by Lore's rules alone</div>
         </div>
-        <p>Holdout: ${esc(ev.split_method)} (since ${esc(ev.holdout_since)}), never seen during extraction. Both skills are judged by the same
-          open-weight model (${esc(ev.model)}) and prompt; the generic skill has ${ev.generic_rules} best-practice rules. A comment counts only
+        <p style="margin:0">Holdout: ${esc(ev.split_method)} (since ${esc(ev.holdout_since)}), never seen during extraction. Both skills are judged by the same
+          open-weight model (${esc(ev.model)}) and prompt; the generic skill has ${ev.generic_rules} best-practice review rules. A comment counts only
           if the judge maps it to a specific rule.</p>
       </details>
     </div>` : ""}`;
@@ -270,39 +312,47 @@ function render({rules, ev, meta, skill, md, base}) {
     document.querySelectorAll(".tabs button").forEach((b) => b.setAttribute("aria-selected", b === t));
     document.querySelectorAll(".panel").forEach((p) => (p.hidden = p.id !== `p-${t.dataset.tab}`));
   }));
+  document.querySelectorAll("[data-filter]").forEach((b) => b.addEventListener("click", () => {
+    document.querySelectorAll("[data-filter]").forEach((x) => x.setAttribute("aria-pressed", x === b));
+    document.querySelectorAll(".rule[data-written]").forEach((r) => (r.hidden =
+      b.dataset.filter === "unwritten" ? r.dataset.written === "1" : b.dataset.filter === "written" ? r.dataset.written === "0" : false));
+  }));
   document.querySelectorAll("[data-ev]").forEach((b) => b.addEventListener("click", () => {
     const el = $(`#ev-${b.dataset.ev}`); el.hidden = !el.hidden;
-    b.setAttribute("aria-expanded", !el.hidden); b.textContent = el.hidden ? "See the comments" : "Hide the comments";
+    b.setAttribute("aria-expanded", !el.hidden); b.textContent = el.hidden ? "Show comments" : "Hide comments";
   }));
   $("#checkBtn").addEventListener("click", runCheck);
-  setTimeout(() => document.querySelectorAll(".fill").forEach((f) => (f.style.width = f.dataset.w + "%")), 150);
+  setTimeout(() => document.querySelectorAll(".fill").forEach((f) => (f.style.width = f.dataset.w + "%")), 200);
 }
 
 async function runCheck() {
   const input = $("#prInput").value.trim();
   if (!input) return;
   $("#checkBtn").disabled = true; $("#findings").innerHTML = "";
-  $("#checkStatus").textContent = "Reading the diff…";
+  $("#checkStatus").textContent = "Reviewing the diff…";
   try {
     const r = await fetch("/api/check", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({slug: current, input})});
-    if (r.status === 404 || r.status === 501) throw new Error("PR check needs the local server: python -m lore serve");
+    if (r.status === 404 || r.status === 501) throw new Error("PR review needs the local server: python -m lore serve");
     const d = await r.json();
     if (!r.ok) throw new Error(d.error);
-    $("#checkStatus").textContent = d.findings.length ? `${d.findings.length} thing${d.findings.length === 1 ? "" : "s"} maintainers would flag` : "";
+    const must = d.findings.filter((f) => f.severity === "must-fix").length;
+    $("#checkStatus").textContent = d.findings.length ? `${d.findings.length} finding${d.findings.length === 1 ? "" : "s"}${must ? ` · ${must} must-fix` : ""}` : "";
     $("#findings").innerHTML = d.findings.map((f) => `<div class="finding">
-      <div class="loc">${esc(f.file)}${f.line ? ":" + esc(f.line) : ""}</div>
-      <p style="margin:4px 0"><b>${esc(f.issue)}</b></p>
-      <p style="margin:0 0 4px">${esc(f.fix)}</p>
-      <div class="meta" style="margin-top:4px"><span class="badge">${esc(f.rule)}</span>
+      <div class="meta" style="margin:0 0 6px">
+        <span class="tag ${f.severity === "must-fix" ? "bad" : "mark"}">${f.severity === "must-fix" ? "Must fix" : "Suggestion"}</span>
+        <span class="loc">${esc(f.file)}${f.line ? ":" + esc(f.line) : ""}</span></div>
+      <p style="margin:4px 0;font-weight:600">${esc(f.issue)}</p>
+      <p style="margin:0;color:var(--ink-2)">${esc(f.fix)}</p>
+      <div class="meta"><span class="tag">${esc(f.rule)}</span>
         ${f.evidence?.[0] ? `<a href="${esc(f.evidence[0].url)}" target="_blank" rel="noopener">precedent ↗</a>` : ""}</div>
-    </div>`).join("") || `<p style="margin:12px 0 0">✓ Nothing here breaks a learned rule.</p>`;
+    </div>`).join("") || `<p style="margin:14px 0 0;color:var(--ok);font-weight:500">✓ Nothing here breaks a learned rule.</p>`;
   } catch (e) { $("#checkStatus").textContent = e.message; }
   $("#checkBtn").disabled = false;
 }
 
 async function runLive(repo) {
   $("#go").disabled = true; $("#progress").hidden = false; $("#pfill").style.width = "2%";
-  $("#pmsg").textContent = "Starting…";
+  $("#pmsg").textContent = `Starting on ${repo}…`;
   let res;
   try { res = await fetch("/api/run", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({repo})}); } catch { res = null; }
   if (!res || res.status === 404 || res.status === 501) { $("#pmsg").textContent = "Live runs need the local server: python -m lore serve"; $("#go").disabled = false; return; }
@@ -312,10 +362,9 @@ async function runLive(repo) {
   const poll = setInterval(async () => {
     const p = await get(`../out/${data.slug}/progress.json`).catch(() => null);
     if (!p) return;
-    const within = p.total ? (p.done / p.total) : 0;
     const keys = Object.keys(STAGES), i = keys.indexOf(p.stage);
     const lo = STAGES[p.stage] ?? 0, hi = i >= 0 && i < keys.length - 1 ? STAGES[keys[i + 1]] : 100;
-    $("#pfill").style.width = `${lo + (hi - lo) * within}%`;
+    $("#pfill").style.width = `${lo + (hi - lo) * (p.total ? p.done / p.total : 0)}%`;
     $("#pmsg").textContent = `${Math.round((Date.now() - t0) / 1000)}s · ${p.msg}`;
     if (p.stage === "done" || p.stage === "error") {
       clearInterval(poll); $("#go").disabled = false;
