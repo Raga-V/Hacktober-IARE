@@ -1,0 +1,79 @@
+{
+ "holdout_comments": 150,
+ "holdout_total": 441,
+ "holdout_since": "2026-09-10",
+ "split_method": "newest 20% by time",
+ "lore_rules": 9,
+ "generic_rules": 20,
+ "lore_covered": 56,
+ "generic_covered": 86,
+ "both_covered": 45,
+ "lore_pct": 37.3,
+ "generic_pct": 57.3,
+ "per_rule": {
+  "whatsnew-categorization-and-content": 18,
+  "test-organization-and-structure": 4,
+  "parametrize-over-repetition": 3,
+  "github-issue-linking-in-tests": 6,
+  "prefer-full-object-equality-assertions": 3,
+  "test-edge-cases-and-coverage": 6,
+  "use-descriptive-variables-and-comments": 10,
+  "avoid-unnecessary-complexity-in-tests": 6,
+  "check-dtype-and-index-codes-correctly": 0
+ },
+ "examples": [
+  {
+   "comment_id": 4018001235,
+   "url": "https://github.com/pandas-dev/pandas/pull/68056#discussion_r4018001235",
+   "quote": "can this be more concise?",
+   "rule": "avoid-unnecessary-complexity-in-tests"
+  },
+  {
+   "comment_id": 4063787073,
+   "url": "https://github.com/pandas-dev/pandas/pull/68345#discussion_r4063787073",
+   "quote": "still doesnt need a test class",
+   "rule": "test-organization-and-structure"
+  },
+  {
+   "comment_id": 4095841457,
+   "url": "https://github.com/pandas-dev/pandas/pull/68927#discussion_r4095841457",
+   "quote": "e.g\n\n```\ntm.assert_almost_equal(np.array(np.datetime64(\"2020-01-01T00:00\", \"ns\")), np.array(np.datetime64(\"2020-01-01T01:00\", \"ns\")))\n```",
+   "rule": "prefer-full-object-equality-assertions"
+  },
+  {
+   "comment_id": 4115628998,
+   "url": "https://github.com/pandas-dev/pandas/pull/69463#discussion_r4115628998",
+   "quote": "Can you check the full `result` here directly and below.",
+   "rule": "prefer-full-object-equality-assertions"
+  },
+  {
+   "comment_id": 4138554346,
+   "url": "https://github.com/pandas-dev/pandas/pull/68457#discussion_r4138554346",
+   "quote": "can you add the issue reference here",
+   "rule": "github-issue-linking-in-tests"
+  },
+  {
+   "comment_id": 4147478089,
+   "url": "https://github.com/pandas-dev/pandas/pull/68457#discussion_r4147478089",
+   "quote": "maybe \"same missing itemsize as GH#68421\"",
+   "rule": "whatsnew-categorization-and-content"
+  },
+  {
+   "comment_id": 4149129313,
+   "url": "https://github.com/pandas-dev/pandas/pull/69433#discussion_r4149129313",
+   "quote": "i think this is redundant given the pytest.raises?",
+   "rule": "use-descriptive-variables-and-comments"
+  },
+  {
+   "comment_id": 4232905117,
+   "url": "https://github.com/pandas-dev/pandas/pull/68457#discussion_r4232905117",
+   "quote": "i dont think 68421 is the right reference here?",
+   "rule": "github-issue-linking-in-tests"
+  }
+ ],
+ "model": "qwen/qwen3-235b-a22b-instruct-2507-maas",
+ "provider": "vertex",
+ "method": "Same open-weight model and judging prompt for both skills; each holdout comment (never seen by the extractor) counts as covered if the judge maps it to a specific rule.",
+ "lore_only": 11,
+ "combined_pct": 64.7
+}

@@ -1,0 +1,100 @@
+{
+ "holdout_comments": 150,
+ "holdout_total": 448,
+ "holdout_since": "2026-09-28",
+ "split_method": "newest 20% by time",
+ "lore_rules": 30,
+ "generic_rules": 20,
+ "lore_covered": 32,
+ "generic_covered": 73,
+ "both_covered": 22,
+ "lore_pct": 21.3,
+ "generic_pct": 48.7,
+ "per_rule": {
+  "avoid-creating-coordinators-in-tests": 0,
+  "config-flow-test-expectations": 0,
+  "fixture-management": 2,
+  "pr-scope": 1,
+  "avoid-reauth-reconfig-initial-pr": 2,
+  "avoid-direct-coordinator-interaction-in": 2,
+  "snapshot-testing-complex-data": 1,
+  "avoid-inline-patching": 0,
+  "avoid-using-if-statements-in-tests": 0,
+  "avoid-bumping-dependencies-with-function": 1,
+  "implement-consistent-patterns-by-inlinin": 1,
+  "use-entity-category-diagnostic": 1,
+  "use-common-translation-keys": 9,
+  "avoid-patching-integration-internals": 2,
+  "avoid-accessing-runtime-data-in-tests": 1,
+  "avoid-calculating-entity-states-in-integ": 1,
+  "avoid-putting-logic-in-try-blocks": 1,
+  "parametrize-tests-instead-of-writing-sep": 1,
+  "assert-unique-id-in-config-flow": 1,
+  "avoid-using-parametrize-single-case": 0,
+  "avoid-manual-coordinator-refresh": 0,
+  "merge-related-test-cases-into-a-single-t": 0,
+  "avoid-unnecessary-data-parsing-in-models": 1,
+  "entity-name-handling": 0,
+  "test-data-storage": 1,
+  "use-consistent-naming": 0,
+  "use-extended-config-entry-types": 2,
+  "use-freezer-to-advance-time-in-tests": 0,
+  "typing-type-checking": 0,
+  "wait-background-tasks-testing": 1
+ },
+ "examples": [
+  {
+   "comment_id": 4152785642,
+   "url": "https://github.com/home-assistant/core/pull/183812#discussion_r4152785642",
+   "quote": "Always a bit doubtful to put errors in the translations, since they're badly transltable. You think we can omit it? :)",
+   "rule": "use-common-translation-keys"
+  },
+  {
+   "comment_id": 4158442117,
+   "url": "https://github.com/home-assistant/core/pull/183099#discussion_r4158442117",
+   "quote": "Why don't we reload on reauth?",
+   "rule": "avoid-reauth-reconfig-initial-pr"
+  },
+  {
+   "comment_id": 4158992106,
+   "url": "https://github.com/home-assistant/core/pull/183933#discussion_r4158992106",
+   "quote": "Why don't we create the whole runtime data object with the coordinator directly instead of setting it later",
+   "rule": "avoid-accessing-runtime-data-in-tests"
+  },
+  {
+   "comment_id": 4159014094,
+   "url": "https://github.com/home-assistant/core/pull/183933#discussion_r4159014094",
+   "quote": "Let's keep reauth for a later PR",
+   "rule": "avoid-reauth-reconfig-initial-pr"
+  },
+  {
+   "comment_id": 4169185462,
+   "url": "https://github.com/home-assistant/core/pull/183617#discussion_r4169185462",
+   "quote": "unique ids are unique per platform per domain. Are you expecting to add more in the future? If not, you can omit `_firmware`",
+   "rule": "assert-unique-id-in-config-flow"
+  },
+  {
+   "comment_id": 4182515581,
+   "url": "https://github.com/home-assistant/core/pull/184065#discussion_r4182515581",
+   "quote": "the sub decoding needs to happen in the library",
+   "rule": "avoid-unnecessary-data-parsing-in-models"
+  },
+  {
+   "comment_id": 4182525909,
+   "url": "https://github.com/home-assistant/core/pull/184065#discussion_r4182525909",
+   "quote": "use the extended config entry",
+   "rule": "use-extended-config-entry-types"
+  },
+  {
+   "comment_id": 4183517915,
+   "url": "https://github.com/home-assistant/core/pull/183906#discussion_r4183517915",
+   "quote": "This should be moved above the `try`.",
+   "rule": "avoid-putting-logic-in-try-blocks"
+  }
+ ],
+ "model": "qwen/qwen3-235b-a22b-instruct-2507-maas",
+ "provider": "vertex",
+ "method": "Same open-weight model and judging prompt for both skills; each holdout comment (never seen by the extractor) counts as covered if the judge maps it to a specific rule.",
+ "lore_only": 10,
+ "combined_pct": 55.3
+}

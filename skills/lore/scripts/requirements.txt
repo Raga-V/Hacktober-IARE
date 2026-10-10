@@ -1,0 +1,3 @@
+openai>=1.40
+requests>=2.31
+skills-ref>=0.1.1

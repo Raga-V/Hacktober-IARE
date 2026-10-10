@@ -1,0 +1,13 @@
+{
+ "repo": "home-assistant/core",
+ "default_branch": "dev",
+ "license": "Apache-2.0",
+ "mined": 2237,
+ "train": 1789,
+ "holdout": 448,
+ "prs": 577,
+ "first": "2026-03-19",
+ "last": "2026-10-10",
+ "holdout_since": "2026-09-28",
+ "split_method": "newest 20% by time"
+}

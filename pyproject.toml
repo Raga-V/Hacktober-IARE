@@ -1,0 +1,13 @@
+[project]
+name = "lore-skills"
+version = "0.1.0"
+description = "Compile the rules maintainers enforce in code review into an Agent Skill."
+license = "Apache-2.0"
+requires-python = ">=3.10"
+dependencies = ["openai>=1.40", "requests>=2.31", "skills-ref>=0.1.1"]
+
+[project.scripts]
+lore = "lore.__main__:main"
+
+[tool.setuptools]
+packages = ["lore"]

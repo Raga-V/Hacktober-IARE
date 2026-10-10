@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+*.egg-info/
+out/*/progress.json
+out-ollama/
+out/*/extract_cache.json

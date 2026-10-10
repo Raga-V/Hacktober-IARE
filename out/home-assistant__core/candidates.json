@@ -1,0 +1,2280 @@
+{
+ "model": "qwen/qwen3-235b-a22b-instruct-2507-maas",
+ "provider": "vertex",
+ "batches": 36,
+ "failed_batches": 0,
+ "candidates": [
+  {
+   "rule": "Keep reauthentication and reconfiguration flows out of the initial PR for a new integration.",
+   "why": "To keep the initial PR focused and simple, adding advanced configuration flows in later PRs.",
+   "comment_ids": [
+    3997649552,
+    4008854847,
+    3886637206
+   ]
+  },
+  {
+   "rule": "Only include code in try blocks that can actually raise exceptions.",
+   "why": "To keep exception handling clean and focused on code that may fail.",
+   "comment_ids": [
+    3886617410
+   ]
+  },
+  {
+   "rule": "Use common translation keys from homeassistant/strings.json for standard statuses like paused, charging, or standby.",
+   "why": "To maintain consistency across integrations and avoid duplicating widely used translations.",
+   "comment_ids": [
+    4047698719
+   ]
+  },
+  {
+   "rule": "Map all variations of unknown states to None instead of creating multiple unknown variants.",
+   "why": "To prevent automation issues and breaking changes when unknown states are later defined.",
+   "comment_ids": [
+    3979928018
+   ]
+  },
+  {
+   "rule": "Avoid including Modbus or other complex features in the initial integration PR.",
+   "why": "To keep the first PR small and focused, especially when adding OAuth2 and core functionality.",
+   "comment_ids": [
+    3878360285
+   ]
+  },
+  {
+   "rule": "Add all supported devices by default instead of maintaining a selective list; let users disable unwanted ones.",
+   "why": "Core prefers a 'batteries included' approach where all devices are added and can be individually disabled.",
+   "comment_ids": [
+    3886618332
+   ]
+  },
+  {
+   "rule": "Do not put internal events on the global event bus; use a dispatcher or direct method calls instead.",
+   "why": "Internal events should not pollute the global event bus and should be handled privately within the integration.",
+   "comment_ids": [
+    3886621669
+   ]
+  },
+  {
+   "rule": "Store shared data like API clients or coordinators in entry.runtime_data during async_setup_entry.",
+   "why": "To make data available to platforms and ensure proper lifecycle management within the config entry.",
+   "comment_ids": [
+    4008865061
+   ]
+  },
+  {
+   "rule": "Avoid adding unique IDs for entities unless necessary in the initial PR.",
+   "why": "To simplify the initial implementation and defer unique ID logic until it's clearly needed.",
+   "comment_ids": [
+    4008867976
+   ]
+  },
+  {
+   "rule": "Define the options flow in config_flow.py alongside the config flow.",
+   "why": "For consistency and proper structure, the options flow belongs in the same file as the config flow.",
+   "comment_ids": [
+    3886638977
+   ]
+  },
+  {
+   "rule": "Omit detailed stories or lengthy explanations in code comments.",
+   "why": "Comments should be concise and technical, not narrative.",
+   "comment_ids": [
+    3878373884,
+    3878379266
+   ]
+  },
+  {
+   "rule": "Place sensor entity descriptions in sensor.py, not in separate modules.",
+   "why": "Sensor entity descriptions are specific to the sensor platform and should be co-located with it.",
+   "comment_ids": [
+    3878394210
+   ]
+  },
+  {
+   "rule": "Use the dispatcher pattern or direct method calls instead of reloading the integration on token updates in OAuth2 flows.",
+   "why": "Reloading on every token update is inefficient and can lead to unnecessary restarts.",
+   "comment_ids": [
+    3886632194
+   ]
+  },
+  {
+   "rule": "Leave diagnostics out of the initial PR for a new integration.",
+   "why": "To keep the first PR focused on core functionality, adding diagnostics in a follow-up.",
+   "comment_ids": [
+    3878384801
+   ]
+  },
+  {
+   "rule": "Follow existing documentation style and avoid over-documenting entity classes.",
+   "why": "Consistency with the rest of the codebase is more important than extensive inline docs.",
+   "comment_ids": [
+    3878386935
+   ]
+  },
+  {
+   "rule": "Place server constants in `const.py` instead of creating separate folders or files for them.",
+   "why": "The maintainers prefer centralized constant definitions to avoid unnecessary file structure complexity.",
+   "comment_ids": [
+    3878363107
+   ]
+  },
+  {
+   "rule": "Avoid using regex to transform keys into slugs or calculate sensor states, as it may lead to unpredictable behavior if input changes.",
+   "why": "Regex-based transformations of keys or states are fragile and depend on library output that could change.",
+   "comment_ids": [
+    3889561749,
+    3896684432,
+    4008821471
+   ]
+  },
+  {
+   "rule": "Define sensor entities using a map of keys to `SensorEntityDescription` objects to centralize entity logic and improve maintainability.",
+   "why": "This approach provides better control over entity properties and avoids spreading logic across multiple dictionaries.",
+   "comment_ids": [
+    3889557128,
+    3889806625,
+    4008821471
+   ]
+  },
+  {
+   "rule": "Use sentence case for strings in `strings.json`.",
+   "why": "The project follows sentence case as the standard for user-facing strings.",
+   "comment_ids": [
+    3889562808
+   ]
+  },
+  {
+   "rule": "Firmware versions should be included in `DeviceInfo` instead of being exposed as entities in the state machine.",
+   "why": "Firmware information belongs to device metadata, not as standalone state entities.",
+   "comment_ids": [
+    3889566127,
+    3889612583
+   ]
+  },
+  {
+   "rule": "Comments must explain why code exists, not what it does, and should be limited to non-obvious constraints or workarounds.",
+   "why": "Excessive or redundant comments that merely describe code reduce readability and maintenance efficiency.",
+   "comment_ids": [
+    3846215103,
+    3878371544,
+    3886632671,
+    4111600560
+   ]
+  },
+  {
+   "rule": "Avoid using persistent notifications or repair issues for invalid tokens; instead, trigger config entry reauthentication.",
+   "why": "Handling invalid tokens via reauth is the standard pattern and avoids using userland features in core logic.",
+   "comment_ids": [
+    3886662897
+   ]
+  },
+  {
+   "rule": "Move model definitions and error handling into the integration library rather than keeping them in component code.",
+   "why": "The library is the appropriate place for data models and error definitions to promote reuse and proper abstraction.",
+   "comment_ids": [
+    3878403831,
+    3878405065
+   ]
+  },
+  {
+   "rule": "Do not expose `unique_id` in diagnostics if it contains sensitive identifiers like MAC addresses.",
+   "why": "MAC addresses in diagnostics can expose sensitive information if used as unique IDs.",
+   "comment_ids": [
+    4111638173
+   ]
+  },
+  {
+   "rule": "Migrate existing config entries with empty `unique_id` during configuration version upgrades.",
+   "why": "Empty unique IDs must be handled to ensure proper migration and avoid conflicts.",
+   "comment_ids": [
+    4079136739
+   ]
+  },
+  {
+   "rule": "Split reauth and reconfigure flow implementations into separate PRs from the initial config flow addition.",
+   "why": "Maintainers want to keep the initial config flow PR focused and avoid adding complex flows like reauth and reconfigure prematurely.",
+   "comment_ids": [
+    3886694856,
+    4108092107,
+    4108095202,
+    4108102546,
+    3896874014,
+    4053056318
+   ]
+  },
+  {
+   "rule": "Omit diagnostics support in the initial integration PR and add it in a follow-up.",
+   "why": "Diagnostics is considered a later enhancement and not required for initial integration approval.",
+   "comment_ids": [
+    3886700195
+   ]
+  },
+  {
+   "rule": "Do not catch bare exceptions outside of tasks or config flow code.",
+   "why": "Catching bare exceptions broadly can hide errors and make debugging harder.",
+   "comment_ids": [
+    3886716088
+   ]
+  },
+  {
+   "rule": "Use `entry.subentries_for_type` instead of manual tracking when managing sub-entries in a config flow.",
+   "why": "The built-in method is more reliable and consistent with Home Assistant patterns.",
+   "comment_ids": [
+    4108095202,
+    4108115907
+   ]
+  },
+  {
+   "rule": "Keep dynamic device addition or complex device management features for follow-up PRs.",
+   "why": "Initial PRs should focus on core functionality and avoid introducing advanced features like dynamic devices.",
+   "comment_ids": [
+    3886718758
+   ]
+  },
+  {
+   "rule": "Split unrelated changes or major additions into separate PRs to keep reviews focused.",
+   "why": "Smaller, focused PRs are easier to review and merge, reducing complexity and review overhead.",
+   "comment_ids": [
+    3886694339,
+    4108101324,
+    3851116514
+   ]
+  },
+  {
+   "rule": "Initial config flow PRs should not add coordinators or new platforms if the existing setup can be reused.",
+   "why": "The initial PR should mirror existing functionality without introducing new architectural components.",
+   "comment_ids": [
+    4108088873
+   ]
+  },
+  {
+   "rule": "Mark quality_scale items as `todo` if they cannot be immediately satisfied and plan follow-ups.",
+   "why": "This allows incremental progress on quality requirements without blocking initial merges.",
+   "comment_ids": [
+    3851116514,
+    3949428161,
+    3949428673
+   ]
+  },
+  {
+   "rule": "Bump dependencies in a separate PR from functional changes.",
+   "why": "Separating dependency bumps improves traceability and reduces merge conflicts.",
+   "comment_ids": [
+    4047543616
+   ]
+  },
+  {
+   "rule": "Move shared functions used in multiple platforms (like select and switch) to a helpers.py or common.py module.",
+   "why": "To avoid code duplication and centralize shared logic.",
+   "comment_ids": [
+    4115411828
+   ]
+  },
+  {
+   "rule": "Do not silently pass connection-related errors in coordinators; raise them to prevent silent failures.",
+   "why": "Connection errors indicate a real problem that should be reported, not hidden, as they affect the entire integration.",
+   "comment_ids": [
+    3850120365,
+    3850358399
+   ]
+  },
+  {
+   "rule": "Raise UpdateFailed for unhandled parent exceptions in coordinators instead of only debugging them.",
+   "why": "To ensure proper error propagation and handling during data updates.",
+   "comment_ids": [
+    3866551546
+   ]
+  },
+  {
+   "rule": "Avoid exact string comparisons against library error messages as they can break silently if the message changes.",
+   "why": "Such comparisons are fragile and lead to silent breakage when underlying library messages are updated.",
+   "comment_ids": [
+    3864589763
+   ]
+  },
+  {
+   "rule": "Do not use ServiceValidationError for non-service validation errors; choose an appropriate exception type.",
+   "why": "ServiceValidationError is specifically for service call validations, not general error handling.",
+   "comment_ids": [
+    3846778862
+   ]
+  },
+  {
+   "rule": "Rename non-async functions to not start with 'async_' to avoid confusion.",
+   "why": "Functions starting with 'async_' should be awaitable coroutines; otherwise, the naming is misleading.",
+   "comment_ids": [
+    4115987301
+   ]
+  },
+  {
+   "rule": "Prefer using entity descriptions with loops instead of creating dedicated classes when adding multiple similar entities.",
+   "why": "It simplifies maintenance and scaling when more entities are added in the future.",
+   "comment_ids": [
+    3846763020
+   ]
+  },
+  {
+   "rule": "Handle data sanitation and type conversion in the library rather than in the integration when possible.",
+   "why": "It reduces business logic in the integration and centralizes data handling where it belongs.",
+   "comment_ids": [
+    3846750706,
+    3888987589
+   ]
+  },
+  {
+   "rule": "Use entry.unique_id for entity uniqueness when a unique ID like user ID is available.",
+   "why": "It ensures consistent and reliable identification of configuration entries across reboots.",
+   "comment_ids": [
+    3915604270
+   ]
+  },
+  {
+   "rule": "Move setup logic that may fail due to transient issues (like network problems) to __init__.py and raise ConfigEntryNotReady on failure.",
+   "why": "This allows Home Assistant to retry the setup automatically when conditions improve.",
+   "comment_ids": [
+    3915597207
+   ]
+  },
+  {
+   "rule": "Use ConfigEntryNotReady instead of ConfigEntryError when the integration should retry later on failure.",
+   "why": "ConfigEntryNotReady triggers a retry mechanism, while ConfigEntryError does not.",
+   "comment_ids": [
+    3923899854
+   ]
+  },
+  {
+   "rule": "Do not include reconfigure functionality in a PR that introduces core integration features.",
+   "why": "Reconfigure support changes the scope and makes the PR too large.",
+   "comment_ids": [
+    3923916319
+   ]
+  },
+  {
+   "rule": "Exclude diagnostics from a PR if it is not the main focus of the change.",
+   "why": "Diagnostics should be added in a separate, dedicated PR to avoid scope creep.",
+   "comment_ids": [
+    3923920847
+   ]
+  },
+  {
+   "rule": "Define individual sensor descriptions with lambda functions instead of using getattr for dynamic attribute access.",
+   "why": "It improves code clarity and maintainability by avoiding dynamic attribute resolution.",
+   "comment_ids": [
+    3923930875
+   ]
+  },
+  {
+   "rule": "Omit translation keys in strings.json when the translation matches the device class, as it will fall back automatically.",
+   "why": "This reduces redundancy and leverages Home Assistant's built-in fallback mechanism.",
+   "comment_ids": [
+    3923945796
+   ]
+  },
+  {
+   "rule": "Remove commented-out code before submitting a PR.",
+   "why": "Commented code is unnecessary and clutters the codebase.",
+   "comment_ids": [
+    4082476897
+   ]
+  },
+  {
+   "rule": "Implement retry mechanisms in the integration's library rather than in the coordinator.",
+   "why": "Libraries are the appropriate layer for handling retries and connection resilience.",
+   "comment_ids": [
+    4081601811
+   ]
+  },
+  {
+   "rule": "Split off significant new features like a coordinator into a separate PR.",
+   "why": "Adding a coordinator is a major change that should not be bundled with other unrelated changes.",
+   "comment_ids": [
+    4107046490,
+    4121693638
+   ]
+  },
+  {
+   "rule": "Do not add dependency bumps in a PR that includes functional changes; they must be in a dedicated PR.",
+   "why": "Dependency changes require separate review and testing to avoid unintended side effects.",
+   "comment_ids": [
+    4121695949
+   ]
+  },
+  {
+   "rule": "Avoid web scraping in integrations except during the authentication phase, and parse all required fields at once.",
+   "why": "Web scraping is forbidden by project policy unless strictly necessary for auth, per ADR0004.",
+   "comment_ids": [
+    3846387214
+   ]
+  },
+  {
+   "rule": "Do not alias voluptuous as 'vol'; use the full import name.",
+   "why": "Consistent import style avoids confusion and aligns with project conventions.",
+   "comment_ids": [
+    4047431679
+   ]
+  },
+  {
+   "rule": "Use lowercase strings for fan modes and provide translations instead of hardcoding capitalized values.",
+   "why": "Lowercase with translations ensures proper internationalization and consistency with HA standards.",
+   "comment_ids": [
+    3889821962
+   ]
+  },
+  {
+   "rule": "Use existing Home Assistant features like clean segments instead of implementing custom commands for vacuum zones.",
+   "why": "Leveraging built-in HA functionality ensures consistency and avoids reinventing existing solutions.",
+   "comment_ids": [
+    3889825732
+   ]
+  },
+  {
+   "rule": "Raise ServiceValidationError when a user selects an inaccessible room or invalid service parameter.",
+   "why": "It provides clear feedback to the user about invalid service calls.",
+   "comment_ids": [
+    3901807467
+   ]
+  },
+  {
+   "rule": "Avoid using async_send_command for services; create dedicated service methods instead.",
+   "why": "async_send_command is considered a design mistake and should not be propagated.",
+   "comment_ids": [
+    3924105969
+   ]
+  },
+  {
+   "rule": "Do not include manifest.json changes in a PR with functional code; they must be in a separate PR.",
+   "why": "Manifest changes, especially dependency bumps, require isolated review and testing.",
+   "comment_ids": [
+    4120628209,
+    4121695949
+   ]
+  },
+  {
+   "rule": "Do not add exception translations; they are not translatable and should be handled differently.",
+   "why": "Error messages are difficult to translate and should avoid relying on translation systems.",
+   "comment_ids": [
+    4121598779
+   ]
+  },
+  {
+   "rule": "Place logic that determines feature availability in the coordinator, not in config_flow.",
+   "why": "The coordinator is the correct place to handle dynamic feature detection and state.",
+   "comment_ids": [
+    4120098682
+   ]
+  },
+  {
+   "rule": "Use a separate translation key for placeholders instead of embedding spaces or formatting in the value.",
+   "why": "This ensures proper handling across different languages and avoids formatting issues.",
+   "comment_ids": [
+    3846391630
+   ]
+  },
+  {
+   "rule": "Do not add unused icons to icons.json.",
+   "why": "Unused icons clutter the codebase and increase maintenance overhead.",
+   "comment_ids": [
+    4094956566,
+    4094957417
+   ]
+  },
+  {
+   "rule": "Use 'supported_fn' as the preferred name for functions that determine entity support.",
+   "why": "It is a consistent and recognized naming pattern within the codebase.",
+   "comment_ids": [
+    3924016126
+   ]
+  },
+  {
+   "rule": "Handle potential crashes in entity methods with error handling or decorators, especially when coordinator does not handle them.",
+   "why": "Ensures robustness and prevents uncaught exceptions from crashing the integration.",
+   "comment_ids": [
+    3924031580
+   ]
+  },
+  {
+   "rule": "Set self._attr_name to None when the name is derived from another source.",
+   "why": "It clarifies that the name is not statically assigned and avoids confusion.",
+   "comment_ids": [
+    3864751145
+   ]
+  },
+  {
+   "rule": "Set breaks_in_ha_version to 6 months after the current release cycle when deprecating features.",
+   "why": "To align with the project's release schedule and ensure deprecation periods are consistent.",
+   "comment_ids": [
+    3845190896
+   ]
+  },
+  {
+   "rule": "Only include code in try blocks that can raise an exception.",
+   "why": "To keep exception handling focused and avoid catching unintended errors.",
+   "comment_ids": [
+    3845195346,
+    3847537533
+   ]
+  },
+  {
+   "rule": "Avoid adding unique IDs and device info in the initial PR for new integrations.",
+   "why": "To simplify the initial implementation and defer complexity until core functionality is stable.",
+   "comment_ids": [
+    3845204975
+   ]
+  },
+  {
+   "rule": "Defer reauthentication support to a follow-up PR.",
+   "why": "To keep the initial integration focused and reduce review complexity.",
+   "comment_ids": [
+    3845216732,
+    3847515803
+   ]
+  },
+  {
+   "rule": "Use CONF_PORT, CONF_VERSION, and CONF_PASSWORD constants when available for configuration options.",
+   "why": "To maintain consistency with existing configuration patterns in the codebase.",
+   "comment_ids": [
+    3845210548
+   ]
+  },
+  {
+   "rule": "Defer name changes to a later PR.",
+   "why": "To reduce scope and focus on core functionality first.",
+   "comment_ids": [
+    3845220618
+   ]
+  },
+  {
+   "rule": "Use extended config entry types in coordinators.",
+   "why": "To leverage type safety and better integration with the config entry system.",
+   "comment_ids": [
+    3847533921,
+    4026284417
+   ]
+  },
+  {
+   "rule": "Do not raise third-party exceptions in Home Assistant code.",
+   "why": "To maintain a clean separation between integration logic and external library errors.",
+   "comment_ids": [
+    4026294178
+   ]
+  },
+  {
+   "rule": "Limit PRs to adding one platform at a time.",
+   "why": "To simplify review and reduce the risk of introducing bugs.",
+   "comment_ids": [
+    3890518706,
+    3856496771
+   ]
+  },
+  {
+   "rule": "Mark binary sensors and sensors that expose diagnostic information with entity category diagnostic.",
+   "why": "To properly classify entities that provide system-level diagnostics rather than user-facing data.",
+   "comment_ids": [
+    3890520470,
+    3890520598,
+    3901909228,
+    3890524959,
+    3890526480
+   ]
+  },
+  {
+   "rule": "Do not explicitly set default value None in function or method parameters.",
+   "why": "Because None is already the default and explicitly adding it is redundant.",
+   "comment_ids": [
+    3890524245
+   ]
+  },
+  {
+   "rule": "Use a single translation key with placeholders instead of multiple translation keys for similar strings.",
+   "why": "To reduce duplication and simplify translation management.",
+   "comment_ids": [
+    3852699014
+   ]
+  },
+  {
+   "rule": "Initialize number entities with None instead of 0 to represent unknown state on startup.",
+   "why": "To accurately reflect that the initial value is not known until read from the device.",
+   "comment_ids": [
+    3921411235
+   ]
+  },
+  {
+   "rule": "Avoid rounding sensor values unless required by the device or service.",
+   "why": "To preserve data accuracy and allow consumers to decide on precision.",
+   "comment_ids": [
+    4003302247
+   ]
+  },
+  {
+   "rule": "Omit the coordinator from sensor initialization if it is not used.",
+   "why": "To clean up unnecessary parameter passing.",
+   "comment_ids": [
+    4003303891
+   ]
+  },
+  {
+   "rule": "Use a dedicated method like `_validate_input` to consolidate validation logic in config flow user steps.",
+   "why": "It avoids redundant code and follows the convenience patterns already present in the codebase.",
+   "comment_ids": [
+    3901563815
+   ]
+  },
+  {
+   "rule": "Split unrelated changes into separate pull requests to maintain focused scope.",
+   "why": "It ensures PRs are easier to review and maintain, especially when adding features like reauth flow.",
+   "comment_ids": [
+    3901345015,
+    3901572400
+   ]
+  },
+  {
+   "rule": "Place shared functionality in a `common.py` or `helpers.py` file instead of `entity.py`.",
+   "why": "It promotes code reuse across platforms and keeps entity files focused on entity logic.",
+   "comment_ids": [
+    3911589382
+   ]
+  },
+  {
+   "rule": "Do not include error messages in translation files as they are not translatable.",
+   "why": "Error messages are intended for developers and logging, not end-user translation.",
+   "comment_ids": [
+    3911867022
+   ]
+  },
+  {
+   "rule": "Use `entity_category` for select entities when appropriate.",
+   "why": "It helps categorize entities properly in the UI and improves user experience.",
+   "comment_ids": [
+    3931689769
+   ]
+  },
+  {
+   "rule": "Use translations instead of hardcoded names in sensor and binary sensor platforms.",
+   "why": "It ensures proper localization and consistency with Home Assistant's translation system.",
+   "comment_ids": [
+    3960936841
+   ]
+  },
+  {
+   "rule": "Set `sw_version` in device info when the library exposes it.",
+   "why": "It provides accurate and complete device information in the device registry.",
+   "comment_ids": [
+    3960938296
+   ]
+  },
+  {
+   "rule": "Set unique IDs for config entries during auto-creation to prevent duplicate entries on DHCP rediscovery.",
+   "why": "Without a unique ID, the same device can create multiple config entries if its IP changes.",
+   "comment_ids": [
+    3862377844
+   ]
+  },
+  {
+   "rule": "Entity action methods must raise `HomeAssistantError` on device command failure.",
+   "why": "It ensures proper error handling and user feedback when entity commands fail.",
+   "comment_ids": [
+    3862380836
+   ]
+  },
+  {
+   "rule": "Include all supported entities and features in the integration's documentation under a top-level 'Supported functionality' section.",
+   "why": "It ensures users have clear and complete documentation about what the integration supports.",
+   "comment_ids": [
+    3862386085
+   ]
+  },
+  {
+   "rule": "Add removal instructions to the integration's documentation via a `remove_device_service.md` include.",
+   "why": "Users need clear guidance on how to remove the integration, and this rule has no exceptions.",
+   "comment_ids": [
+    3862373752
+   ]
+  },
+  {
+   "rule": "Test all config flow abort conditions, including duplicate-entry checks and options flow error recovery.",
+   "why": "Untested abort paths can lead to unexpected behavior and reduce code reliability.",
+   "comment_ids": [
+    3862371905
+   ]
+  },
+  {
+   "rule": "Use `async_set_unique_id` when creating config entries to ensure they are not duplicated.",
+   "why": "Entries without unique IDs can result in duplicates during rediscovery or reconfiguration.",
+   "comment_ids": [
+    3862377844
+   ]
+  },
+  {
+   "rule": "Use `_attr_name = None` instead of a translation key to make a camera entity the main feature of a device.",
+   "why": "It simplifies the entity setup and aligns with Home Assistant conventions for primary device features.",
+   "comment_ids": [
+    3863927502
+   ]
+  },
+  {
+   "rule": "Use the Probatio validation framework for new additions in the KNX integration.",
+   "why": "It provides typed, validated data and aligns with the integration's adopted standards.",
+   "comment_ids": [
+    3890498248
+   ]
+  },
+  {
+   "rule": "Log unknown errors with `LOGGER.exception` instead of showing placeholder errors in config flow.",
+   "why": "It provides better debugging information when the cause of a failure is not known.",
+   "comment_ids": [
+    3889459213
+   ]
+  },
+  {
+   "rule": "Use DeviceInfo type for device information in entities.",
+   "why": "It ensures consistency and proper typing for device information across integrations.",
+   "comment_ids": [
+    4049208926
+   ]
+  },
+  {
+   "rule": "Avoid using aliases in configuration flow files.",
+   "why": "Aliases can obscure the actual behavior and make the code harder to follow.",
+   "comment_ids": [
+    4049188595
+   ]
+  },
+  {
+   "rule": "Place return statements outside try-except blocks when possible, keeping only crash-prone code inside.",
+   "why": "This improves code readability and ensures that successful execution paths are clearly separated from error handling.",
+   "comment_ids": [
+    3872643262
+   ]
+  },
+  {
+   "rule": "Use enum device classes for sensor states with a limited set of values.",
+   "why": "This enables proper translation and user interface support for known state values.",
+   "comment_ids": [
+    3889909570,
+    3889910039
+   ]
+  },
+  {
+   "rule": "Prefer icon translations over hardcoded icons in sensor entities.",
+   "why": "Icon translations allow for better localization and consistency across the frontend.",
+   "comment_ids": [
+    4049212902
+   ]
+  },
+  {
+   "rule": "Remove unused dataclasses if they only wrap a single object like a coordinator.",
+   "why": "It simplifies the code and avoids unnecessary indirection when direct storage is sufficient.",
+   "comment_ids": [
+    3924805573
+   ]
+  },
+  {
+   "rule": "Move data parsing logic from models or entities into the underlying library when possible.",
+   "why": "This keeps the integration code clean and delegates low-level parsing to the library where it belongs.",
+   "comment_ids": [
+    3889906883
+   ]
+  },
+  {
+   "rule": "Use named constants instead of magic numbers, especially when the value is used in multiple places.",
+   "why": "Named constants improve code readability and maintainability by clarifying the purpose of numeric values.",
+   "comment_ids": [
+    3883088923
+   ]
+  },
+  {
+   "rule": "Set native_step for number entities when the step size is meaningful for user input.",
+   "why": "It ensures proper frontend behavior and validation when users interact with number controls.",
+   "comment_ids": [
+    3854701246
+   ]
+  },
+  {
+   "rule": "Use translation keys in strings.json that reflect the entity's function and are reusable across devices.",
+   "why": "Reusable translation keys promote consistency and avoid device-specific naming that limits reusability.",
+   "comment_ids": [
+    3847317448
+   ]
+  },
+  {
+   "rule": "Ensure cluster revision checks in discovery schemas include 0 as a valid value alongside None and NullValue.",
+   "why": "Cluster revisions are non-nullable uint16 attributes that default to 0, so excluding 0 leads to incorrect behavior.",
+   "comment_ids": [
+    3864759106
+   ]
+  },
+  {
+   "rule": "Avoid including bug fixes in feature PRs; submit them in separate PRs.",
+   "why": "Separating bug fixes from feature changes makes reviews clearer and prevents scope creep in feature PRs.",
+   "comment_ids": [
+    3854011095
+   ]
+  },
+  {
+   "rule": "Prefer frozen=True and kw_only=True for dataclasses used to hold immutable integration data.",
+   "why": "It ensures data integrity and clarity for dataclasses that should not be modified after creation.",
+   "comment_ids": [
+    3872598787
+   ]
+  },
+  {
+   "rule": "Create a method like `_update_attr` to avoid writing state twice when `self._handle_coordinator_update()` already writes state.",
+   "why": "Writing state twice is redundant and can lead to inconsistent behavior.",
+   "comment_ids": [
+    3923647964
+   ]
+  },
+  {
+   "rule": "Use normal entity descriptions instead of custom patterns unless there is a specific need.",
+   "why": "Using standard entity descriptions keeps the code consistent and avoids unnecessary complexity.",
+   "comment_ids": [
+    4107996379
+   ]
+  },
+  {
+   "rule": "Use callable functions in entity descriptions instead of replicating logic with slight variations.",
+   "why": "It's cleaner and more maintainable to pass logic via callables in entity descriptions.",
+   "comment_ids": [
+    4108148892
+   ]
+  },
+  {
+   "rule": "Remove pylint ignore comments unless absolutely necessary.",
+   "why": "Pylint ignores should not be used without strong justification as they hide potential issues.",
+   "comment_ids": [
+    4004242700
+   ]
+  },
+  {
+   "rule": "Implement simple computed values as properties instead of methods.",
+   "why": "Properties are more appropriate for simple computed values and improve code readability.",
+   "comment_ids": [
+    4004247674
+   ]
+  },
+  {
+   "rule": "Use the default update recognition logic unless dealing with complex version strings.",
+   "why": "The default logic is sufficient for most cases and avoids unnecessary customization.",
+   "comment_ids": [
+    4004252598
+   ]
+  },
+  {
+   "rule": "Do not calculate entity states in the integration; this logic should reside in the library.",
+   "why": "Integrations should reflect the API directly, not introduce calculated states that deviate from the source.",
+   "comment_ids": [
+    3880439966,
+    3880296091,
+    3881953712,
+    3895479209
+   ]
+  },
+  {
+   "rule": "Add a code comment in the options flow to explain why certain options are required if they deviate from standard practices.",
+   "why": "Future reviewers need context to understand exceptions to the rule of not allowing options for entity selection.",
+   "comment_ids": [
+    3880389382
+   ]
+  },
+  {
+   "rule": "Use `_abort_if_unique_id_mismatch` in config flow when handling unique ID mismatches.",
+   "why": "It's the standard way to handle unique ID mismatches and ensures consistent behavior.",
+   "comment_ids": [
+    3869818645
+   ]
+  },
+  {
+   "rule": "Do not invent features not exposed by the API; integrations must represent the API as-is.",
+   "why": "Exposing non-existent API features violates Home Assistant's integration design principles.",
+   "comment_ids": [
+    3957197798
+   ]
+  },
+  {
+   "rule": "Avoid using datetime entities if they cause constant state updates; consider alternative approaches like a sync button.",
+   "why": "Datetime entities that always update create noise and may lead to unintended behavior.",
+   "comment_ids": [
+    3959114377
+   ]
+  },
+  {
+   "rule": "Do not resolve review conversations without addressing the feedback, as it hinders the review process.",
+   "why": "Resolved conversations that aren't addressed make it harder for reviewers to track open issues.",
+   "comment_ids": [
+    3957187987
+   ]
+  },
+  {
+   "rule": "Use extended ConfigEntry type hints where applicable for better type safety.",
+   "why": "Extended ConfigEntry provides more accurate typing for configuration data.",
+   "comment_ids": [
+    3843445961
+   ]
+  },
+  {
+   "rule": "Return `None` for unknown data and use `unavailable` for devices that cannot be reached.",
+   "why": "Distinguishing between unknown data and unreachable devices ensures correct state representation.",
+   "comment_ids": [
+    3843461788
+   ]
+  },
+  {
+   "rule": "Set `breaks_in_ha_version` with the full version string including patch number, e.g., '2027.3.0'.",
+   "why": "The full version string is required for accurate deprecation tracking.",
+   "comment_ids": [
+    3843703078
+   ]
+  },
+  {
+   "rule": "Avoid using `getattr` excessively; prefer direct attribute access or proper defaults.",
+   "why": "Overuse of `getattr` can make code less readable and harder to debug.",
+   "comment_ids": [
+    3847833950
+   ]
+  },
+  {
+   "rule": "Handle unknown exceptions in API calls to provide meaningful feedback to users.",
+   "why": "Catching only base Exception hides specific error causes and reduces debuggability.",
+   "comment_ids": [
+    3869854262
+   ]
+  },
+  {
+   "rule": "Mark services that modify critical settings as admin-only.",
+   "why": "Admin-only restriction ensures that sensitive actions are protected.",
+   "comment_ids": [
+    3901902300
+   ]
+  },
+  {
+   "rule": "Use Sentence case for translatable strings in `strings.json`.",
+   "why": "Sentence case is the preferred style for user-facing strings in Home Assistant.",
+   "comment_ids": [
+    3896521721
+   ]
+  },
+  {
+   "rule": "Avoid adding translations for examples or non-user-facing strings.",
+   "why": "Translating examples adds no value and increases translation overhead.",
+   "comment_ids": [
+    3896520455
+   ]
+  },
+  {
+   "rule": "Use consistent terminology for similar concepts in a module, such as using `coordinates` or `position` throughout.",
+   "why": "Consistent naming improves code readability and maintainability.",
+   "comment_ids": [
+    3843128729
+   ]
+  },
+  {
+   "rule": "Shield long-running tasks in HTTP views using `hass.async_create_task` and proper shielding to prevent request hangs.",
+   "why": "Unshielded tasks in HTTP views can cause the server to hang if the task blocks.",
+   "comment_ids": [
+    3861477239
+   ]
+  },
+  {
+   "rule": "Move duplicated logic in climate entities to a helper method.",
+   "why": "Duplicated code reduces maintainability and increases the risk of inconsistencies.",
+   "comment_ids": [
+    3960961796
+   ]
+  },
+  {
+   "rule": "Include the minor version in log messages when relevant.",
+   "why": "To provide more precise context in logs for debugging and tracking changes.",
+   "comment_ids": [
+    3964961518
+   ]
+  },
+  {
+   "rule": "Use a separate timestamp sensor entity instead of a state attribute when the timestamp does not relate to the main state of the device.",
+   "why": "State attributes should only contain data that helps interpret the main state; otherwise, a dedicated sensor is more appropriate.",
+   "comment_ids": [
+    3957095369
+   ]
+  },
+  {
+   "rule": "Translate raw numeric sensor values into meaningful states within the integration and log unknown values for future improvement.",
+   "why": "Users should be able to understand sensor states without needing to interpret raw numbers themselves.",
+   "comment_ids": [
+    3865129940
+   ]
+  },
+  {
+   "rule": "Use binary sensors instead of sensors for boolean-like values and ensure states are user-friendly.",
+   "why": "Binary sensors are semantically correct for on/off states and improve usability.",
+   "comment_ids": [
+    3865142567
+   ]
+  },
+  {
+   "rule": "Avoid catching broad exceptions; catch only specific exceptions that are expected.",
+   "why": "Catching broad exceptions can hide unexpected errors and make debugging harder.",
+   "comment_ids": [
+    3979982875
+   ]
+  },
+  {
+   "rule": "Name decorators based on their purpose rather than generic terms like 'command'.",
+   "why": "Clear naming improves code readability and maintainability.",
+   "comment_ids": [
+    3979987746
+   ]
+  },
+  {
+   "rule": "Keep decorators in the same file as the component they are primarily used for if they are specific to it.",
+   "why": "Co-locating related code improves discoverability and reduces unnecessary abstraction.",
+   "comment_ids": [
+    3979990411
+   ]
+  },
+  {
+   "rule": "Avoid command guards that rely on cached state unless required by the device or service.",
+   "why": "Such guards can lead to dropped commands if the cached state is outdated, which may be worse than sending a wrong command.",
+   "comment_ids": [
+    3865959866
+   ]
+  },
+  {
+   "rule": "Press the 'Ready for review' button when a PR is ready to be reviewed.",
+   "why": "Maintainers rely on this signal to know when to review and often ignore draft PRs.",
+   "comment_ids": [
+    3962099084
+   ]
+  },
+  {
+   "rule": "Hold changes that affect critical behavior until a codeowner has reviewed them.",
+   "why": "Codeowners have deeper knowledge of the integration and can prevent regressions.",
+   "comment_ids": [
+    3962134546
+   ]
+  },
+  {
+   "rule": "Avoid storing rarely used diagnostic data in runtime_data if it can be retrieved from existing sources.",
+   "why": "Storing such data unnecessarily increases memory usage across all users.",
+   "comment_ids": [
+    3911812842
+   ]
+  },
+  {
+   "rule": "Link follow-up PRs when changes are split across multiple PRs released in the same version.",
+   "why": "This ensures related changes are tracked together and released cohesively.",
+   "comment_ids": [
+    3949666668
+   ]
+  },
+  {
+   "rule": "Use timestamp sensors for time-based data rather than generic sensors.",
+   "why": "Timestamp sensors are semantically correct and provide better UI representation.",
+   "comment_ids": [
+    3896498458
+   ]
+  },
+  {
+   "rule": "Do not check the entity registry to determine whether to create an entity, as it prevents re-creation after removal.",
+   "why": "This breaks the expected behavior of entity restoration after being deleted.",
+   "comment_ids": [
+    3960419858
+   ]
+  },
+  {
+   "rule": "Use DeviceClassSelectorConfig with the correct domain, not 'number', when selecting device classes for sensors.",
+   "why": "Using the wrong domain can lead to incorrect configuration and user confusion.",
+   "comment_ids": [
+    3864924632
+   ]
+  },
+  {
+   "rule": "Do not rename translation keys unless there is actual content to translate.",
+   "why": "Unnecessary renaming complicates translation management without benefit.",
+   "comment_ids": [
+    3996906622
+   ]
+  },
+  {
+   "rule": "Ensure select entities always have options defined, as having none is invalid.",
+   "why": "A select without options violates the expected behavior of the select entity.",
+   "comment_ids": [
+    4016692942
+   ]
+  },
+  {
+   "rule": "Remove methods that simply return their input parameter without transformation.",
+   "why": "Such methods add unnecessary complexity and provide no value.",
+   "comment_ids": [
+    3874875369
+   ]
+  },
+  {
+   "rule": "Prefer automatic detection over requiring manual user actions during setup.",
+   "why": "User-facing steps should be minimized, especially if they require technical understanding.",
+   "comment_ids": [
+    3875445670
+   ]
+  },
+  {
+   "rule": "Enable assumed state for cover entities when the actual open/closed state cannot be reliably determined.",
+   "why": "This prevents UI issues and allows continued control when position feedback is unreliable.",
+   "comment_ids": [
+    3885836632,
+    3885842256
+   ]
+  },
+  {
+   "rule": "Set sensor unit of measurement to bytes and suggest higher units like megabytes or gigabytes instead of converting manually.",
+   "why": "This ensures correct unit conversion and allows users to choose their preferred display unit.",
+   "comment_ids": [
+    4005294605,
+    4006531566
+   ]
+  },
+  {
+   "rule": "Use natural language for sensor names in translations, such as 'Free storage space' instead of literal translations.",
+   "why": "Natural phrasing improves user experience and readability.",
+   "comment_ids": [
+    4005297595
+   ]
+  },
+  {
+   "rule": "Return only necessary data from methods; avoid passing through identifiers like uid if not needed.",
+   "why": "Simpler return values reduce complexity and improve maintainability.",
+   "comment_ids": [
+    3903391824
+   ]
+  },
+  {
+   "rule": "Use consistent naming for variables, such as 'info' instead of 'data', to match surrounding code.",
+   "why": "Consistent naming improves readability and reduces cognitive load.",
+   "comment_ids": [
+    3903400626
+   ]
+  },
+  {
+   "rule": "Keep reauthentication logic out of initial feature PRs and add it in a follow-up.",
+   "why": "Separating concerns makes reviews easier and reduces the risk of introducing bugs.",
+   "comment_ids": [
+    4016037527,
+    4122355720
+   ]
+  },
+  {
+   "rule": "Use only the URL as a placeholder in config flow fields, not markdown or other formatting.",
+   "why": "Placeholders should be simple and functional, not formatted text.",
+   "comment_ids": [
+    4016040986
+   ]
+  },
+  {
+   "rule": "Avoid asking for redundant configuration data if one piece can derive the other.",
+   "why": "Minimizing user input improves setup experience and reduces errors.",
+   "comment_ids": [
+    4016044134
+   ]
+  },
+  {
+   "rule": "Set device_info in the constructor using _attr_device_info instead of in other methods.",
+   "why": "This follows standard Home Assistant patterns and ensures consistent behavior.",
+   "comment_ids": [
+    4016086914
+   ]
+  },
+  {
+   "rule": "Move model definitions to the coordinator file if they are closely related to coordination logic.",
+   "why": "Co-locating related components improves code organization and maintainability.",
+   "comment_ids": [
+    4122365832
+   ]
+  },
+  {
+   "rule": "Keep quality scale rules in sync with the actual code implementation.",
+   "why": "Out-of-sync rules can mislead contributors and reduce code quality.",
+   "comment_ids": [
+    4016091456
+   ]
+  },
+  {
+   "rule": "Do not add unnecessary comments in configuration files like quality_scale.yaml.",
+   "why": "These files should be self-explanatory; extra comments add noise.",
+   "comment_ids": [
+    4122368422
+   ]
+  },
+  {
+   "rule": "Implement device-specific logic in the underlying library rather than the integration.",
+   "why": "This promotes code reuse and separates concerns between integration and library.",
+   "comment_ids": [
+    4016114902
+   ]
+  },
+  {
+   "rule": "Use a single generic entity class with entity descriptions to customize behavior instead of creating multiple similar classes.",
+   "why": "This reduces code duplication and makes maintenance easier.",
+   "comment_ids": [
+    4016134013
+   ]
+  },
+  {
+   "rule": "Expose only actual device state in entities, not integration-specific metrics like API key expiration or rate limits.",
+   "why": "Integrations should reflect the device or service state, not internal integration details.",
+   "comment_ids": [
+    4016139376
+   ]
+  },
+  {
+   "rule": "Use common translation strings instead of defining custom ones for standard states or actions.",
+   "why": "Using common keys ensures consistency and avoids polluting the translation system with redundant or non-standard entries.",
+   "comment_ids": [
+    4122409325,
+    4122412344,
+    4122417717,
+    3961536773
+   ]
+  },
+  {
+   "rule": "Map manufacturer or model identifiers to snake_case and translate them using strings.json.",
+   "why": "This ensures consistent formatting and enables proper translation through the standard localization system.",
+   "comment_ids": [
+    3989820442,
+    3842453121
+   ]
+  },
+  {
+   "rule": "Do not set manufacturer or model information for SmartThings devices if it is inaccurate or derived from non-authoritative slugs.",
+   "why": "Inaccurate data would pollute the device database used for analytics and should be avoided unless provided reliably by the library.",
+   "comment_ids": [
+    3843225656,
+    3843245443,
+    3949020715
+   ]
+  },
+  {
+   "rule": "Use a timestamp instead of a sensor for actions that cannot be paused or represent time-based events.",
+   "why": "A timestamp sensor better represents irreversible or time-specific events in the system.",
+   "comment_ids": [
+    4122391833,
+    4122395921,
+    4122397934,
+    4008927917
+   ]
+  },
+  {
+   "rule": "Place module-level documentation strings at the top of the file, above sensor or class definitions.",
+   "why": "This follows Python conventions and ensures clarity about the module's purpose.",
+   "comment_ids": [
+    4122403990
+   ]
+  },
+  {
+   "rule": "Avoid using RestoreSensor to accumulate data; use the integral integration instead.",
+   "why": "RestoreSensor is not designed for data accumulation and can lead to incorrect state handling.",
+   "comment_ids": [
+    3842443960
+   ]
+  },
+  {
+   "rule": "Do not include dynamic or stale device handling in the initial PR if it complicates the implementation.",
+   "why": "Simpler initial implementations are preferred to ensure clarity and maintainability.",
+   "comment_ids": [
+    3896831007
+   ]
+  },
+  {
+   "rule": "Do not add extra state attributes in the initial PR if they are not essential.",
+   "why": "Keeping the initial implementation minimal helps focus on core functionality.",
+   "comment_ids": [
+    3896869033
+   ]
+  },
+  {
+   "rule": "Do not include last reported timestamps for push-based sensors since the state machine already tracks this.",
+   "why": "Push-based sensors inherently reflect current state, making 'last reported' redundant.",
+   "comment_ids": [
+    3896865050
+   ]
+  },
+  {
+   "rule": "Avoid using instruction-like values as sensor states since they are not meaningful states.",
+   "why": "Sensor states should reflect measurable conditions, not procedural instructions.",
+   "comment_ids": [
+    3896867253
+   ]
+  },
+  {
+   "rule": "Use TYPE_CHECKING from typing to avoid runtime import overhead.",
+   "why": "This improves performance by only importing types when necessary for type checking.",
+   "comment_ids": [
+    3945234078
+   ]
+  },
+  {
+   "rule": "Do not customize icons for sensors that have a device class.",
+   "why": "Device class sensors use standardized icons; custom icons can cause inconsistency.",
+   "comment_ids": [
+    3861177789
+   ]
+  },
+  {
+   "rule": "Use self._attr_available instead of self.available when setting availability in entities.",
+   "why": "Direct assignment to self.available is incorrect; self._attr_available properly interfaces with the state machine.",
+   "comment_ids": [
+    3894358200,
+    3894375519
+   ]
+  },
+  {
+   "rule": "Do not use constants for service action names that are only used once.",
+   "why": "Using constants for single-use service action names is a legacy pattern and unnecessary.",
+   "comment_ids": [
+    3954626274
+   ]
+  },
+  {
+   "rule": "Guard typing of event-related variables with Literal types when appropriate.",
+   "why": "It improves type safety and clarity for variables representing specific event types.",
+   "comment_ids": [
+    3861026256,
+    3861788414
+   ]
+  },
+  {
+   "rule": "Mark manifest.json version bumps in a separate PR from other changes.",
+   "why": "Separating version bumps improves clarity and traceability of dependency changes.",
+   "comment_ids": [
+    3886756499,
+    3886758494
+   ]
+  },
+  {
+   "rule": "Place assertions inside TYPE_CHECKING guards in config_flow.py.",
+   "why": "Assertions outside TYPE_CHECKING can execute at runtime and cause unintended side effects.",
+   "comment_ids": [
+    3931970056
+   ]
+  },
+  {
+   "rule": "Inline simple methods in config_flow.py that are not reused.",
+   "why": "Avoiding unnecessary method extraction reduces complexity and improves readability.",
+   "comment_ids": [
+    3933627858,
+    3933630878
+   ]
+  },
+  {
+   "rule": "Handle potential I/O operations in config_flow.py with try-except blocks.",
+   "why": "I/O operations can raise exceptions and should be properly caught to avoid crashes.",
+   "comment_ids": [
+    3932040606
+   ]
+  },
+  {
+   "rule": "Move constants outside of function or method bodies and define them at the module level.",
+   "why": "It improves code clarity and follows Python best practices for constant definitions.",
+   "comment_ids": [
+    3988425584
+   ]
+  },
+  {
+   "rule": "Only include code in try blocks that can potentially raise exceptions.",
+   "why": "This makes exception handling more precise and avoids masking unexpected errors.",
+   "comment_ids": [
+    3988517289,
+    3988565061,
+    3988576841
+   ]
+  },
+  {
+   "rule": "Do not overwrite entity_id in integrations as it interferes with frontend improvements and user experience.",
+   "why": "Overwriting entity_id undermines recent improvements to entity ID handling and reduces consistency.",
+   "comment_ids": [
+    4057084817
+   ]
+  },
+  {
+   "rule": "Avoid hardcoding translatable strings; use translations instead.",
+   "why": "Hardcoded strings cannot be localized, limiting accessibility for non-English users.",
+   "comment_ids": [
+    3852208204
+   ]
+  },
+  {
+   "rule": "Do not include reauth functionality in new integrations to reduce initial review complexity.",
+   "why": "Keeping reauth out of new integrations simplifies the initial review and integration process.",
+   "comment_ids": [
+    4025797367
+   ]
+  },
+  {
+   "rule": "Do not use constants for service action registration in new code as it is a legacy pattern.",
+   "why": "Service names and schemas are typically used only once, making constants unnecessary.",
+   "comment_ids": [
+    3954891819
+   ]
+  },
+  {
+   "rule": "New service actions should not include the config entry ID as an optional parameter, even for single-entry integrations.",
+   "why": "Including config entry ID unnecessarily complicates service definitions and usage.",
+   "comment_ids": [
+    3954826683
+   ]
+  },
+  {
+   "rule": "Wrap type assertions used for type narrowing in TYPE_CHECKING conditions.",
+   "why": "This prevents runtime performance impact and follows Home Assistant development guidelines.",
+   "comment_ids": [
+    4014052202,
+    4014074949
+   ]
+  },
+  {
+   "rule": "Do not commit auto-generated translation files like en.json.",
+   "why": "These files are generated automatically and should not be manually edited or committed.",
+   "comment_ids": [
+    4025771607
+   ]
+  },
+  {
+   "rule": "Check for unique_id mismatch in reconfiguration flows to prevent accidental device switching.",
+   "why": "It ensures users don't accidentally switch devices during reconfiguration by validating the unique_id consistency.",
+   "comment_ids": [
+    3955195830
+   ]
+  },
+  {
+   "rule": "Implement consistent patterns by inlining simple functions as lambdas in entity descriptions.",
+   "why": "It reduces unnecessary function definitions and maintains consistency across sensors with minimal business logic.",
+   "comment_ids": [
+    3931671758,
+    3932238212,
+    3932606335,
+    3932610800,
+    3932788167
+   ]
+  },
+  {
+   "rule": "Define module-specific constants inside the module instead of in a shared const.py.",
+   "why": "It improves code readability by keeping constants close to their usage and reserving const.py for truly shared constants.",
+   "comment_ids": [
+    3999368127
+   ]
+  },
+  {
+   "rule": "Prefer async functions for service handlers and use hass.async_add_executor_job for blocking calls.",
+   "why": "It aligns with Home Assistant's preferred pattern of keeping the main context async and scheduling blocking operations appropriately.",
+   "comment_ids": [
+    3999013176
+   ]
+  },
+  {
+   "rule": "Do not update existing config entries in the user step of a config flow.",
+   "why": "The user step should not modify existing entries to prevent unintended side effects during setup.",
+   "comment_ids": [
+    3989825173
+   ]
+  },
+  {
+   "rule": "Use device selectors instead of target selectors when targeting a Z-Wave node in conditions.",
+   "why": "Device selectors are the correct and current way to target nodes, while target selectors should only be used for backward compatibility.",
+   "comment_ids": [
+    3952466859,
+    3979936853,
+    3952455220
+   ]
+  },
+  {
+   "rule": "Avoid adding computed or timestamped data to state attributes; create separate entities with appropriate device classes instead.",
+   "why": "Separate entities with device classes like timestamp provide clearer, more consistent integration with Home Assistant's state model.",
+   "comment_ids": [
+    3889571814
+   ]
+  },
+  {
+   "rule": "Move value calculations into the library when possible to reduce code duplication and make functionality available to all consumers.",
+   "why": "Providing computed values in the library makes the Home Assistant integration leaner and benefits other users of the library.",
+   "comment_ids": [
+    3890317721,
+    3891910764
+   ]
+  },
+  {
+   "rule": "Mark event trigger functions as @callback if they are meant to be called by the system in response to events.",
+   "why": "Using @callback ensures proper execution context and performance for event-driven functions.",
+   "comment_ids": [
+    3844580275
+   ]
+  },
+  {
+   "rule": "Do not use the entity_id parameter in new Z-Wave integrations; use device ID as the target parameter instead.",
+   "why": "The entity_id parameter is outdated and not in line with current guidelines; device ID is the preferred way to interface with the API.",
+   "comment_ids": [
+    3922381054
+   ]
+  },
+  {
+   "rule": "Prefer NamedTuple over plain tuples when returning multiple values from helper functions to improve code clarity.",
+   "why": "NamedTuple makes the code more readable and maintainable compared to unpacking plain tuples with positional assumptions.",
+   "comment_ids": [
+    3853675752,
+    3923132307,
+    3947755553,
+    3947778161
+   ]
+  },
+  {
+   "rule": "Add docstrings to NamedTuple classes explaining field order and their use in unpacking contexts.",
+   "why": "Call sites rely on the field order for unpacking, so documenting this contract prevents errors and improves maintainability.",
+   "comment_ids": [
+    3947885215
+   ]
+  },
+  {
+   "rule": "Update docstrings to accurately reflect what a method does, especially if it schedules retries or re-raises exceptions.",
+   "why": "Inaccurate docstrings can mislead contributors about the behavior, especially for callback functions with side effects.",
+   "comment_ids": [
+    3947931712
+   ]
+  },
+  {
+   "rule": "Keep lines within 88 characters and docstrings within 72 characters per line to comply with PEP8.",
+   "why": "Long lines reduce readability and violate project style guidelines.",
+   "comment_ids": [
+    4004728903
+   ]
+  },
+  {
+   "rule": "All config flow tests must end with the flow result type CREATE_ENTRY or ABORT.",
+   "why": "To ensure config flows properly terminate and handle recovery or abortion as expected.",
+   "comment_ids": [
+    3847851857,
+    3889786452
+   ]
+  },
+  {
+   "rule": "Use the common mock config entry fixture instead of creating config entries manually in tests.",
+   "why": "To maintain consistency and reduce duplication by using shared test fixtures.",
+   "comment_ids": [
+    3863470071,
+    3863486278,
+    4047739770
+   ]
+  },
+  {
+   "rule": "Avoid patching integration internals; instead, patch the underlying library or client.",
+   "why": "To test integration behavior through public interfaces and avoid coupling tests to internal implementation details.",
+   "comment_ids": [
+    4024795535,
+    3863459675,
+    4047936555
+   ]
+  },
+  {
+   "rule": "Do not create entities or coordinators directly in tests; let Home Assistant set up the integration and then assert the resulting entities.",
+   "why": "To accurately reflect runtime behavior and ensure integration components interact correctly.",
+   "comment_ids": [
+    4094627461,
+    4047752309,
+    4047774005
+   ]
+  },
+  {
+   "rule": "Move repeated test setup code and mocks into conftest.py as fixtures.",
+   "why": "To promote reuse, reduce duplication, and centralize common test configuration.",
+   "comment_ids": [
+    3965315133,
+    4047760868
+   ]
+  },
+  {
+   "rule": "Avoid inline patching; use common patching patterns or fixtures instead.",
+   "why": "To improve readability and maintain consistency with project-wide testing practices.",
+   "comment_ids": [
+    3847853897,
+    4008275688
+   ]
+  },
+  {
+   "rule": "Fully type all test functions.",
+   "why": "To improve code quality and maintainability through consistent type annotations.",
+   "comment_ids": [
+    3965315133
+   ]
+  },
+  {
+   "rule": "Do not patch PLATFORMS directly as it is a common pattern and the comment is unnecessary.",
+   "why": "Because the pattern is well-known and self-explanatory, so comments add no value.",
+   "comment_ids": [
+    3965377726
+   ]
+  },
+  {
+   "rule": "Do not include if statements or conditional logic in tests.",
+   "why": "To ensure tests are deterministic and always follow a clear, predictable execution path.",
+   "comment_ids": [
+    3863466843,
+    4047721802
+   ]
+  },
+  {
+   "rule": "Assert the unique ID in config flow tests when applicable.",
+   "why": "To verify that the integration correctly sets and persists unique identifiers for config entries.",
+   "comment_ids": [
+    3863461001
+   ]
+  },
+  {
+   "rule": "Do not test coordinator internals directly; instead, patch the library and test integration behavior through the sensor platform.",
+   "why": "Testing through the sensor platform reflects how users interact with the integration and avoids testing internal implementation details.",
+   "comment_ids": [
+    3863493965,
+    3889792287,
+    3889794146,
+    4047648002
+   ]
+  },
+  {
+   "rule": "Do not access or modify runtime_data in tests.",
+   "why": "runtime_data is an internal implementation detail and should not be directly touched in tests.",
+   "comment_ids": [
+    3889789031,
+    3863496335,
+    4026209256
+   ]
+  },
+  {
+   "rule": "Do not access or test internal methods like _async_setup or other private attributes in tests.",
+   "why": "Testing internals is discouraged because it couples tests to implementation details that may change.",
+   "comment_ids": [
+    3863501917,
+    3889792805
+   ]
+  },
+  {
+   "rule": "Use parametrize for tests with multiple cases instead of loops.",
+   "why": "Using parametrize makes tests clearer, more maintainable, and follows pytest best practices.",
+   "comment_ids": [
+    4111655019
+   ]
+  },
+  {
+   "rule": "Merge related test cases into a single test when they share setup and logic.",
+   "why": "Combining similar tests reduces duplication and improves maintainability.",
+   "comment_ids": [
+    4111644728,
+    3978997363,
+    3915735717
+   ]
+  },
+  {
+   "rule": "Use descriptive source strings instead of test case IDs in parametrize.",
+   "why": "Descriptive strings make test output more readable and easier to understand.",
+   "comment_ids": [
+    3846255527
+   ]
+  },
+  {
+   "rule": "Avoid writing tests that are already covered by snapshot files.",
+   "why": "Snapshot tests already validate the output, making additional unit tests redundant.",
+   "comment_ids": [
+    4110761974,
+    3889797156
+   ]
+  },
+  {
+   "rule": "Do not initialize config flow with data directly; simulate user input step by step.",
+   "why": "Initializing with data bypasses the actual flow logic and doesn't reflect real user interaction.",
+   "comment_ids": [
+    3978995632,
+    3915687472
+   ]
+  },
+  {
+   "rule": "Ensure config flows always end with CREATE_ENTRY or ABORT to verify flow completion and recovery.",
+   "why": "This ensures the flow behaves correctly under all conditions and can properly finalize.",
+   "comment_ids": [
+    3979002217,
+    3915630219
+   ]
+  },
+  {
+   "rule": "Use existing fixtures like mock_config_entry instead of creating redundant mocks.",
+   "why": "Using standard fixtures ensures consistency and reduces maintenance overhead.",
+   "comment_ids": [
+    3915689779,
+    3915733273,
+    3915741819
+   ]
+  },
+  {
+   "rule": "Use hass.config_entries.async_setup(entry.entry_id) to set up config entries in tests.",
+   "why": "This properly simulates runtime setup and ensures correct integration initialization.",
+   "comment_ids": [
+    3915623301
+   ]
+  },
+  {
+   "rule": "Use the snapshot_platform helper to test platform entities comprehensively.",
+   "why": "snapshot_platform captures full state and attributes, reducing the need for manual assertions.",
+   "comment_ids": [
+    3915739665
+   ]
+  },
+  {
+   "rule": "Use the freezer to advance time in tests instead of other time manipulation methods.",
+   "why": "The freezer provides a reliable and consistent way to control time in tests.",
+   "comment_ids": [
+    4026216504
+   ]
+  },
+  {
+   "rule": "Avoid pointless parametrize when only a single test case is used.",
+   "why": "Using parametrize with one case adds unnecessary complexity without benefit.",
+   "comment_ids": [
+    3862730617
+   ]
+  },
+  {
+   "rule": "Combine multiple small test files into existing ones when they test the same component.",
+   "why": "Keeping related tests together improves organization and reduces file clutter.",
+   "comment_ids": [
+    4034339802
+   ]
+  },
+  {
+   "rule": "Do not patch internal methods like _async_probe in config flow tests.",
+   "why": "Patching internals breaks encapsulation and makes tests fragile to implementation changes.",
+   "comment_ids": [
+    3979002217
+   ]
+  },
+  {
+   "rule": "Use lambda or inline simple async functions that do not use await.",
+   "why": "Non-async functions should not be defined as async to avoid confusion and unnecessary syntax.",
+   "comment_ids": [
+    3888992708,
+    3888993546
+   ]
+  },
+  {
+   "rule": "Use the coordinator's update interval to determine the rhythm in tests instead of hardcoding or using other timing mechanisms.",
+   "why": "The coordinator's update interval is what drives the update logic in the integration, so tests should reflect that behavior.",
+   "comment_ids": [
+    3866582909,
+    3866587407
+   ]
+  },
+  {
+   "rule": "Freeze and advance time to trigger coordinator refreshes instead of relying on integration-specific runtime data like the coordinator directly.",
+   "why": "This ensures tests are reliable and not dependent on internal integration details, following Home Assistant testing best practices.",
+   "comment_ids": [
+    3956999049
+   ]
+  },
+  {
+   "rule": "Wait for background tasks when testing coordinator refreshes since they run asynchronously.",
+   "why": "Coordinator refreshes are background tasks, so tests must wait for them to complete to ensure accurate state checks.",
+   "comment_ids": [
+    3961775477
+   ]
+  },
+  {
+   "rule": "Use `freezer.tick(x)` to skip time in tests instead of other time manipulation methods.",
+   "why": "Using the freezer to tick time is the preferred and more accurate way to simulate time passage in tests.",
+   "comment_ids": [
+    3988413797
+   ]
+  },
+  {
+   "rule": "Use snapshot testing with `snapshot_platform` for thorough and maintainable platform tests instead of manual assertions.",
+   "why": "Snapshot testing automatically records and validates entity states, reducing boilerplate and catching unintended changes.",
+   "comment_ids": [
+    3941829804,
+    3960847763
+   ]
+  },
+  {
+   "rule": "Move repeated test data or setup into fixtures in conftest.py when possible, especially for shared test resources.",
+   "why": "This promotes reuse and consistency across tests, reducing duplication and improving maintainability.",
+   "comment_ids": [
+    3960824136,
+    3960834029,
+    4009617333
+   ]
+  },
+  {
+   "rule": "Do not test every possible state; verify that the integration loads and unloads correctly, as other behaviors are indirectly tested.",
+   "why": "Over-testing individual states adds unnecessary complexity and maintenance burden when core functionality is already covered.",
+   "comment_ids": [
+    3960830503,
+    3960841301
+   ]
+  },
+  {
+   "rule": "Ensure config flow tests end in CREATE_ENTRY to verify the flow can successfully complete and recover.",
+   "why": "This ensures the configuration flow is fully functional and can be resumed or retried in real-world scenarios.",
+   "comment_ids": [
+    4008426442,
+    3864103137,
+    4108213715
+   ]
+  },
+  {
+   "rule": "Do not patch or directly interact with the coordinator in sensor or platform tests.",
+   "why": "The coordinator is an internal detail; tests should focus on integration behavior without manipulating internal components.",
+   "comment_ids": [
+    4016387159
+   ]
+  },
+  {
+   "rule": "Avoid using if statements in tests to maintain clarity and prevent conditional logic from obscuring test intent.",
+   "why": "Tests should be explicit and deterministic; conditional logic can hide edge cases and reduce readability.",
+   "comment_ids": [
+    3864101839
+   ]
+  },
+  {
+   "rule": "Set `_attr_name = None` for devices where the created entity (e.g., dehumidifier) is the primary feature of the device.",
+   "why": "This ensures the entity is properly represented as the main function of the device rather than a secondary attribute.",
+   "comment_ids": [
+    3847594228
+   ]
+  },
+  {
+   "rule": "Assert the full payload in tests instead of only checking for non-null values when testing device or entity data.",
+   "why": "It ensures the complete correctness of the data structure and prevents regressions by validating all expected fields.",
+   "comment_ids": [
+    4116205892
+   ]
+  },
+  {
+   "rule": "Move related test functions to be grouped together, either above or below other related tests to maintain logical order.",
+   "why": "It improves test readability and maintainability by keeping related test logic together.",
+   "comment_ids": [
+    4116207744
+   ]
+  },
+  {
+   "rule": "Ensure regression tests cover caching issues by re-setting up the integration and verifying correct behavior after setup.",
+   "why": "This prevents reintroduction of bugs where incorrect values (e.g., None) are cached before the integration is fully initialized.",
+   "comment_ids": [
+    4116215796
+   ]
+  },
+  {
+   "rule": "Ensure config flow tests run to completion by progressing to either a create entry or abort result.",
+   "why": "This verifies that the entire flow logic works as expected and can reach a final state.",
+   "comment_ids": [
+    3879363754,
+    3895273632
+   ]
+  },
+  {
+   "rule": "Use the `mock_config_entry` fixture instead of manually creating config entries when available.",
+   "why": "It standardizes configuration setup and reduces duplication across tests.",
+   "comment_ids": [
+    3895265922
+   ]
+  },
+  {
+   "rule": "Use `load_json_fixture` instead of `async_load_json_object` for loading test fixture data.",
+   "why": "It is a common helper designed for this purpose and avoids unnecessary async usage in tests.",
+   "comment_ids": [
+    3961263241
+   ]
+  },
+  {
+   "rule": "Use the freezer to control time in tests instead of adding arbitrary time increments.",
+   "why": "It provides precise and reliable time manipulation without depending on real-time delays.",
+   "comment_ids": [
+    3961267840
+   ]
+  },
+  {
+   "rule": "Do not create or interact with coordinators directly in tests; instead test integration behavior through entities.",
+   "why": "It ensures tests reflect real-world usage and avoids coupling to internal runtime details.",
+   "comment_ids": [
+    3961277107,
+    3961281644,
+    3961283529,
+    3862220528,
+    3843474663,
+    3889512871,
+    3864471014,
+    4052370961
+   ]
+  },
+  {
+   "rule": "Do not access Entity instances directly in tests; use state checks and service calls instead.",
+   "why": "It ensures tests interact with entities the same way the system does, avoiding direct manipulation of internal objects.",
+   "comment_ids": [
+    3880448000
+   ]
+  },
+  {
+   "rule": "Wait for background tasks when triggering coordinator refreshes by using `hass.async_block_till_done(wait_background_tasks=True)`.",
+   "why": "Coordinator refreshes run as background tasks, and failing to wait can lead to flaky or incomplete test results.",
+   "comment_ids": [
+    3861848801,
+    3880456600
+   ]
+  },
+  {
+   "rule": "Use `snapshot_platform` to test and validate all entities from a platform instead of writing individual entity tests.",
+   "why": "It ensures comprehensive coverage and reduces the need for repetitive, granular tests.",
+   "comment_ids": [
+    3843474663,
+    3923755167
+   ]
+  },
+  {
+   "rule": "Avoid touching runtime data such as coordinators or platform objects directly in tests; instead patch the underlying library and trigger updates via time control.",
+   "why": "It ensures tests are isolated from internal implementation details and reflect actual integration behavior.",
+   "comment_ids": [
+    3843471308,
+    3886970667,
+    3862220528
+   ]
+  },
+  {
+   "rule": "Use `@pytest.mark.usefixtures` for unused fixture arguments instead of including them as function parameters.",
+   "why": "It clearly indicates that a fixture is used for setup without needing to reference it in the test body.",
+   "comment_ids": [
+    3961018339,
+    3961020003
+   ]
+  },
+  {
+   "rule": "Use existing fixtures like `mock_device` instead of duplicating setup logic in test methods.",
+   "why": "It promotes reuse, reduces code duplication, and ensures consistency across tests.",
+   "comment_ids": [
+    3965563770,
+    3965573165
+   ]
+  },
+  {
+   "rule": "Use snapshot testing instead of writing explicit assertions for complex data structures when appropriate.",
+   "why": "It reduces test maintenance overhead and ensures consistency in platform-wide definitions.",
+   "comment_ids": [
+    3887627244,
+    3882107751
+   ]
+  },
+  {
+   "rule": "Move time forward to trigger coordinator refreshes instead of directly manipulating integration runtime data.",
+   "why": "It makes tests more robust by simulating real-world timing behavior without relying on internal state access.",
+   "comment_ids": [
+    3860055001
+   ]
+  },
+  {
+   "rule": "Mock the library instead of HTTP requests when testing integrations to avoid testing library behavior.",
+   "why": "It isolates the integration logic and makes tests easier to write and maintain.",
+   "comment_ids": [
+    3889938438
+   ]
+  },
+  {
+   "rule": "Trim snapshot test data to only what is useful and not redacted.",
+   "why": "Including redacted or irrelevant data in snapshots adds noise and reduces clarity.",
+   "comment_ids": [
+    4097363918
+   ]
+  },
+  {
+   "rule": "Avoid patching time.sleep in tests as it is usually unnecessary or indicates dead code.",
+   "why": "Patching time.sleep can mask design issues and is typically not needed in well-structured tests.",
+   "comment_ids": [
+    4076601623
+   ]
+  },
+  {
+   "rule": "Ensure config flow tests demonstrate recovery from errors and end in CREATE_ENTRY or ABORT.",
+   "why": "This verifies the flow can recover and reach a final state, ensuring robustness.",
+   "comment_ids": [
+    3851502019,
+    3851508171,
+    3863961976,
+    4008948264,
+    3890289273,
+    3886273075,
+    3844379311
+   ]
+  },
+  {
+   "rule": "Assert the unique_id in config flow tests.",
+   "why": "Ensures the config entry is properly assigned a unique identifier.",
+   "comment_ids": [
+    3854058810,
+    4008943554
+   ]
+  },
+  {
+   "rule": "Use distinct test constants like NEW_LIST_ID when testing creation scenarios.",
+   "why": "Avoids confusion between existing and newly created entities in tests.",
+   "comment_ids": [
+    3854087005
+   ]
+  },
+  {
+   "rule": "Do not test integration internals directly; set up the integration and test via platforms and services.",
+   "why": "Testing via public interfaces ensures integration correctness and follows Home Assistant testing guidelines.",
+   "comment_ids": [
+    4052756414,
+    3911202392,
+    3895051962
+   ]
+  },
+  {
+   "rule": "Avoid if statements in tests.",
+   "why": "Tests should be deterministic and not contain conditional logic that can obscure intent.",
+   "comment_ids": [
+    3847769497
+   ]
+  },
+  {
+   "rule": "Move reusable fixtures to conftest.py and name them based on what they return.",
+   "why": "Centralizes shared test setup and ensures fixture names accurately reflect their purpose.",
+   "comment_ids": [
+    3979957416,
+    4008980467
+   ]
+  },
+  {
+   "rule": "Store test response data in JSON files within the fixtures folder instead of inlining them.",
+   "why": "Keeps tests clean and separates test data from test logic.",
+   "comment_ids": [
+    4008933765
+   ]
+  },
+  {
+   "rule": "Do not use parametrize when there is only one test case.",
+   "why": "Parametrize is unnecessary overhead when testing a single scenario.",
+   "comment_ids": [
+    3886069984,
+    3886079388
+   ]
+  },
+  {
+   "rule": "Define constants at the beginning of the test file.",
+   "why": "Improves readability and ensures all test constants are easy to locate.",
+   "comment_ids": [
+    3886078288
+   ]
+  },
+  {
+   "rule": "Do not make out-of-scope changes to existing tests, such as modifying test values or IP addresses.",
+   "why": "Preserves test integrity and avoids unintended side effects in unrelated functionality.",
+   "comment_ids": [
+    3887789262,
+    3871274982,
+    3871578877
+   ]
+  },
+  {
+   "rule": "Do not manually create or directly manipulate the coordinator; test via platform and time manipulation.",
+   "why": "Ensures tests reflect real-world usage and avoids bypassing integration logic.",
+   "comment_ids": [
+    3960421915,
+    4015990504,
+    3864270428
+   ]
+  },
+  {
+   "rule": "Combine similar tests using parameterization to reduce duplication.",
+   "why": "Improves maintainability and clarity by expressing multiple cases in a single test.",
+   "comment_ids": [
+    3871274982,
+    3894879663
+   ]
+  },
+  {
+   "rule": "Test that values are properly reported back to Home Assistant after a refresh.",
+   "why": "Ensures the entity state is correctly updated and visible in the system.",
+   "comment_ids": [
+    3871271617
+   ]
+  },
+  {
+   "rule": "Place tests in standard test modules like test_sensor.py instead of custom test modules.",
+   "why": "Follows project conventions and ensures tests are located where maintainers expect them.",
+   "comment_ids": [
+    3847335611
+   ]
+  },
+  {
+   "rule": "Add comments to explain what is being tested, especially for non-obvious assertions.",
+   "why": "Helps reviewers and future contributors understand the test's intent.",
+   "comment_ids": [
+    3966907681
+   ]
+  },
+  {
+   "rule": "Explain significant time changes in tests, especially jumps like 24 hours.",
+   "why": "Large time shifts may indicate errors or require justification to ensure test validity.",
+   "comment_ids": [
+    3997839595,
+    3998009774
+   ]
+  },
+  {
+   "rule": "Do not directly create entities in tests; use the state machine or platform setup instead.",
+   "why": "Direct entity creation bypasses Home Assistant's entity management and may not reflect real-world behavior.",
+   "comment_ids": [
+    4005331920,
+    3847677880
+   ]
+  },
+  {
+   "rule": "Do not interact with the coordinator directly in tests; use time freezing or let the coordinator tick naturally.",
+   "why": "Direct coordinator interaction bypasses normal update mechanisms and can lead to unreliable or unrealistic test conditions.",
+   "comment_ids": [
+    4091306796,
+    3960236293,
+    3864696803,
+    4071361857
+   ]
+  },
+  {
+   "rule": "Freeze and advance time instead of manually triggering coordinators or blocking on timeouts.",
+   "why": "Time freezing provides more predictable and controllable test conditions than direct coordinator manipulation or blocking.",
+   "comment_ids": [
+    4071364148,
+    3996087484
+   ]
+  },
+  {
+   "rule": "Do not assert integration-specific internal details such as runtime_data or coordinator state during setup.",
+   "why": "Such assertions test implementation details rather than user-visible behavior and can break unnecessarily.",
+   "comment_ids": [
+    3995477222,
+    3996105455,
+    3995480987
+   ]
+  },
+  {
+   "rule": "Test config flows must reach the CREATE_ENTRY state to demonstrate recovery from errors.",
+   "why": "Ensuring flows can reach CREATE_ENTRY validates that they can successfully complete and recover.",
+   "comment_ids": [
+    4057066783
+   ]
+  },
+  {
+   "rule": "Avoid using comments in tests that do not explain the reason for a test or assertion.",
+   "why": "Comments that don't explain the 'why' add noise and can become outdated or misleading.",
+   "comment_ids": [
+    3941786928
+   ]
+  },
+  {
+   "rule": "Prefer inline parametrization with simple types like Tuple instead of using constants or dicts for test parameters.",
+   "why": "Inline parametrization improves readability and reduces unnecessary indirection in tests.",
+   "comment_ids": [
+    3863192550,
+    3863268361
+   ]
+  },
+  {
+   "rule": "Move tests to test_init.py when they do not require component-specific setup beyond initialization.",
+   "why": "Consolidating initialization tests in test_init.py improves organization and consistency.",
+   "comment_ids": [
+    3886606022,
+    3886893329
+   ]
+  },
+  {
+   "rule": "Split complex fixtures into smaller, composable ones for easier maintenance and reuse.",
+   "why": "Smaller fixtures are more flexible, easier to understand, and can be reused independently.",
+   "comment_ids": [
+    4036397810
+   ]
+  },
+  {
+   "rule": "Only patch dependencies where they are actually used, not globally in conftest.",
+   "why": "Narrow patching reduces side effects and makes tests more reliable and easier to debug.",
+   "comment_ids": [
+    4036400389
+   ]
+  },
+  {
+   "rule": "Use existing shared mocks from conftest instead of creating new ones.",
+   "why": "Reusing mocks ensures consistency and reduces duplication across tests.",
+   "comment_ids": [
+    3931259649
+   ]
+  },
+  {
+   "rule": "Prefer one-liner docstrings in tests.",
+   "why": "One-liner docstrings are concise and align with the project's style for test documentation.",
+   "comment_ids": [
+    3931241389
+   ]
+  },
+  {
+   "rule": "Use the mock_config_entry fixture for testing config entries.",
+   "why": "It ensures consistent and correct setup of configuration entries in tests.",
+   "comment_ids": [
+    4025755575,
+    3896233585
+   ]
+  },
+  {
+   "rule": "Do not interact directly with integration internals like coordinators in tests.",
+   "why": "Tests should verify resulting states of entities rather than manipulate internal components directly.",
+   "comment_ids": [
+    4025754318,
+    3847905783,
+    3999371183
+   ]
+  },
+  {
+   "rule": "Avoid conditions in tests.",
+   "why": "Tests should have clear, deterministic outcomes without conditional logic.",
+   "comment_ids": [
+    3999102711
+   ]
+  },
+  {
+   "rule": "Use get_fixture_path to access fixture files.",
+   "why": "It provides a standardized way to reference fixture data files in tests.",
+   "comment_ids": [
+    4035672795
+   ]
+  },
+  {
+   "rule": "Store JSON-based test data in fixture files within a fixtures folder.",
+   "why": "It keeps test data organized and reusable across tests.",
+   "comment_ids": [
+    3847894680
+   ]
+  },
+  {
+   "rule": "Parametrize tests instead of writing separate test functions for similar cases.",
+   "why": "It reduces code duplication and makes test coverage clearer.",
+   "comment_ids": [
+    4025577067,
+    3847908549,
+    3968461307,
+    3843136243,
+    4012978315
+   ]
+  },
+  {
+   "rule": "Ensure pytest.param ids are unique across all parametrize tables to prevent silent overwrites.",
+   "why": "Duplicate ids can cause test cases to be silently merged, leading to incorrect test behavior.",
+   "comment_ids": [
+    4005480310,
+    4092036481,
+    4092036880
+   ]
+  },
+  {
+   "rule": "Use mock_config_flow when testing configuration flows.",
+   "why": "It properly sets up the configuration flow environment for testing.",
+   "comment_ids": [
+    4012870108,
+    4023344593
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1566 @@
+{
+ "repo": "home-assistant/core",
+ "mined": 2237,
+ "train": 1789,
+ "model": "qwen/qwen3-235b-a22b-instruct-2507-maas",
+ "provider": "vertex",
+ "candidates": 303,
+ "rejected_rules": 0,
+ "rejected_examples": [],
+ "unsupported_citations": 56,
+ "below_threshold": 181,
+ "threshold": {
+  "min_comments": 3,
+  "min_prs": 2
+ },
+ "rules": [
+  {
+   "id": "avoid-creating-coordinators-in-tests",
+   "rule": "Do not create or interact with coordinators directly in tests; instead test integration behavior through entities.",
+   "why": "This ensures tests reflect real-world usage and avoids bypassing integration setup.",
+   "support": 12,
+   "prs": 9,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3847677880,
+     "url": "https://github.com/home-assistant/core/pull/171587#discussion_r3847677880",
+     "pr": 171587,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "we shouldn't directly create a camera entity, instead do this via the state machine"
+    },
+    {
+     "comment_id": 3862220528,
+     "url": "https://github.com/home-assistant/core/pull/178684#discussion_r3862220528",
+     "pr": 178684,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "we shouldn't touch the coordinator data, instead repatch the library to what you expect it returns and trigger a refresh by freezing and skipping time"
+    },
+    {
+     "comment_id": 3864471014,
+     "url": "https://github.com/home-assistant/core/pull/180238#discussion_r3864471014",
+     "pr": 180238,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "we shouldn't touch runtime_data/the coordinator directly, instead skip time using the freezer to trigger a refresh"
+    },
+    {
+     "comment_id": 3889512871,
+     "url": "https://github.com/home-assistant/core/pull/180581#discussion_r3889512871",
+     "pr": 180581,
+     "author": "joostlek",
+     "created_at": "2026-08-30",
+     "quote": "Can we avoid touching the coordinator here?"
+    },
+    {
+     "comment_id": 3961277107,
+     "url": "https://github.com/home-assistant/core/pull/177918#discussion_r3961277107",
+     "pr": 177918,
+     "author": "joostlek",
+     "created_at": "2026-09-08",
+     "quote": "We should not create a coordinator ourselves. Instead test the behavior of the integration via the entities, so via `test_sensor.py`"
+    },
+    {
+     "comment_id": 3961281644,
+     "url": "https://github.com/home-assistant/core/pull/177918#discussion_r3961281644",
+     "pr": 177918,
+     "author": "joostlek",
+     "created_at": "2026-09-08",
+     "quote": "In the end I think we should try to not have a `test_coordinator.py`"
+    },
+    {
+     "comment_id": 3961283529,
+     "url": "https://github.com/home-assistant/core/pull/177918#discussion_r3961283529",
+     "pr": 177918,
+     "author": "joostlek",
+     "created_at": "2026-09-08",
+     "quote": "don't touch the coordinator in the tests"
+    },
+    {
+     "comment_id": 4005331920,
+     "url": "https://github.com/home-assistant/core/pull/181566#discussion_r4005331920",
+     "pr": 181566,
+     "author": "joostlek",
+     "created_at": "2026-09-14",
+     "quote": "We shouldn't create entities directly. Looking at the relevant tests, those wouldn't work because that's already guarded by HA, so we don't need to test those"
+    },
+    {
+     "comment_id": 4047752309,
+     "url": "https://github.com/home-assistant/core/pull/177108#discussion_r4047752309",
+     "pr": 177108,
+     "author": "joostlek",
+     "created_at": "2026-09-18",
+     "quote": "The tests should not create a Coordinator object directly. Instead we should have Home Assistant set up the integration and then see the behavior of the integration and the attached entities. In the end we should not have a test_coordinator.py anymore"
+    },
+    {
+     "comment_id": 4047774005,
+     "url": "https://github.com/home-assistant/core/pull/177108#discussion_r4047774005",
+     "pr": 177108,
+     "author": "joostlek",
+     "created_at": "2026-09-18",
+     "quote": "we should not create entities directly, instead have HA set up the integration and then assert that the created entities are what we expect with the right state and such"
+    },
+    {
+     "comment_id": 4052370961,
+     "url": "https://github.com/home-assistant/core/pull/182648#discussion_r4052370961",
+     "pr": 182648,
+     "author": "erwindouna",
+     "created_at": "2026-09-19",
+     "quote": "We shouldn't trigger the coordinator directly, but let the time pass by the freezer factory. :)"
+    },
+    {
+     "comment_id": 4094627461,
+     "url": "https://github.com/home-assistant/core/pull/182956#discussion_r4094627461",
+     "pr": 182956,
+     "author": "joostlek",
+     "created_at": "2026-09-24",
+     "quote": "we shouldn't create an entity directly but instead use the one created by the integration"
+    }
+   ]
+  },
+  {
+   "id": "config-flow-test-expectations",
+   "rule": "Ensure config flow tests end with CREATE_ENTRY or ABORT to verify flow completion and recovery from errors.",
+   "why": "This ensures the config flow behaves correctly under all conditions and completes as expected.",
+   "support": 12,
+   "prs": 12,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3844379311,
+     "url": "https://github.com/home-assistant/core/pull/168444#discussion_r3844379311",
+     "pr": 168444,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "all flows should end in CREATE_ENTRY or ABORT to test that they are able to recover"
+    },
+    {
+     "comment_id": 3847851857,
+     "url": "https://github.com/home-assistant/core/pull/179543#discussion_r3847851857",
+     "pr": 179543,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "all flows should end in CREATE_ENTRY or ABORT"
+    },
+    {
+     "comment_id": 3863961976,
+     "url": "https://github.com/home-assistant/core/pull/176785#discussion_r3863961976",
+     "pr": 176785,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "Let's make sure the test ends in CREATE_ENTRY or ABORT to test that the flow is able to recover"
+    },
+    {
+     "comment_id": 3864103137,
+     "url": "https://github.com/home-assistant/core/pull/167872#discussion_r3864103137",
+     "pr": 167872,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "make sure it ends in CREATE_ENTRY"
+    },
+    {
+     "comment_id": 3879363754,
+     "url": "https://github.com/home-assistant/core/pull/180394#discussion_r3879363754",
+     "pr": 180394,
+     "author": "MartinHjelmare",
+     "created_at": "2026-08-28",
+     "quote": "Please continue the flow to a create entry or abort result."
+    },
+    {
+     "comment_id": 3890289273,
+     "url": "https://github.com/home-assistant/core/pull/180856#discussion_r3890289273",
+     "pr": 180856,
+     "author": "joostlek",
+     "created_at": "2026-08-30",
+     "quote": "All flows need to finish to test that it can recover"
+    },
+    {
+     "comment_id": 3895273632,
+     "url": "https://github.com/home-assistant/core/pull/180878#discussion_r3895273632",
+     "pr": 180878,
+     "author": "joostlek",
+     "created_at": "2026-08-31",
+     "quote": "All flows should finish to show that they are able to succeed"
+    },
+    {
+     "comment_id": 3915630219,
+     "url": "https://github.com/home-assistant/core/pull/180531#discussion_r3915630219",
+     "pr": 180531,
+     "author": "joostlek",
+     "created_at": "2026-09-02",
+     "quote": "All flows should end in CREATE_ENTRY or ABORT to test that the flow is able to finish"
+    },
+    {
+     "comment_id": 3979002217,
+     "url": "https://github.com/home-assistant/core/pull/181516#discussion_r3979002217",
+     "pr": 181516,
+     "author": "joostlek",
+     "created_at": "2026-09-10",
+     "quote": "All flows should end in CREATE_ENTRY or ABORT to test that they're able to recover. Also, don't patch internals (`_async_probe`)"
+    },
+    {
+     "comment_id": 4008426442,
+     "url": "https://github.com/home-assistant/core/pull/181541#discussion_r4008426442",
+     "pr": 181541,
+     "author": "joostlek",
+     "created_at": "2026-09-14",
+     "quote": "All flows should end in CREATE_ENTRY to test that they are able to recover"
+    },
+    {
+     "comment_id": 4008948264,
+     "url": "https://github.com/home-assistant/core/pull/180437#discussion_r4008948264",
+     "pr": 180437,
+     "author": "joostlek",
+     "created_at": "2026-09-14",
+     "quote": "All flows should end in CREATE_ENTRY to test that they're able to recover"
+    },
+    {
+     "comment_id": 4108213715,
+     "url": "https://github.com/home-assistant/core/pull/182877#discussion_r4108213715",
+     "pr": 182877,
+     "author": "joostlek",
+     "created_at": "2026-09-25",
+     "quote": "Let's make sure it finishes with a happy flow so we also test that it can recover"
+    }
+   ]
+  },
+  {
+   "id": "fixture-management",
+   "rule": "Split complex fixtures into smaller, composable ones and use shared fixtures like mock_config_entry instead of duplicating setup.",
+   "why": "Reusable fixtures reduce duplication and improve test maintainability.",
+   "support": 12,
+   "prs": 9,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3863470071,
+     "url": "https://github.com/home-assistant/core/pull/165457#discussion_r3863470071",
+     "pr": 165457,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "Why don't you use `mock_config_entry`"
+    },
+    {
+     "comment_id": 3863486278,
+     "url": "https://github.com/home-assistant/core/pull/165457#discussion_r3863486278",
+     "pr": 165457,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "use mock config entry fixture"
+    },
+    {
+     "comment_id": 3895265922,
+     "url": "https://github.com/home-assistant/core/pull/180878#discussion_r3895265922",
+     "pr": 180878,
+     "author": "joostlek",
+     "created_at": "2026-08-31",
+     "quote": "why can't we use the `mock_config_entry` fixture here?"
+    },
+    {
+     "comment_id": 3896233585,
+     "url": "https://github.com/home-assistant/core/pull/180722#discussion_r3896233585",
+     "pr": 180722,
+     "author": "joostlek",
+     "created_at": "2026-08-31",
+     "quote": "use the mock_config_entry fixture"
+    },
+    {
+     "comment_id": 3915689779,
+     "url": "https://github.com/home-assistant/core/pull/180531#discussion_r3915689779",
+     "pr": 180531,
+     "author": "joostlek",
+     "created_at": "2026-09-02",
+     "quote": "you can use the mock_config_entry fixture here"
+    },
+    {
+     "comment_id": 3915733273,
+     "url": "https://github.com/home-assistant/core/pull/180531#discussion_r3915733273",
+     "pr": 180531,
+     "author": "joostlek",
+     "created_at": "2026-09-02",
+     "quote": "Also use the mock config entry"
+    },
+    {
+     "comment_id": 3915741819,
+     "url": "https://github.com/home-assistant/core/pull/180531#discussion_r3915741819",
+     "pr": 180531,
+     "author": "joostlek",
+     "created_at": "2026-09-02",
+     "quote": "use the mock config entry fixture"
+    },
+    {
+     "comment_id": 3931259649,
+     "url": "https://github.com/home-assistant/core/pull/181262#discussion_r3931259649",
+     "pr": 181262,
+     "author": "erwindouna",
+     "created_at": "2026-09-04",
+     "quote": "Can't we re-use the mock in `conftest`? This is setting up a raw new one. :)"
+    },
+    {
+     "comment_id": 3965563770,
+     "url": "https://github.com/home-assistant/core/pull/181686#discussion_r3965563770",
+     "pr": 181686,
+     "author": "zweckj",
+     "created_at": "2026-09-09",
+     "quote": "elsewhere you have the `mock_device` fixture - any reason you are not using that here?"
+    },
+    {
+     "comment_id": 4025755575,
+     "url": "https://github.com/home-assistant/core/pull/168419#discussion_r4025755575",
+     "pr": 168419,
+     "author": "joostlek",
+     "created_at": "2026-09-16",
+     "quote": "Use the mock_config_entry fixture here"
+    },
+    {
+     "comment_id": 4036397810,
+     "url": "https://github.com/home-assistant/core/pull/174407#discussion_r4036397810",
+     "pr": 174407,
+     "author": "joostlek",
+     "created_at": "2026-09-17",
+     "quote": "I'd split this up in 3 fixtures, as that makes it easier to maintain and overwrite. The fixtures can depend on each other so you only need 1 to activate everything"
+    },
+    {
+     "comment_id": 4047739770,
+     "url": "https://github.com/home-assistant/core/pull/177108#discussion_r4047739770",
+     "pr": 177108,
+     "author": "joostlek",
+     "created_at": "2026-09-18",
+     "quote": "Instead make the mock config entry a common fixture"
+    }
+   ]
+  },
+  {
+   "id": "pr-scope",
+   "rule": "Split unrelated changes, major features, or flows like reauth into separate pull requests.",
+   "why": "Focused PRs are easier to review, test, and merge.",
+   "support": 12,
+   "prs": 7,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3851116514,
+     "url": "https://github.com/home-assistant/core/pull/178361#discussion_r3851116514",
+     "pr": 178361,
+     "author": "Markus98",
+     "created_at": "2026-08-25",
+     "quote": "Could you split out this change like joostlek asked and mark `entity-unique-id` as `todo` for this PR? This would mean also removing `\"quality_scale\": \"bronze\",` from `manifest.json` for this PR. After that this would be an easy merge, and the `entity-unique-id` + bronze quality "
+    },
+    {
+     "comment_id": 3886694339,
+     "url": "https://github.com/home-assistant/core/pull/180349#discussion_r3886694339",
+     "pr": 180349,
+     "author": "joostlek",
+     "created_at": "2026-08-29",
+     "quote": "Can we split this off to a separate PR?"
+    },
+    {
+     "comment_id": 3886694856,
+     "url": "https://github.com/home-assistant/core/pull/180349#discussion_r3886694856",
+     "pr": 180349,
+     "author": "joostlek",
+     "created_at": "2026-08-29",
+     "quote": "Let's keep reauth and reconfigure for a later PR"
+    },
+    {
+     "comment_id": 3896874014,
+     "url": "https://github.com/home-assistant/core/pull/180531#discussion_r3896874014",
+     "pr": 180531,
+     "author": "joostlek",
+     "created_at": "2026-08-31",
+     "quote": "let's omit reauth as well"
+    },
+    {
+     "comment_id": 3901345015,
+     "url": "https://github.com/home-assistant/core/pull/180975#discussion_r3901345015",
+     "pr": 180975,
+     "author": "erwindouna",
+     "created_at": "2026-09-01",
+     "quote": "I think these should be in a separate PR, since your PR descrption mentions to adding the reauth flow. Please split if off. :)"
+    },
+    {
+     "comment_id": 3901572400,
+     "url": "https://github.com/home-assistant/core/pull/180975#discussion_r3901572400",
+     "pr": 180975,
+     "author": "erwindouna",
+     "created_at": "2026-09-01",
+     "quote": "This is a _new_ addition to the coordinator. Please split if off, to have the scope on the reauth flow. :)"
+    },
+    {
+     "comment_id": 4053056318,
+     "url": "https://github.com/home-assistant/core/pull/178466#discussion_r4053056318",
+     "pr": 178466,
+     "author": "gjohansson-ST",
+     "created_at": "2026-09-19",
+     "quote": "I haven't looked at copilots comments, I'll take a look. But adding the reconfigure flow should be done in a follow-up actually rather than this PR."
+    },
+    {
+     "comment_id": 4107046490,
+     "url": "https://github.com/home-assistant/core/pull/181140#discussion_r4107046490",
+     "pr": 181140,
+     "author": "erwindouna",
+     "created_at": "2026-09-25",
+     "quote": "I like this, but it changes the scope and makes the PR a bit too big. Can you please split it off in a separate PR? :)"
+    },
+    {
+     "comment_id": 4108092107,
+     "url": "https://github.com/home-assistant/core/pull/178466#discussion_r4108092107",
+     "pr": 178466,
+     "author": "joostlek",
+     "created_at": "2026-09-25",
+     "quote": "Please keep reconfigure for a later PR"
+    },
+    {
+     "comment_id": 4108101324,
+     "url": "https://github.com/home-assistant/core/pull/178466#discussion_r4108101324",
+     "pr": 178466,
+     "author": "joostlek",
+     "created_at": "2026-09-25",
+     "quote": "Not sure why we'd need this, as in, other transport integrations also don't have this, so mind splitting this out from this PR?"
+    },
+    {
+     "comment_id": 4108102546,
+     "url": "https://github.com/home-assistant/core/pull/178466#discussion_r4108102546",
+     "pr": 178466,
+     "author": "joostlek",
+     "created_at": "2026-09-25",
+     "quote": "Please keep reconfigure for a later PR"
+    },
+    {
+     "comment_id": 4121693638,
+     "url": "https://github.com/home-assistant/core/pull/183419#discussion_r4121693638",
+     "pr": 183419,
+     "author": "erwindouna",
+     "created_at": "2026-09-28",
+     "quote": "The coordinator is a total new feature here. Please add this in a separate PR."
+    }
+   ]
+  },
+  {
+   "id": "avoid-reauth-reconfig-initial-pr",
+   "rule": "Do not include reauthentication or reconfiguration functionality in the initial PR for a new integration.",
+   "why": "This allows incremental development and review of complex flows.",
+   "support": 9,
+   "prs": 8,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3845216732,
+     "url": "https://github.com/home-assistant/core/pull/179695#discussion_r3845216732",
+     "pr": 179695,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "Can we keep reauth for a later PR?"
+    },
+    {
+     "comment_id": 3847515803,
+     "url": "https://github.com/home-assistant/core/pull/168143#discussion_r3847515803",
+     "pr": 168143,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "Keep out reauth from the initial PR"
+    },
+    {
+     "comment_id": 3886637206,
+     "url": "https://github.com/home-assistant/core/pull/180440#discussion_r3886637206",
+     "pr": 180440,
+     "author": "joostlek",
+     "created_at": "2026-08-29",
+     "quote": "can we omit reauth and reconfigure for the initial PR?"
+    },
+    {
+     "comment_id": 3923916319,
+     "url": "https://github.com/home-assistant/core/pull/181083#discussion_r3923916319",
+     "pr": 181083,
+     "author": "joostlek",
+     "created_at": "2026-09-03",
+     "quote": "Can we keep reconfigure out of this PR"
+    },
+    {
+     "comment_id": 3997649552,
+     "url": "https://github.com/home-assistant/core/pull/181960#discussion_r3997649552",
+     "pr": 181960,
+     "author": "joostlek",
+     "created_at": "2026-09-12",
+     "quote": "Keep reauth from the initial PR"
+    },
+    {
+     "comment_id": 4008854847,
+     "url": "https://github.com/home-assistant/core/pull/180515#discussion_r4008854847",
+     "pr": 180515,
+     "author": "joostlek",
+     "created_at": "2026-09-14",
+     "quote": "Please keep reconfigure out for the initial PR"
+    },
+    {
+     "comment_id": 4016037527,
+     "url": "https://github.com/home-assistant/core/pull/181591#discussion_r4016037527",
+     "pr": 181591,
+     "author": "joostlek",
+     "created_at": "2026-09-15",
+     "quote": "Keep reauth out of this PR"
+    },
+    {
+     "comment_id": 4025797367,
+     "url": "https://github.com/home-assistant/core/pull/165993#discussion_r4025797367",
+     "pr": 165993,
+     "author": "joostlek",
+     "created_at": "2026-09-16",
+     "quote": "New integrations shouldn't have reauth in it to keep the amount of stuff to review lower"
+    },
+    {
+     "comment_id": 4122355720,
+     "url": "https://github.com/home-assistant/core/pull/181591#discussion_r4122355720",
+     "pr": 181591,
+     "author": "joostlek",
+     "created_at": "2026-09-28",
+     "quote": "No we want to keep reauth out of the initial PR. You can add it in a later PT"
+    }
+   ]
+  },
+  {
+   "id": "avoid-direct-coordinator-interaction-in",
+   "rule": "Do not interact with the coordinator directly in tests; use time freezing or let the coordinator tick naturally.",
+   "why": "This ensures proper simulation of real-world behavior and avoids bypassing integration logic.",
+   "support": 7,
+   "prs": 7,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3862220528,
+     "url": "https://github.com/home-assistant/core/pull/178684#discussion_r3862220528",
+     "pr": 178684,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "we shouldn't touch the coordinator data, instead repatch the library to what you expect it returns and trigger a refresh by freezing and skipping time"
+    },
+    {
+     "comment_id": 3863493965,
+     "url": "https://github.com/home-assistant/core/pull/165457#discussion_r3863493965",
+     "pr": 165457,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "We should not touch the coordinator directly. Instead we should patch the library, have it set up the integration, and then assert the state machine to see everything is behaving like it should"
+    },
+    {
+     "comment_id": 3960236293,
+     "url": "https://github.com/home-assistant/core/pull/181634#discussion_r3960236293",
+     "pr": 181634,
+     "author": "joostlek",
+     "created_at": "2026-09-08",
+     "quote": "we shouldn't touch the coordinator directly"
+    },
+    {
+     "comment_id": 3960421915,
+     "url": "https://github.com/home-assistant/core/pull/181659#discussion_r3960421915",
+     "pr": 181659,
+     "author": "joostlek",
+     "created_at": "2026-09-08",
+     "quote": "Don't touch the coordinator"
+    },
+    {
+     "comment_id": 4015990504,
+     "url": "https://github.com/home-assistant/core/pull/182309#discussion_r4015990504",
+     "pr": 182309,
+     "author": "joostlek",
+     "created_at": "2026-09-15",
+     "quote": "We shouldn't touch the coordinator directly, instead test this via the sensor platform and use the freezer to skip time and implicitly refresh the coordinator"
+    },
+    {
+     "comment_id": 4071361857,
+     "url": "https://github.com/home-assistant/core/pull/181865#discussion_r4071361857",
+     "pr": 181865,
+     "author": "joostlek",
+     "created_at": "2026-09-22",
+     "quote": "Don't touch the coordinator"
+    },
+    {
+     "comment_id": 4091306796,
+     "url": "https://github.com/home-assistant/core/pull/183033#discussion_r4091306796",
+     "pr": 183033,
+     "author": "zweckj",
+     "created_at": "2026-09-24",
+     "quote": "Do not get and trigger the coordinator directly. Use a freezer to let it tick instead."
+    }
+   ]
+  },
+  {
+   "id": "snapshot-testing-complex-data",
+   "rule": "Use snapshot testing with snapshot_platform for complex data structures instead of writing explicit assertions.",
+   "why": "Reduces test maintenance overhead and ensures comprehensive structure validation.",
+   "support": 6,
+   "prs": 6,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3843474663,
+     "url": "https://github.com/home-assistant/core/pull/178132#discussion_r3843474663",
+     "pr": 178132,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "Instead use `snapshot_platform` to fixate all entities"
+    },
+    {
+     "comment_id": 3887627244,
+     "url": "https://github.com/home-assistant/core/pull/180689#discussion_r3887627244",
+     "pr": 180689,
+     "author": "frenck",
+     "created_at": "2026-08-29",
+     "quote": "Let's use snapshot testing instead."
+    },
+    {
+     "comment_id": 3915739665,
+     "url": "https://github.com/home-assistant/core/pull/180531#discussion_r3915739665",
+     "pr": 180531,
+     "author": "joostlek",
+     "created_at": "2026-09-02",
+     "quote": "I'd recommend looking into `snapshot_platform` helper, as that will fixate all of this"
+    },
+    {
+     "comment_id": 3923755167,
+     "url": "https://github.com/home-assistant/core/pull/169872#discussion_r3923755167",
+     "pr": 169872,
+     "author": "joostlek",
+     "created_at": "2026-09-03",
+     "quote": "instead use `snapshot_platform`"
+    },
+    {
+     "comment_id": 3941829804,
+     "url": "https://github.com/home-assistant/core/pull/181386#discussion_r3941829804",
+     "pr": 181386,
+     "author": "erwindouna",
+     "created_at": "2026-09-05",
+     "quote": "Instead of manually asserts, please introduce the snapshot platform here. It's very thorough and records all changes ever done. :)"
+    },
+    {
+     "comment_id": 3960847763,
+     "url": "https://github.com/home-assistant/core/pull/176149#discussion_r3960847763",
+     "pr": 176149,
+     "author": "joostlek",
+     "created_at": "2026-09-08",
+     "quote": "instead use `snapshot_platform`"
+    }
+   ]
+  },
+  {
+   "id": "avoid-inline-patching",
+   "rule": "Avoid inline patching; use common patching patterns or fixtures instead.",
+   "why": "This improves test readability and reusability of test setup logic.",
+   "support": 5,
+   "prs": 5,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3847853897,
+     "url": "https://github.com/home-assistant/core/pull/179543#discussion_r3847853897",
+     "pr": 179543,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "why do we patch inline instead of using the common patch?"
+    },
+    {
+     "comment_id": 3965315133,
+     "url": "https://github.com/home-assistant/core/pull/176640#discussion_r3965315133",
+     "pr": 176640,
+     "author": "Markus98",
+     "created_at": "2026-09-09",
+     "quote": "Let's make this into a fixture in `conftest.py`. Also we should fully type all the functions."
+    },
+    {
+     "comment_id": 3979957416,
+     "url": "https://github.com/home-assistant/core/pull/178024#discussion_r3979957416",
+     "pr": 178024,
+     "author": "Markus98",
+     "created_at": "2026-09-10",
+     "quote": "We should probably move this fixture to `conftest.py`. That is the convention.\n\nAlso, this fixture doesn't return `entity_id`s so we should not have `entity_ids` in the fixture name."
+    },
+    {
+     "comment_id": 4008980467,
+     "url": "https://github.com/home-assistant/core/pull/180437#discussion_r4008980467",
+     "pr": 180437,
+     "author": "joostlek",
+     "created_at": "2026-09-14",
+     "quote": "Can we have this as a fixture in conftest.py?"
+    },
+    {
+     "comment_id": 4047760868,
+     "url": "https://github.com/home-assistant/core/pull/177108#discussion_r4047760868",
+     "pr": 177108,
+     "author": "joostlek",
+     "created_at": "2026-09-18",
+     "quote": "This is stuff I would recommend to move to conftest.py"
+    }
+   ]
+  },
+  {
+   "id": "avoid-using-if-statements-in-tests",
+   "rule": "Avoid using if statements or conditions in tests to maintain clarity and prevent conditional logic from obscuring test intent.",
+   "why": "This ensures tests are deterministic and easy to understand.",
+   "support": 5,
+   "prs": 5,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3847769497,
+     "url": "https://github.com/home-assistant/core/pull/179349#discussion_r3847769497",
+     "pr": 179349,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "we should not have if statements in the tests"
+    },
+    {
+     "comment_id": 3863466843,
+     "url": "https://github.com/home-assistant/core/pull/165457#discussion_r3863466843",
+     "pr": 165457,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "we shouldn't have if statements in the tests, let's alwayus make sure they recover"
+    },
+    {
+     "comment_id": 3864101839,
+     "url": "https://github.com/home-assistant/core/pull/167872#discussion_r3864101839",
+     "pr": 167872,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "Please don't use if statements in the tests though.\n\nI am also not seeing the difference between these 2. If they are different, then they're okay to be split"
+    },
+    {
+     "comment_id": 3999102711,
+     "url": "https://github.com/home-assistant/core/pull/182075#discussion_r3999102711",
+     "pr": 182075,
+     "author": "MartinHjelmare",
+     "created_at": "2026-09-13",
+     "quote": "We don't want conditions in tests."
+    },
+    {
+     "comment_id": 4047721802,
+     "url": "https://github.com/home-assistant/core/pull/177108#discussion_r4047721802",
+     "pr": 177108,
+     "author": "joostlek",
+     "created_at": "2026-09-18",
+     "quote": "as this is a direct test helper, let's not add if statements"
+    }
+   ]
+  },
+  {
+   "id": "avoid-bumping-dependencies-with-function",
+   "rule": "Bump dependencies in a separate PR from functional changes.",
+   "why": "This isolates changes and makes reviews more focused.",
+   "support": 5,
+   "prs": 5,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3886756499,
+     "url": "https://github.com/home-assistant/core/pull/173262#discussion_r3886756499",
+     "pr": 173262,
+     "author": "joostlek",
+     "created_at": "2026-08-29",
+     "quote": "Please bump in a separate PR"
+    },
+    {
+     "comment_id": 3886758494,
+     "url": "https://github.com/home-assistant/core/pull/176386#discussion_r3886758494",
+     "pr": 176386,
+     "author": "joostlek",
+     "created_at": "2026-08-29",
+     "quote": "Please bump in a separate PR"
+    },
+    {
+     "comment_id": 4047543616,
+     "url": "https://github.com/home-assistant/core/pull/182318#discussion_r4047543616",
+     "pr": 182318,
+     "author": "joostlek",
+     "created_at": "2026-09-18",
+     "quote": "Can we bump this in a separate PR?"
+    },
+    {
+     "comment_id": 4120628209,
+     "url": "https://github.com/home-assistant/core/pull/183424#discussion_r4120628209",
+     "pr": 183424,
+     "author": "erwindouna",
+     "created_at": "2026-09-28",
+     "quote": "This has to be in it's own dedicated PR. Please split if off. :)"
+    },
+    {
+     "comment_id": 4121695949,
+     "url": "https://github.com/home-assistant/core/pull/183419#discussion_r4121695949",
+     "pr": 183419,
+     "author": "erwindouna",
+     "created_at": "2026-09-28",
+     "quote": "Dependency bumps need to be in their own dedicated PR."
+    }
+   ]
+  },
+  {
+   "id": "implement-consistent-patterns-by-inlinin",
+   "rule": "Implement consistent patterns by inlining simple functions as lambdas in entity descriptions.",
+   "why": "It reduces unnecessary function definitions and maintains consistency across sensors with minimal business logic.",
+   "support": 5,
+   "prs": 2,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3931671758,
+     "url": "https://github.com/home-assistant/core/pull/181265#discussion_r3931671758",
+     "pr": 181265,
+     "author": "erwindouna",
+     "created_at": "2026-09-04",
+     "quote": "This function has little to no business logic. I think this can be done inline to check if it's not None, with a lambda.\nThis is a pattern you're also doing across the other sensors, so it's good to be consistent. :)"
+    },
+    {
+     "comment_id": 3932238212,
+     "url": "https://github.com/home-assistant/core/pull/181278#discussion_r3932238212",
+     "pr": 181278,
+     "author": "erwindouna",
+     "created_at": "2026-09-04",
+     "quote": "You can optimize this method and add the inline check. It makes it a bit more explicit and reduce a function which contains little to no business logic. :)"
+    },
+    {
+     "comment_id": 3932606335,
+     "url": "https://github.com/home-assistant/core/pull/181278#discussion_r3932606335",
+     "pr": 181278,
+     "author": "erwindouna",
+     "created_at": "2026-09-04",
+     "quote": "I think can you inline this, with a lambda and follow the rest of the patterns. Try to make the code follow the same consistent patterns. :)"
+    },
+    {
+     "comment_id": 3932610800,
+     "url": "https://github.com/home-assistant/core/pull/181278#discussion_r3932610800",
+     "pr": 181278,
+     "author": "erwindouna",
+     "created_at": "2026-09-04",
+     "quote": "You can inline this with a lambda too. It's only used once and is perfectly suitable for lambda."
+    },
+    {
+     "comment_id": 3932788167,
+     "url": "https://github.com/home-assistant/core/pull/181278#discussion_r3932788167",
+     "pr": 181278,
+     "author": "erwindouna",
+     "created_at": "2026-09-04",
+     "quote": "I see, thanks for explaining. That make sense. This function is also a perfect candidate to be a lambda, so that would be good to follow-up. :)"
+    }
+   ]
+  },
+  {
+   "id": "use-entity-category-diagnostic",
+   "rule": "Mark binary sensors and sensors that expose diagnostic information with entity category diagnostic.",
+   "why": "This ensures diagnostic entities are properly grouped and hidden by default in the UI.",
+   "support": 5,
+   "prs": 2,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3890520470,
+     "url": "https://github.com/home-assistant/core/pull/180825#discussion_r3890520470",
+     "pr": 180825,
+     "author": "balloob",
+     "created_at": "2026-08-30",
+     "quote": "Should this be diagnostic entity category?"
+    },
+    {
+     "comment_id": 3890520598,
+     "url": "https://github.com/home-assistant/core/pull/180825#discussion_r3890520598",
+     "pr": 180825,
+     "author": "balloob",
+     "created_at": "2026-08-30",
+     "quote": "Should this be diagnostic entity category?"
+    },
+    {
+     "comment_id": 3890524959,
+     "url": "https://github.com/home-assistant/core/pull/180825#discussion_r3890524959",
+     "pr": 180825,
+     "author": "balloob",
+     "created_at": "2026-08-30",
+     "quote": "Diagnostic entity category"
+    },
+    {
+     "comment_id": 3890526480,
+     "url": "https://github.com/home-assistant/core/pull/180825#discussion_r3890526480",
+     "pr": 180825,
+     "author": "balloob",
+     "created_at": "2026-08-30",
+     "quote": "Diagnostic entity category"
+    },
+    {
+     "comment_id": 3901909228,
+     "url": "https://github.com/home-assistant/core/pull/180952#discussion_r3901909228",
+     "pr": 180952,
+     "author": "balloob",
+     "created_at": "2026-09-01",
+     "quote": "This one also needs entity category diagnostic."
+    }
+   ]
+  },
+  {
+   "id": "use-common-translation-keys",
+   "rule": "Use common translation keys from homeassistant/strings.json for standard statuses like paused or charging.",
+   "why": "This ensures consistency in user-facing status messages across integrations.",
+   "support": 5,
+   "prs": 3,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3961536773,
+     "url": "https://github.com/home-assistant/core/pull/180437#discussion_r3961536773",
+     "pr": 180437,
+     "author": "joostlek",
+     "created_at": "2026-09-08",
+     "quote": "use common key references"
+    },
+    {
+     "comment_id": 4047698719,
+     "url": "https://github.com/home-assistant/core/pull/177108#discussion_r4047698719",
+     "pr": 177108,
+     "author": "joostlek",
+     "created_at": "2026-09-18",
+     "quote": "Some of the statuses here like paused, standby and charging are ones that you can use common key references to `homeassistant/strings.json`"
+    },
+    {
+     "comment_id": 4122409325,
+     "url": "https://github.com/home-assistant/core/pull/181591#discussion_r4122409325",
+     "pr": 181591,
+     "author": "joostlek",
+     "created_at": "2026-09-28",
+     "quote": "We have common translation strings for this"
+    },
+    {
+     "comment_id": 4122412344,
+     "url": "https://github.com/home-assistant/core/pull/181591#discussion_r4122412344",
+     "pr": 181591,
+     "author": "joostlek",
+     "created_at": "2026-09-28",
+     "quote": "For this one as well"
+    },
+    {
+     "comment_id": 4122417717,
+     "url": "https://github.com/home-assistant/core/pull/181591#discussion_r4122417717",
+     "pr": 181591,
+     "author": "joostlek",
+     "created_at": "2026-09-28",
+     "quote": "These 2 as well (off I'm sure, the other one I'm not)"
+    }
+   ]
+  },
+  {
+   "id": "avoid-patching-integration-internals",
+   "rule": "Avoid patching integration internals; instead, patch the underlying library or client.",
+   "why": "This ensures tests validate integration behavior without relying on internal implementation details.",
+   "support": 4,
+   "prs": 4,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3863459675,
+     "url": "https://github.com/home-assistant/core/pull/165457#discussion_r3863459675",
+     "pr": 165457,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "can we instead patch the library? We ideally don't patch internals"
+    },
+    {
+     "comment_id": 3979002217,
+     "url": "https://github.com/home-assistant/core/pull/181516#discussion_r3979002217",
+     "pr": 181516,
+     "author": "joostlek",
+     "created_at": "2026-09-10",
+     "quote": "All flows should end in CREATE_ENTRY or ABORT to test that they're able to recover. Also, don't patch internals (`_async_probe`)"
+    },
+    {
+     "comment_id": 4024795535,
+     "url": "https://github.com/home-assistant/core/pull/182152#discussion_r4024795535",
+     "pr": 182152,
+     "author": "MartinHjelmare",
+     "created_at": "2026-09-16",
+     "quote": "Please try to patch and use the library client instead to test this behavior. We want to avoid interacting with integration details in the tests.\n\nhttps://developers.home-assistant.io/docs/development_testing#writing-tests-for-integrations"
+    },
+    {
+     "comment_id": 4047936555,
+     "url": "https://github.com/home-assistant/core/pull/182389#discussion_r4047936555",
+     "pr": 182389,
+     "author": "joostlek",
+     "created_at": "2026-09-18",
+     "quote": "can we avoid patching internals?"
+    }
+   ]
+  },
+  {
+   "id": "avoid-accessing-runtime-data-in-tests",
+   "rule": "Do not access or modify runtime_data in tests.",
+   "why": "This ensures tests reflect real integration behavior through proper setup and state checks.",
+   "support": 4,
+   "prs": 3,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3863496335,
+     "url": "https://github.com/home-assistant/core/pull/165457#discussion_r3863496335",
+     "pr": 165457,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "Also don't touch runtime_data"
+    },
+    {
+     "comment_id": 3889789031,
+     "url": "https://github.com/home-assistant/core/pull/165457#discussion_r3889789031",
+     "pr": 165457,
+     "author": "joostlek",
+     "created_at": "2026-08-30",
+     "quote": "let's avoid touching runtime_data"
+    },
+    {
+     "comment_id": 3996105455,
+     "url": "https://github.com/home-assistant/core/pull/181988#discussion_r3996105455",
+     "pr": 181988,
+     "author": "MartinHjelmare",
+     "created_at": "2026-09-12",
+     "quote": "We shouldn't access integration details in runtime_data."
+    },
+    {
+     "comment_id": 4026209256,
+     "url": "https://github.com/home-assistant/core/pull/176238#discussion_r4026209256",
+     "pr": 176238,
+     "author": "joostlek",
+     "created_at": "2026-09-16",
+     "quote": "we shouldn't touch the runtime_data"
+    }
+   ]
+  },
+  {
+   "id": "avoid-calculating-entity-states-in-integ",
+   "rule": "Do not calculate entity states in the integration; this logic should reside in the library.",
+   "why": "This separates concerns and improves testability and reuse.",
+   "support": 4,
+   "prs": 2,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3880296091,
+     "url": "https://github.com/home-assistant/core/pull/180393#discussion_r3880296091",
+     "pr": 180393,
+     "author": "MartinHjelmare",
+     "created_at": "2026-08-28",
+     "quote": "This is a calculated value. We don't allow calculating states in integrations that integrate with devices or services. The integration should represent the API as is, while following our entity design."
+    },
+    {
+     "comment_id": 3880439966,
+     "url": "https://github.com/home-assistant/core/pull/180393#discussion_r3880439966",
+     "pr": 180393,
+     "author": "MartinHjelmare",
+     "created_at": "2026-08-28",
+     "quote": "This is calculating the sensor state. This belongs in the library if it's needed."
+    },
+    {
+     "comment_id": 3890317721,
+     "url": "https://github.com/home-assistant/core/pull/180722#discussion_r3890317721",
+     "pr": 180722,
+     "author": "frenck",
+     "created_at": "2026-08-30",
+     "quote": "Honestly, this should be in the library :)\n\nIf you make this properties available in the objects, you'd save yourself tons lines of code below as well."
+    },
+    {
+     "comment_id": 3895479209,
+     "url": "https://github.com/home-assistant/core/pull/180393#discussion_r3895479209",
+     "pr": 180393,
+     "author": "MartinHjelmare",
+     "created_at": "2026-08-31",
+     "quote": "This is still a calculated value that is used for a entity state. That's not allowed. I suggest removing that entity for now, and we can discuss separately how to best expose the corresponding data point."
+    }
+   ]
+  },
+  {
+   "id": "avoid-putting-logic-in-try-blocks",
+   "rule": "Only include code in try blocks that can potentially raise exceptions.",
+   "why": "This prevents catching exceptions from code that cannot fail, improving clarity.",
+   "support": 4,
+   "prs": 4,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3845195346,
+     "url": "https://github.com/home-assistant/core/pull/179695#discussion_r3845195346",
+     "pr": 179695,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "Only keep things in the try block that can raise"
+    },
+    {
+     "comment_id": 3847537533,
+     "url": "https://github.com/home-assistant/core/pull/168143#discussion_r3847537533",
+     "pr": 168143,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "only keep things in the try block that can raise"
+    },
+    {
+     "comment_id": 3886617410,
+     "url": "https://github.com/home-assistant/core/pull/180440#discussion_r3886617410",
+     "pr": 180440,
+     "author": "joostlek",
+     "created_at": "2026-08-29",
+     "quote": "Only keep things in the try block that are able to raise"
+    },
+    {
+     "comment_id": 3988517289,
+     "url": "https://github.com/home-assistant/core/pull/152802#discussion_r3988517289",
+     "pr": 152802,
+     "author": "joostlek",
+     "created_at": "2026-09-11",
+     "quote": "only keep things in the try block that can raise"
+    }
+   ]
+  },
+  {
+   "id": "parametrize-tests-instead-of-writing-sep",
+   "rule": "Parametrize tests instead of writing separate test functions for similar cases.",
+   "why": "It reduces code duplication and makes test coverage clearer.",
+   "support": 4,
+   "prs": 4,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3843136243,
+     "url": "https://github.com/home-assistant/core/pull/179970#discussion_r3843136243",
+     "pr": 179970,
+     "author": "justanotherariel",
+     "created_at": "2026-08-24",
+     "quote": "Can we paramaterize `test_remove_child_device_and_restore` to include this test?"
+    },
+    {
+     "comment_id": 3847908549,
+     "url": "https://github.com/home-assistant/core/pull/177366#discussion_r3847908549",
+     "pr": 177366,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "These 2 can be parametrized"
+    },
+    {
+     "comment_id": 3968461307,
+     "url": "https://github.com/home-assistant/core/pull/178407#discussion_r3968461307",
+     "pr": 178407,
+     "author": "Markus98",
+     "created_at": "2026-09-09",
+     "quote": "I would like this to be included in the test above (`test_get_triggers`) instead with `@pytest.mark.parametrize()`"
+    },
+    {
+     "comment_id": 4012978315,
+     "url": "https://github.com/home-assistant/core/pull/182054#discussion_r4012978315",
+     "pr": 182054,
+     "author": "Markus98",
+     "created_at": "2026-09-15",
+     "quote": "This test and `test_entry_reload_from_migration_error_fails` below both cover the same `OperationNotAllowed` branch, just from different states. Since the method raises before touching the integration, the `mock_integration`/`mock_platform` setup and the `async_*` mocks are not n"
+    }
+   ]
+  },
+  {
+   "id": "assert-unique-id-in-config-flow",
+   "rule": "Assert the unique_id in config flow tests when applicable.",
+   "why": "This verifies that entities are correctly identified and avoids duplication issues.",
+   "support": 3,
+   "prs": 3,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3854058810,
+     "url": "https://github.com/home-assistant/core/pull/180057#discussion_r3854058810",
+     "pr": 180057,
+     "author": "erwindouna",
+     "created_at": "2026-08-25",
+     "quote": "Shouldn't we also assert the unique_id? :)"
+    },
+    {
+     "comment_id": 3863461001,
+     "url": "https://github.com/home-assistant/core/pull/165457#discussion_r3863461001",
+     "pr": 165457,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "Also assert the unique id"
+    },
+    {
+     "comment_id": 4008943554,
+     "url": "https://github.com/home-assistant/core/pull/180437#discussion_r4008943554",
+     "pr": 180437,
+     "author": "joostlek",
+     "created_at": "2026-09-14",
+     "quote": "also assert the unique id"
+    }
+   ]
+  },
+  {
+   "id": "avoid-using-parametrize-single-case",
+   "rule": "Avoid using parametrize when only a single test case is used.",
+   "why": "This avoids unnecessary complexity in test definitions.",
+   "support": 3,
+   "prs": 2,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3862730617,
+     "url": "https://github.com/home-assistant/core/pull/180197#discussion_r3862730617",
+     "pr": 180197,
+     "author": "arturpragacz",
+     "created_at": "2026-08-26",
+     "quote": "Pointless `parametrize`, only a single case."
+    },
+    {
+     "comment_id": 3886069984,
+     "url": "https://github.com/home-assistant/core/pull/180438#discussion_r3886069984",
+     "pr": 180438,
+     "author": "bieniu",
+     "created_at": "2026-08-29",
+     "quote": "`parametrize` is not needed with only one test case."
+    },
+    {
+     "comment_id": 3886079388,
+     "url": "https://github.com/home-assistant/core/pull/180438#discussion_r3886079388",
+     "pr": 180438,
+     "author": "bieniu",
+     "created_at": "2026-08-29",
+     "quote": "`parametrize` is not needed with only one test case."
+    }
+   ]
+  },
+  {
+   "id": "avoid-manual-coordinator-refresh",
+   "rule": "Freeze and advance time to trigger coordinator refreshes instead of relying on integration-specific runtime data like the coordinator directly.",
+   "why": "This simulates real-world timing and avoids bypassing normal update mechanisms.",
+   "support": 3,
+   "prs": 3,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3860055001,
+     "url": "https://github.com/home-assistant/core/pull/179057#discussion_r3860055001",
+     "pr": 179057,
+     "author": "MartinHjelmare",
+     "created_at": "2026-08-26",
+     "quote": "Please move time forward instead, to trigger a coordinator refresh. To make the tests robust, we don't want to interact with integration details in runtime data like the coordinator."
+    },
+    {
+     "comment_id": 3956999049,
+     "url": "https://github.com/home-assistant/core/pull/181602#discussion_r3956999049",
+     "pr": 181602,
+     "author": "MartinHjelmare",
+     "created_at": "2026-09-08",
+     "quote": "Please don't use integration details in runtime data, like the coordinator, in the tests. Freeze time and move time forward to trigger a coordinator refresh instead.\n\nhttps://developers.home-assistant.io/docs/development_testing#writing-tests-for-integrations"
+    },
+    {
+     "comment_id": 4071364148,
+     "url": "https://github.com/home-assistant/core/pull/181865#discussion_r4071364148",
+     "pr": 181865,
+     "author": "joostlek",
+     "created_at": "2026-09-22",
+     "quote": "Freeze and skip time instead"
+    }
+   ]
+  },
+  {
+   "id": "merge-related-test-cases-into-a-single-t",
+   "rule": "Merge related test cases into a single test when they share setup and logic.",
+   "why": "Combining similar tests reduces duplication and improves maintainability.",
+   "support": 3,
+   "prs": 3,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3915735717,
+     "url": "https://github.com/home-assistant/core/pull/180531#discussion_r3915735717",
+     "pr": 180531,
+     "author": "joostlek",
+     "created_at": "2026-09-02",
+     "quote": "These 2 can be combined"
+    },
+    {
+     "comment_id": 3978997363,
+     "url": "https://github.com/home-assistant/core/pull/181516#discussion_r3978997363",
+     "pr": 181516,
+     "author": "joostlek",
+     "created_at": "2026-09-10",
+     "quote": "merge this one with the next test"
+    },
+    {
+     "comment_id": 4111644728,
+     "url": "https://github.com/home-assistant/core/pull/182949#discussion_r4111644728",
+     "pr": 182949,
+     "author": "bieniu",
+     "created_at": "2026-09-26",
+     "quote": "I think `test_existing_unique_id_is_kept` and `test_migrate_empty_unique_id` could be merged into one test."
+    }
+   ]
+  },
+  {
+   "id": "avoid-unnecessary-data-parsing-in-models",
+   "rule": "Move data parsing logic from models or entities into the underlying library when possible.",
+   "why": "This promotes code reuse and separates concerns.",
+   "support": 3,
+   "prs": 2,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3878403831,
+     "url": "https://github.com/home-assistant/core/pull/180440#discussion_r3878403831",
+     "pr": 180440,
+     "author": "balloob",
+     "created_at": "2026-08-28",
+     "quote": "This kind of code should be in the library. Being able to raise when an error happens. In here we just catch the specific errors."
+    },
+    {
+     "comment_id": 3878405065,
+     "url": "https://github.com/home-assistant/core/pull/180440#discussion_r3878405065",
+     "pr": 180440,
+     "author": "balloob",
+     "created_at": "2026-08-28",
+     "quote": "Shouldn't these be things in the library?"
+    },
+    {
+     "comment_id": 3889906883,
+     "url": "https://github.com/home-assistant/core/pull/179635#discussion_r3889906883",
+     "pr": 179635,
+     "author": "joostlek",
+     "created_at": "2026-08-30",
+     "quote": "I think the parsing part is something for the library to do, and then I think this can just be read in the entity.py"
+    }
+   ]
+  },
+  {
+   "id": "entity-name-handling",
+   "rule": "Set _attr_name = None when the entity is the primary feature of the device to avoid redundant naming.",
+   "why": "This prevents duplicate or confusing entity names in the UI.",
+   "support": 3,
+   "prs": 2,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3847594228,
+     "url": "https://github.com/home-assistant/core/pull/179700#discussion_r3847594228",
+     "pr": 179700,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "shouldn't we set `_attr_name = None` instead? I would assume that for a device where we create a dehumidifier the dehumidifier is the main feature of the device"
+    },
+    {
+     "comment_id": 3863927502,
+     "url": "https://github.com/home-assistant/core/pull/179123#discussion_r3863927502",
+     "pr": 179123,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "you can omit the translation key and use `_attr_name = None` to make the camera entity the main feature on the device"
+    },
+    {
+     "comment_id": 3864751145,
+     "url": "https://github.com/home-assistant/core/pull/179700#discussion_r3864751145",
+     "pr": 179700,
+     "author": "joostlek",
+     "created_at": "2026-08-26",
+     "quote": "```suggestion\n        self._attr_name = None\n```"
+    }
+   ]
+  },
+  {
+   "id": "test-data-storage",
+   "rule": "Store JSON-based test data in fixture files within the fixtures folder using get_fixture_path or load_json_fixture.",
+   "why": "Centralized test data improves readability and reuse.",
+   "support": 3,
+   "prs": 3,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3961263241,
+     "url": "https://github.com/home-assistant/core/pull/177918#discussion_r3961263241",
+     "pr": 177918,
+     "author": "joostlek",
+     "created_at": "2026-09-08",
+     "quote": "instead use `load_json_fixture` which is a common test helper instead"
+    },
+    {
+     "comment_id": 4008933765,
+     "url": "https://github.com/home-assistant/core/pull/180437#discussion_r4008933765",
+     "pr": 180437,
+     "author": "joostlek",
+     "created_at": "2026-09-14",
+     "quote": "Look at storing this in a json file in fixtures folder"
+    },
+    {
+     "comment_id": 4035672795,
+     "url": "https://github.com/home-assistant/core/pull/182457#discussion_r4035672795",
+     "pr": 182457,
+     "author": "arturpragacz",
+     "created_at": "2026-09-17",
+     "quote": "We could use `get_fixture_path`.\n\n```suggestion\nfrom tests.common import extract_stack_to_frame, get_fixture_path\n\nINCLUDE_DIRS_FIXTURE = str(get_fixture_path(\"core/config/annotations/include_dirs\"))\n```"
+    }
+   ]
+  },
+  {
+   "id": "use-consistent-naming",
+   "rule": "Use consistent and meaningful naming for functions, variables, and parameters, such as avoiding 'async_' prefix for non-async functions and using 'info' instead of 'data'.",
+   "why": "This improves code readability and maintainability.",
+   "support": 3,
+   "prs": 3,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3843128729,
+     "url": "https://github.com/home-assistant/core/pull/176110#discussion_r3843128729",
+     "pr": 176110,
+     "author": "Markus98",
+     "created_at": "2026-08-24",
+     "quote": "One nit I have about the naming is that right now in this file we kind of have three different terms that refer to almost the same concept: `location`, `position`, and `coordinates`. I would probably use either `coordinates` or `position` for these variable names in `nws` to make"
+    },
+    {
+     "comment_id": 3903400626,
+     "url": "https://github.com/home-assistant/core/pull/173469#discussion_r3903400626",
+     "pr": 173469,
+     "author": "Markus98",
+     "created_at": "2026-09-01",
+     "quote": "Maybe we could just use `info` instead of `data` here to be more consistent."
+    },
+    {
+     "comment_id": 4115987301,
+     "url": "https://github.com/home-assistant/core/pull/183294#discussion_r4115987301",
+     "pr": 183294,
+     "author": "erwindouna",
+     "created_at": "2026-09-27",
+     "quote": "Nitpicking here,  but this is no async function. Renaming would be suggested."
+    }
+   ]
+  },
+  {
+   "id": "use-extended-config-entry-types",
+   "rule": "Use extended config entry types and type hints in coordinators for better type safety.",
+   "why": "This improves code clarity and enables better IDE support and error detection.",
+   "support": 3,
+   "prs": 3,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3843445961,
+     "url": "https://github.com/home-assistant/core/pull/178132#discussion_r3843445961",
+     "pr": 178132,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "please use the extended ConfigEntry here"
+    },
+    {
+     "comment_id": 3847533921,
+     "url": "https://github.com/home-assistant/core/pull/168143#discussion_r3847533921",
+     "pr": 168143,
+     "author": "joostlek",
+     "created_at": "2026-08-24",
+     "quote": "use extended config entry"
+    },
+    {
+     "comment_id": 4026284417,
+     "url": "https://github.com/home-assistant/core/pull/175855#discussion_r4026284417",
+     "pr": 175855,
+     "author": "joostlek",
+     "created_at": "2026-09-16",
+     "quote": "Use the extended config entry"
+    }
+   ]
+  },
+  {
+   "id": "use-freezer-to-advance-time-in-tests",
+   "rule": "Use freezer.tick(x) or the freezer to advance and control time in tests instead of arbitrary delays.",
+   "why": "This provides precise and reliable time manipulation in asynchronous tests.",
+   "support": 3,
+   "prs": 3,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3961267840,
+     "url": "https://github.com/home-assistant/core/pull/177918#discussion_r3961267840",
+     "pr": 177918,
+     "author": "joostlek",
+     "created_at": "2026-09-08",
+     "quote": "1. this is a method, so this should be in `__init__.py`\n2. Please use the freezer to skip time\n3. You don't need the extra second"
+    },
+    {
+     "comment_id": 3988413797,
+     "url": "https://github.com/home-assistant/core/pull/161442#discussion_r3988413797",
+     "pr": 161442,
+     "author": "joostlek",
+     "created_at": "2026-09-11",
+     "quote": "use `freezer.tick(x)` instead"
+    },
+    {
+     "comment_id": 4026216504,
+     "url": "https://github.com/home-assistant/core/pull/176238#discussion_r4026216504",
+     "pr": 176238,
+     "author": "joostlek",
+     "created_at": "2026-09-16",
+     "quote": "Please use the freezer to skip time"
+    }
+   ]
+  },
+  {
+   "id": "typing-type-checking",
+   "rule": "Use TYPE_CHECKING from typing to avoid runtime import overhead.",
+   "why": "Improves performance by preventing unnecessary imports during execution.",
+   "support": 3,
+   "prs": 2,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3945234078,
+     "url": "https://github.com/home-assistant/core/pull/181283#discussion_r3945234078",
+     "pr": 181283,
+     "author": "erwindouna",
+     "created_at": "2026-09-06",
+     "quote": "Please use TYPE_CHECKING here."
+    },
+    {
+     "comment_id": 4014052202,
+     "url": "https://github.com/home-assistant/core/pull/182250#discussion_r4014052202",
+     "pr": 182250,
+     "author": "abmantis",
+     "created_at": "2026-09-15",
+     "quote": "lets wrap this on a TYPE_CHECKING condition: https://developers.home-assistant.io/docs/development_guidelines/#using-assert-to-narrow-types"
+    },
+    {
+     "comment_id": 4014074949,
+     "url": "https://github.com/home-assistant/core/pull/182250#discussion_r4014074949",
+     "pr": 182250,
+     "author": "abmantis",
+     "created_at": "2026-09-15",
+     "quote": "lets wrap this on a TYPE_CHECKING condition: developers.home-assistant.io/docs/development_guidelines#using-assert-to-narrow-types"
+    }
+   ]
+  },
+  {
+   "id": "wait-background-tasks-testing",
+   "rule": "Wait for background tasks when testing coordinator refreshes using hass.async_block_till_done with wait_background_tasks=True.",
+   "why": "Ensures test reliability by confirming all asynchronous operations are complete.",
+   "support": 3,
+   "prs": 3,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3861848801,
+     "url": "https://github.com/home-assistant/core/pull/179057#discussion_r3861848801",
+     "pr": 179057,
+     "author": "MartinHjelmare",
+     "created_at": "2026-08-26",
+     "quote": "The coordinator runs the refresh as a background task. We need to wait for background tasks here. Please check all places where we move time forward to trigger a coordinator refresh.\n\n```suggestion\n    await hass.async_block_till_done(wait_background_tasks=True)\n```"
+    },
+    {
+     "comment_id": 3880456600,
+     "url": "https://github.com/home-assistant/core/pull/180393#discussion_r3880456600",
+     "pr": 180393,
+     "author": "MartinHjelmare",
+     "created_at": "2026-08-28",
+     "quote": "If we're waiting for a coordinator refresh we need to wait for backgrounds tasks since the coordinator refresh is a background task."
+    },
+    {
+     "comment_id": 3961775477,
+     "url": "https://github.com/home-assistant/core/pull/181602#discussion_r3961775477",
+     "pr": 181602,
+     "author": "MartinHjelmare",
+     "created_at": "2026-09-08",
+     "quote": "The coordinator refresh runs as a background task so we need to wait for background tasks here."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+{
+ "repo": "pandas-dev/pandas",
+ "default_branch": "main",
+ "license": "BSD-3-Clause",
+ "mined": 2203,
+ "train": 1762,
+ "holdout": 441,
+ "prs": 584,
+ "first": "2026-01-24",
+ "last": "2026-10-09",
+ "holdout_since": "2026-09-10",
+ "split_method": "newest 20% by time"
+}

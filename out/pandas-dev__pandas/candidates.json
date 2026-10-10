@@ -1,0 +1,809 @@
+{
+ "model": "qwen/qwen3-235b-a22b-instruct-2507-maas",
+ "provider": "vertex",
+ "batches": 36,
+ "failed_batches": 0,
+ "candidates": [
+  {
+   "rule": "Do not include implementation details in the whatsnew entries.",
+   "why": "The maintainers want whatsnew entries to focus only on user-facing changes, not internal implementation details.",
+   "comment_ids": [
+    3667965804,
+    3699477516,
+    3697309610,
+    3745521722,
+    3787603705
+   ]
+  },
+  {
+   "rule": "Place whatsnew entries in the appropriate section based on the feature area.",
+   "why": "Maintainers expect entries to be organized by topic, such as moving I/O-related changes to the I/O section.",
+   "comment_ids": [
+    3714278636,
+    3829824502
+   ]
+  },
+  {
+   "rule": "Do not add whatsnew entries for tests, documentation edits, or error message changes.",
+   "why": "These changes are not considered user-facing and do not require release notes.",
+   "comment_ids": [
+    3789700726,
+    3833961518,
+    3836352759
+   ]
+  },
+  {
+   "rule": "Use ASCII characters instead of Unicode symbols in whatsnew entries.",
+   "why": "The project prefers to keep text compatible and readable without special characters.",
+   "comment_ids": [
+    3777654110
+   ]
+  },
+  {
+   "rule": "Avoid creating new sections in whatsnew unless necessary; use existing sections like 'Other' when appropriate.",
+   "why": "Maintainers prefer to keep the structure simple and avoid unnecessary sections.",
+   "comment_ids": [
+    3744286408,
+    3744710827
+   ]
+  },
+  {
+   "rule": "Combine duplicate or nearly identical whatsnew entries into a single entry.",
+   "why": "This reduces redundancy and keeps the changelog clean and concise.",
+   "comment_ids": [
+    3730497289,
+    3765745952,
+    3715001782
+   ]
+  },
+  {
+   "rule": "Reference the correct PR or issue number when documenting fixes.",
+   "why": "Accuracy in referencing ensures proper attribution and traceability.",
+   "comment_ids": [
+    3733826304,
+    3780446254
+   ]
+  },
+  {
+   "rule": "Only document public API changes in whatsnew entries.",
+   "why": "Private or non-public methods should not be included in release notes.",
+   "comment_ids": [
+    3854489441
+   ]
+  },
+  {
+   "rule": "Ensure accuracy when describing behavior changes and provide examples if needed.",
+   "why": "Inaccurate descriptions can mislead users about what has changed.",
+   "comment_ids": [
+    3777943597,
+    3788289253,
+    3789799727,
+    3877273477,
+    3866441843
+   ]
+  },
+  {
+   "rule": "Include both Series and DataFrame equivalents when documenting method changes.",
+   "why": "Users expect consistent documentation across similar APIs.",
+   "comment_ids": [
+    3777641739,
+    3777943597
+   ]
+  },
+  {
+   "rule": "Use consistent method naming with :meth: and :class: directives in whatsnew entries.",
+   "why": "This ensures proper formatting and linking in the generated documentation.",
+   "comment_ids": [
+    3802409600
+   ]
+  },
+  {
+   "rule": "Write whatsnew entries concisely, focusing only on user-facing impact and avoiding internal details or error messages.",
+   "why": "The maintainers want changelog entries to be actionable and understandable for users, not cluttered with implementation specifics.",
+   "comment_ids": [
+    3898128722,
+    3952659172,
+    3952740561,
+    3953398232,
+    3970140312,
+    3870210256
+   ]
+  },
+  {
+   "rule": "Only include bugfixes in whatsnew if they are significant and user-facing; minor or internal fixes do not require an entry.",
+   "why": "The maintainers aim to keep the changelog focused on meaningful changes for users.",
+   "comment_ids": [
+    3941119461,
+    3953300759,
+    3962610296
+   ]
+  },
+  {
+   "rule": "Categorize changes in the correct whatsnew section, such as moving I/O-related bugfixes from API changes to the I/O bugfixes section.",
+   "why": "Proper categorization helps users quickly locate relevant changes.",
+   "comment_ids": [
+    3958038291
+   ]
+  },
+  {
+   "rule": "Mention both horizontal and vertical variants (e.g. barh) when documenting plotting functionality.",
+   "why": "Users may rely on either form, so both should be documented for completeness.",
+   "comment_ids": [
+    3952665909
+   ]
+  },
+  {
+   "rule": "Move documentation of conversion-related changes to the Conversion section in whatsnew.",
+   "why": "Ensures consistent organization of changelog entries by topic.",
+   "comment_ids": [
+    3978808617
+   ]
+  },
+  {
+   "rule": "Avoid default parameters in Cython function signatures.",
+   "why": "Default parameters in Cython can lead to unexpected behavior or compilation issues.",
+   "comment_ids": [
+    3762022091
+   ]
+  },
+  {
+   "rule": "Ensure test coverage for edge cases such as small sample sizes when bias=False returns NAN and bias=True does not.",
+   "why": "The maintainers require confidence that numerical edge cases are correctly handled.",
+   "comment_ids": [
+    3938515635
+   ]
+  },
+  {
+   "rule": "Check for both contiguity directions in performance-critical code to avoid regressions.",
+   "why": "Failing to do so may cause performance issues in non-contiguous array cases.",
+   "comment_ids": [
+    3714822067
+   ]
+  },
+  {
+   "rule": "When fixing bugs involving extension dtypes, ensure the fix is general or accurately reflect its limited scope in the changelog.",
+   "why": "Avoid misleading users by claiming a broader fix than was implemented.",
+   "comment_ids": [
+    3903980490,
+    3903982728
+   ]
+  },
+  {
+   "rule": "Clarify when a bugfix affects specific system configurations, such as older systems with particular tzdata toolchains.",
+   "why": "Helps users understand whether they were actually affected by the bug.",
+   "comment_ids": [
+    3969745577
+   ]
+  },
+  {
+   "rule": "Use C++ types like std::string_view and std::span instead of C-style pointers and arrays in C++ files.",
+   "why": "Using modern C++ types improves type safety, reduces pointer arithmetic, and leverages standard library functionality.",
+   "comment_ids": [
+    3591554598,
+    3598179430
+   ]
+  },
+  {
+   "rule": "Prefer std::pair or std::subspan over custom POD types to return data and size from functions.",
+   "why": "Standard library types like std::span with subspan provide a cleaner, more idiomatic way to signal written data and size.",
+   "comment_ids": [
+    3595468494,
+    3598303757
+   ]
+  },
+  {
+   "rule": "Use C++20 ranges and views like std::ranges::views::lazy_split instead of iterator-based designs when possible.",
+   "why": "Ranges provide a more modern, efficient, and readable way to process sequences in a single pass.",
+   "comment_ids": [
+    3599277710,
+    3599290691
+   ]
+  },
+  {
+   "rule": "Declare variables with auto instead of using static_cast for type conversion.",
+   "why": "Using auto follows modern C++ best practices and improves readability and maintainability.",
+   "comment_ids": [
+    3599262972
+   ]
+  },
+  {
+   "rule": "Replace C-style casts with direct initialization or appropriate C++ casts.",
+   "why": "C-style casts are unsafe and unnecessary in C++; direct initialization or C++ casts are preferred.",
+   "comment_ids": [
+    3188166107
+   ]
+  },
+  {
+   "rule": "Move extern \"C\" linkage declarations to header files and avoid repeating them in source files.",
+   "why": "The extern \"C\" linkage is already specified in the header, so repeating it in the source is redundant.",
+   "comment_ids": [
+    3198381548
+   ]
+  },
+  {
+   "rule": "Use assertions instead of comments to enforce preconditions like tsep != '\\0'.",
+   "why": "Assertions ensure conditions are checked at runtime, making the code safer and more reliable.",
+   "comment_ids": [
+    3597115947,
+    3599420051
+   ]
+  },
+  {
+   "rule": "Avoid unnecessary pointer arithmetic by using modern C++ features and standard library functions.",
+   "why": "Pointer arithmetic is error-prone and unidiomatic in C++; modern C++ provides safer and clearer alternatives.",
+   "comment_ids": [
+    3591566588,
+    3599323583
+   ]
+  },
+  {
+   "rule": "Remove unnecessary indirections and use function arguments directly.",
+   "why": "Direct use of arguments improves clarity and reduces complexity.",
+   "comment_ids": [
+    3595478244,
+    3599286500
+   ]
+  },
+  {
+   "rule": "Rename source files to reflect their broader functionality when they no longer match the original single-purpose name.",
+   "why": "A more generic name improves intuitiveness and maintainability as the file's responsibilities evolve.",
+   "comment_ids": [
+    3588386007
+   ]
+  },
+  {
+   "rule": "Move function declarations to headers when moving non-static functions between source files.",
+   "why": "Corresponding header declarations must be updated to reflect function location changes.",
+   "comment_ids": [
+    3591537940
+   ]
+  },
+  {
+   "rule": "Avoid using memcpy for individual assignments; use it for bulk memory operations only.",
+   "why": "Using memcpy for single assignments is less readable and unnecessary when direct assignment suffices.",
+   "comment_ids": [
+    3188161058
+   ]
+  },
+  {
+   "rule": "Place extern blocks in header files, not in source files.",
+   "why": "Extern blocks belong in headers to ensure consistent linkage across translation units.",
+   "comment_ids": [
+    3188186095
+   ]
+  },
+  {
+   "rule": "Use from_chars_advanced with appropriate chars_format options instead of reusing fast_float_strtod.",
+   "why": "from_chars_advanced provides more precise control over parsing options and is the intended modern interface.",
+   "comment_ids": [
+    3583900400
+   ]
+  },
+  {
+   "rule": "Include documentation about return values and side effects in header files, not in source files.",
+   "why": "Header files are the interface; documentation there ensures users see it without inspecting implementation details.",
+   "comment_ids": [
+    3583988390
+   ]
+  },
+  {
+   "rule": "Keep the original text in docstrings when it accurately reflects the behavior, especially if the parameters have actual effects beyond compatibility.",
+   "why": "The original text should be preserved because the parameters in question have real effects when passed to numpy functions, not just for compatibility.",
+   "comment_ids": [
+    3399678110
+   ]
+  },
+  {
+   "rule": "Combine related conditional checks into a single line and include a comment explaining the reason for the logic.",
+   "why": "Combining checks improves readability and the comment helps clarify the intent, such as why sorting is skipped for Series.",
+   "comment_ids": [
+    3142132745
+   ]
+  },
+  {
+   "rule": "Minimize code changes by reverting unnecessary modifications when the resulting behavior and messages remain unchanged.",
+   "why": "The project prefers to keep diffs small and avoid changes that don't alter functionality or improve clarity.",
+   "comment_ids": [
+    3157761077,
+    3660808385
+   ]
+  },
+  {
+   "rule": "Use `get_indexer_for` instead of special-casing specific index types like IntervalIndex.",
+   "why": "Using `get_indexer_for` avoids the need for type-specific handling and improves code robustness.",
+   "comment_ids": [
+    3197725449
+   ]
+  },
+  {
+   "rule": "Ensure axis handling is robust by calling `_get_axis_number` early to support both integer and string axis specifications.",
+   "why": "Delaying the `_get_axis_number` check can hide bugs when axis is passed as a string like 'index'.",
+   "comment_ids": [
+    3350698008
+   ]
+  },
+  {
+   "rule": "Pass `deep=False` when copying objects unless a deep copy is explicitly required.",
+   "why": "Shallow copies are sufficient in many cases and more efficient; deep copies should be intentional.",
+   "comment_ids": [
+    3350702221
+   ]
+  },
+  {
+   "rule": "Update tolerance-related docstrings when making changes to tolerance behavior.",
+   "why": "The tolerance docstring must reflect current behavior to avoid user confusion.",
+   "comment_ids": [
+    3799272485
+   ]
+  },
+  {
+   "rule": "Link to documentation using the dev version URL when the target page is not yet live in stable releases.",
+   "why": "Linking to the dev docs ensures the link works both before and after a release, avoiding broken redirects.",
+   "comment_ids": [
+    3919034744
+   ]
+  },
+  {
+   "rule": "Modify `result` in place using `ensure_index_from_sequences` when updating index structures in merge operations.",
+   "why": "In-place updates to `result.index` are necessary to maintain correct index structure within the current code design.",
+   "comment_ids": [
+    3935011729
+   ]
+  },
+  {
+   "rule": "Use single quotes for string literals in docstrings when they are more accurate or conventional.",
+   "why": "Single quotes are preferred in certain contexts for consistency and accuracy in documentation.",
+   "comment_ids": [
+    3790037589
+   ]
+  },
+  {
+   "rule": "Use sets for efficient comparison of index names in Series operations.",
+   "why": "Sets provide a clean and performant way to compare collections of names, such as in MultiIndex compatibility checks.",
+   "comment_ids": [
+    3252818012
+   ]
+  },
+  {
+   "rule": "Ensure deprecation warnings are actionable by suggesting an alternative approach to users.",
+   "why": "Deprecation messages should guide users on what to do instead, such as manually aligning indexes.",
+   "comment_ids": [
+    3319146075
+   ]
+  },
+  {
+   "rule": "Keep behavior consistent across similar operations by applying the same deprecation policy to analogous methods.",
+   "why": "Consistency in deprecation helps avoid confusion and ensures uniform behavior across the API.",
+   "comment_ids": [
+    3337362812
+   ]
+  },
+  {
+   "rule": "Avoid special-casing rare edge cases unless they are common enough to justify stricter behavior.",
+   "why": "The current behavior is considered acceptable for rare cases, and stricter rules may not be necessary.",
+   "comment_ids": [
+    3625732113
+   ]
+  },
+  {
+   "rule": "Improve error messages by clarifying when duplicate level values are detected, even if not explicitly passed.",
+   "why": "The message should not mislead users into thinking they passed duplicates when the issue arose internally.",
+   "comment_ids": [
+    3723566406
+   ]
+  },
+  {
+   "rule": "Add a comment referencing the GitHub issue URL on the first line of every new test.",
+   "why": "To ensure each test is traceable to the issue it fixes or addresses.",
+   "comment_ids": [
+    3191551426,
+    3252783792,
+    3276999079
+   ]
+  },
+  {
+   "rule": "Parametrize tests over engine when testing evaluation or computation functionality.",
+   "why": "To ensure coverage across different evaluation engines and reproduce engine-specific bugs.",
+   "comment_ids": [
+    3744711611,
+    3808072751
+   ]
+  },
+  {
+   "rule": "Use pytest fixtures for shared test data instead of defining helper methods or variables.",
+   "why": "To promote reusability, clarity, and integration with pytest's fixture system.",
+   "comment_ids": [
+    3759903875,
+    3769629190,
+    3846411929
+   ]
+  },
+  {
+   "rule": "Avoid constructing DataFrame objects in tests when simpler alternatives are sufficient.",
+   "why": "To reduce test complexity and focus on the minimal code needed to reproduce the behavior.",
+   "comment_ids": [
+    3336580516
+   ]
+  },
+  {
+   "rule": "Parametrize test cases instead of writing repetitive test logic for different values.",
+   "why": "To improve test maintainability and clarity when testing multiple input combinations.",
+   "comment_ids": [
+    3191559227
+   ]
+  },
+  {
+   "rule": "Place imports at the top of the test file.",
+   "why": "To follow Python conventions and ensure clarity about dependencies.",
+   "comment_ids": [
+    3744544488
+   ]
+  },
+  {
+   "rule": "Do not include docstrings in test functions.",
+   "why": "Because tests generally do not require docstrings and the practice is not standard in the codebase.",
+   "comment_ids": [
+    3269571140
+   ]
+  },
+  {
+   "rule": "Avoid redundant or duplicative tests that do not add new coverage.",
+   "why": "To maintain a clean and efficient test suite without unnecessary duplication.",
+   "comment_ids": [
+    3400564156,
+    3400570960,
+    3400571232,
+    3768837787
+   ]
+  },
+  {
+   "rule": "Use clear and accurate names for test variables to reflect their purpose.",
+   "why": "To avoid confusion when reading tests, especially when logic depends on negated conditions.",
+   "comment_ids": [
+    3371752832
+   ]
+  },
+  {
+   "rule": "Follow the pattern of assigning test results to a variable named `result` before assertion.",
+   "why": "To maintain consistency across tests and improve readability.",
+   "comment_ids": [
+    3269580016
+   ]
+  },
+  {
+   "rule": "Remove comments that merely repeat what the code already clearly expresses.",
+   "why": "To reduce noise and keep test code clean and focused.",
+   "comment_ids": [
+    3276994994,
+    3768800149
+   ]
+  },
+  {
+   "rule": "Add a comment inside the test body explaining the motivation for the test, including the GitHub issue number and which code path it exercises.",
+   "why": "This helps clarify the purpose of the test and which part of the code it is validating, especially for future maintainers.",
+   "comment_ids": [
+    3759712955,
+    3899806373
+   ]
+  },
+  {
+   "rule": "Use only the beginning of a warning message when testing for deprecation warnings, unless custom formatting is involved.",
+   "why": "The beginning of the message is sufficient to identify the warning, and testing the full message is unnecessary if no custom formatting is applied.",
+   "comment_ids": [
+    3195476440
+   ]
+  },
+  {
+   "rule": "Replace references to 'object dtype' with 'EA' in test comments when the test cases involve extension array types.",
+   "why": "The values are no longer of object dtype in most test builds, but the test remains valid as the code handles 'object or EA'.",
+   "comment_ids": [
+    3365578788
+   ]
+  },
+  {
+   "rule": "Start each test with a comment referencing the associated GitHub issue.",
+   "why": "This provides immediate context about the issue being tested and improves traceability.",
+   "comment_ids": [
+    3365581403,
+    3142009247
+   ]
+  },
+  {
+   "rule": "Parametrize tests when testing multiple related cases to improve code reuse and clarity.",
+   "why": "Parametrization avoids code duplication and makes it easier to extend test coverage.",
+   "comment_ids": [
+    3978835865,
+    3848421835,
+    3887344354,
+    3525475679,
+    3142012035
+   ]
+  },
+  {
+   "rule": "Use `tm.assert_frame_equal`, `tm.assert_series_equal`, or similar to check the full state of the object, including index, columns, and dtypes.",
+   "why": "This ensures the result matches the expected output in all aspects, not just values.",
+   "comment_ids": [
+    3141998870,
+    3317024563,
+    3133571410,
+    3369300123,
+    3369301437
+   ]
+  },
+  {
+   "rule": "Use the `@td.skip_if_no` decorator to skip tests requiring optional dependencies during test collection.",
+   "why": "Skipping during collection is more efficient and avoids unnecessary test execution.",
+   "comment_ids": [
+    3691857859,
+    3142002533
+   ]
+  },
+  {
+   "rule": "Avoid using one-letter variable names in tests.",
+   "why": "Descriptive variable names improve readability and maintainability of test code.",
+   "comment_ids": [
+    3408433104
+   ]
+  },
+  {
+   "rule": "Avoid using `check_dtype=False` unless absolutely necessary; instead, ensure the expected and actual dtypes match.",
+   "why": "This ensures that dtype correctness is validated, which is important for correctness in operations that depend on dtypes.",
+   "comment_ids": [
+    3889687415,
+    3940814235
+   ]
+  },
+  {
+   "rule": "Do not document previous behavior in test comments; focus on current behavior and motivation.",
+   "why": "Documenting past behavior leads to clutter and becomes outdated; tests should reflect current expectations.",
+   "comment_ids": [
+    3142001134
+   ]
+  },
+  {
+   "rule": "Assert the full warning message or a meaningful part of it when testing for warnings.",
+   "why": "This ensures the correct warning is raised with the expected content.",
+   "comment_ids": [
+    3142002888
+   ]
+  },
+  {
+   "rule": "Remove unused variables like `request` from test functions.",
+   "why": "Unused variables are unnecessary and can confuse readers about the test's intent.",
+   "comment_ids": [
+    3337558428
+   ]
+  },
+  {
+   "rule": "Use hard-coded expected values instead of relying on `check_dtype=False` when comparing dictionaries.",
+   "why": "Hard-coded values make the test more explicit and avoid bypassing dtype checks.",
+   "comment_ids": [
+    3940814235
+   ]
+  },
+  {
+   "rule": "Fix indentation so test functions are not nested inside other tests.",
+   "why": "Nested tests are not discovered by pytest and will not be executed.",
+   "comment_ids": [
+    3934629922
+   ]
+  },
+  {
+   "rule": "Avoid using `inplace=True` in tests unless the test is specifically about inplace operations.",
+   "why": "Using `inplace=True` complicates debugging and is not the default; prefer reassignment.",
+   "comment_ids": [
+    3934647782
+   ]
+  },
+  {
+   "rule": "Add comments referencing GitHub issues instead of including issue details in test names.",
+   "why": "This keeps test names clean and moves explanatory details to comments where they belong.",
+   "comment_ids": [
+    3317053092
+   ]
+  },
+  {
+   "rule": "Split complex test functions into smaller, more focused tests to improve debuggability.",
+   "why": "Smaller tests are easier to understand and debug when failures occur.",
+   "comment_ids": [
+    3142009867
+   ]
+  },
+  {
+   "rule": "Test with standard zoneinfo timezones instead of dateutil when the bug is not specific to dateutil.",
+   "why": "Using standard timezones improves consistency and reduces dependency on external libraries.",
+   "comment_ids": [
+    3803797570
+   ]
+  },
+  {
+   "rule": "Test with both np.int32 and np.int64 when testing integer dtype behavior.",
+   "why": "To ensure compatibility and correct handling of different integer types in the code.",
+   "comment_ids": [
+    3751391766
+   ]
+  },
+  {
+   "rule": "Include non-January 1 dates in tests involving date scalars.",
+   "why": "To ensure tests cover a broader range of date values and avoid edge cases specific to year-start dates.",
+   "comment_ids": [
+    3779705305
+   ]
+  },
+  {
+   "rule": "Place interval index tests in tests.arrays.interval.test_interval instead of tests.indexes.interval.test_interval.",
+   "why": "To maintain proper test organization and alignment with the module structure.",
+   "comment_ids": [
+    3694248467
+   ]
+  },
+  {
+   "rule": "Check the full state of the result using tm.assert_index_equal with an explicitly constructed expected index.",
+   "why": "To ensure complete and accurate comparison of index objects beyond just basic equality.",
+   "comment_ids": [
+    3575716543
+   ]
+  },
+  {
+   "rule": "Avoid using inplace operations in tests unless the test is specifically about inplace behavior.",
+   "why": "To ensure tests focus on the intended functionality and are easier to understand and maintain.",
+   "comment_ids": [
+    3272085677
+   ]
+  },
+  {
+   "rule": "Remove print statements from tests unless they are actively being used for debugging.",
+   "why": "To keep test output clean and avoid noise during test runs.",
+   "comment_ids": [
+    3317447777
+   ]
+  },
+  {
+   "rule": "Generate test files at runtime instead of adding them to the repository.",
+   "why": "To reduce repository bloat and ensure test files are created in a controlled, reproducible manner.",
+   "comment_ids": [
+    3575496624
+   ]
+  },
+  {
+   "rule": "Use the tmp_excel fixture for Excel writer tests to maintain consistency with other writer tests.",
+   "why": "To standardize test setup and teardown across Excel writer test files.",
+   "comment_ids": [
+    3761727286
+   ]
+  },
+  {
+   "rule": "Link new tests to their corresponding GitHub issue or PR using a comment.",
+   "why": "To provide traceability and context for why a test was added.",
+   "comment_ids": [
+    3761731425
+   ]
+  },
+  {
+   "rule": "Check the full result in format tests by comparing against an expected list or structure.",
+   "why": "To make tests more robust and ensure they validate complete output rather than partial results.",
+   "comment_ids": [
+    3326841930
+   ]
+  },
+  {
+   "rule": "Write tests that actually exercise the bug being fixed, not just pass on main.",
+   "why": "To ensure tests are meaningful and catch regressions.",
+   "comment_ids": [
+    3500745875
+   ]
+  },
+  {
+   "rule": "Use only the GitHub issue reference format like #GH19129 in comments, without additional text.",
+   "why": "To maintain a consistent and concise style for issue references in the codebase.",
+   "comment_ids": [
+    3952767717,
+    3554045391
+   ]
+  },
+  {
+   "rule": "Test with integers that exceed numpy int bounds when testing JSON serialization of large integers.",
+   "why": "To ensure correct handling of large integers that cannot be represented by numpy dtypes.",
+   "comment_ids": [
+    3745486314
+   ]
+  },
+  {
+   "rule": "Use np.ulonglong(2**64 - 1) to test maximum unsigned 64-bit integer values.",
+   "why": "To validate behavior at the limits of unsigned 64-bit integer representation.",
+   "comment_ids": [
+    3777649966
+   ]
+  },
+  {
+   "rule": "Move test functions to the appropriate test class, such as TestUltraJSONTests for ujson-specific tests.",
+   "why": "To maintain proper organization and grouping of related tests.",
+   "comment_ids": [
+    3616203079
+   ]
+  },
+  {
+   "rule": "Use TypeError for invalid type errors in ujson tests unless another exception type is specifically required.",
+   "why": "To maintain consistency with Python's standard type error handling.",
+   "comment_ids": [
+    3625740453,
+    3770954161
+   ]
+  },
+  {
+   "rule": "Assert on the output of read_csv directly in parser tests.",
+   "why": "To ensure tests validate the actual parsing result rather than intermediate values.",
+   "comment_ids": [
+    3547690256
+   ]
+  },
+  {
+   "rule": "Test with object-dtype indexes when the test requires non-numeric index types.",
+   "why": "To ensure correct behavior when indexes are not backed by numeric dtypes.",
+   "comment_ids": [
+    3406270352
+   ]
+  },
+  {
+   "rule": "Add high-precision float values like pi to float parametrization in JSON table schema tests.",
+   "why": "To test correct handling of many-digit floating-point numbers in serialization.",
+   "comment_ids": [
+    3839309707
+   ]
+  },
+  {
+   "rule": "Avoid using StringIO for tests that need to exercise parallel CSV parsing logic.",
+   "why": "Because StringIO does not trigger the same code paths as file-like objects that support parallelization.",
+   "comment_ids": [
+    3604359453
+   ]
+  },
+  {
+   "rule": "Do not restrict tests to pyarrow_parser_only unless the behavior is engine-specific.",
+   "why": "Because functionality should work consistently across all parsing engines unless otherwise specified.",
+   "comment_ids": [
+    3843793568
+   ]
+  },
+  {
+   "rule": "Place imports at the top of the test file.",
+   "why": "To follow Python coding standards and make dependencies clear at a glance.",
+   "comment_ids": [
+    3368212012,
+    3590872006,
+    3604354648
+   ]
+  },
+  {
+   "rule": "Split test cases with multiple assertions into separate tests with descriptive names.",
+   "why": "To improve test clarity and make it easier to identify which specific case fails.",
+   "comment_ids": [
+    3590874961
+   ]
+  },
+  {
+   "rule": "Check the dtype of MultiIndex codes when testing MultiIndex equivalence.",
+   "why": "Because the MultiIndex constructor normalizes dtypes, which can mask issues in the test data.",
+   "comment_ids": [
+    3312301203
+   ]
+  },
+  {
+   "rule": "When changing behavior, add tests and a note in the whatsnew for the next minor release.",
+   "why": "To ensure changes are properly documented and tested before release.",
+   "comment_ids": [
+    3701734750,
+    4835186094,
+    4921545730,
+    4962852608
+   ]
+  },
+  {
+   "rule": "Report column numbers as 1-based in validation scripts.",
+   "why": "Because columns are typically reported as 1-based in tooling and error messages.",
+   "comment_ids": [
+    3890282033
+   ]
+  }
+ ]
+}

@@ -1,0 +1,564 @@
+{
+ "repo": "pandas-dev/pandas",
+ "mined": 2203,
+ "train": 1762,
+ "model": "qwen/qwen3-235b-a22b-instruct-2507-maas",
+ "provider": "vertex",
+ "candidates": 106,
+ "rejected_rules": 0,
+ "rejected_examples": [],
+ "unsupported_citations": 51,
+ "below_threshold": 39,
+ "threshold": {
+  "min_comments": 3,
+  "min_prs": 2
+ },
+ "rules": [
+  {
+   "id": "whatsnew-categorization-and-content",
+   "rule": "Place whatsnew entries in the correct section, avoid internal changes, and focus on concise, user-facing impact.",
+   "why": "This ensures the changelog remains useful and accurate for end users and avoids clutter from non-essential changes.",
+   "support": 10,
+   "prs": 9,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3667965804,
+     "url": "https://github.com/pandas-dev/pandas/pull/66498#discussion_r3667965804",
+     "pr": 66498,
+     "author": "jbrockmendel",
+     "created_at": "2026-07-28",
+     "quote": "i dont think we want implementation details in the whatsnew"
+    },
+    {
+     "comment_id": 3697309610,
+     "url": "https://github.com/pandas-dev/pandas/pull/66557#discussion_r3697309610",
+     "pr": 66557,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-02",
+     "quote": "dont include implementation details in the whatsnew"
+    },
+    {
+     "comment_id": 3745521722,
+     "url": "https://github.com/pandas-dev/pandas/pull/66658#discussion_r3745521722",
+     "pr": 66658,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-09",
+     "quote": "dont describe implementation details here, only user-facing changes"
+    },
+    {
+     "comment_id": 3787603705,
+     "url": "https://github.com/pandas-dev/pandas/pull/66708#discussion_r3787603705",
+     "pr": 66708,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-14",
+     "quote": "avoid talking about implementation details"
+    },
+    {
+     "comment_id": 3829824502,
+     "url": "https://github.com/pandas-dev/pandas/pull/66836#discussion_r3829824502",
+     "pr": 66836,
+     "author": "rhshadrach",
+     "created_at": "2026-08-21",
+     "quote": "I believe the only place this code is hit is I/O, can you move to the I/O section and make it something like\n\n```rst\n- :func:`read_csv`, :func:`read_fwf`, and :func:`read_excel` with a numeric :class:`ArrowDtype` (e.g. ``dtype=\"double[pyarrow]\"``) now raise ``ValueError`` for an "
+    },
+    {
+     "comment_id": 3898128722,
+     "url": "https://github.com/pandas-dev/pandas/pull/66708#discussion_r3898128722",
+     "pr": 66708,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-31",
+     "quote": "this still contains too much internal detail.  we only need the user-facing bit"
+    },
+    {
+     "comment_id": 3952659172,
+     "url": "https://github.com/pandas-dev/pandas/pull/68168#discussion_r3952659172",
+     "pr": 68168,
+     "author": "rhshadrach",
+     "created_at": "2026-09-07",
+     "quote": "This is quite verbose. Can you make this more concise, something like \"Reduced duplicate warning messages in DataFrame.to_excel when contents are too long\" is sufficient."
+    },
+    {
+     "comment_id": 3952740561,
+     "url": "https://github.com/pandas-dev/pandas/pull/66380#discussion_r3952740561",
+     "pr": 66380,
+     "author": "rhshadrach",
+     "created_at": "2026-09-07",
+     "quote": "Can you make this more concise. You can remove \"instead of returning...\" and the error message, they aren't necessary."
+    },
+    {
+     "comment_id": 3953398232,
+     "url": "https://github.com/pandas-dev/pandas/pull/67406#discussion_r3953398232",
+     "pr": 67406,
+     "author": "jbrockmendel",
+     "created_at": "2026-09-08",
+     "quote": "this can be much more concise"
+    },
+    {
+     "comment_id": 3970140312,
+     "url": "https://github.com/pandas-dev/pandas/pull/66375#discussion_r3970140312",
+     "pr": 66375,
+     "author": "jorisvandenbossche",
+     "created_at": "2026-09-09",
+     "quote": "Please reduce the verbosity here, just mentioning this is for registering the pyarrow extension types at import is good enough"
+    }
+   ]
+  },
+  {
+   "id": "test-organization-and-structure",
+   "rule": "Place test functions, files, and imports in the correct locations and organize them for clarity and reuse.",
+   "why": "Proper organization improves discoverability, maintainability, and consistency across the test suite.",
+   "support": 10,
+   "prs": 8,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3368212012,
+     "url": "https://github.com/pandas-dev/pandas/pull/65701#discussion_r3368212012",
+     "pr": 65701,
+     "author": "jbrockmendel",
+     "created_at": "2026-06-06",
+     "quote": "please import at the top"
+    },
+    {
+     "comment_id": 3590872006,
+     "url": "https://github.com/pandas-dev/pandas/pull/66293#discussion_r3590872006",
+     "pr": 66293,
+     "author": "jbrockmendel",
+     "created_at": "2026-07-15",
+     "quote": "import at the top of the file"
+    },
+    {
+     "comment_id": 3604354648,
+     "url": "https://github.com/pandas-dev/pandas/pull/66344#discussion_r3604354648",
+     "pr": 66344,
+     "author": "jbrockmendel",
+     "created_at": "2026-07-17",
+     "quote": "imports at the top of the file"
+    },
+    {
+     "comment_id": 3616203079,
+     "url": "https://github.com/pandas-dev/pandas/pull/66357#discussion_r3616203079",
+     "pr": 66357,
+     "author": "jbrockmendel",
+     "created_at": "2026-07-20",
+     "quote": "i think this belongs in TestUltraJSONTests?"
+    },
+    {
+     "comment_id": 3694248467,
+     "url": "https://github.com/pandas-dev/pandas/pull/66530#discussion_r3694248467",
+     "pr": 66530,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-01",
+     "quote": "belongs in tests.arrays.interval.test_interval?"
+    },
+    {
+     "comment_id": 3744544488,
+     "url": "https://github.com/pandas-dev/pandas/pull/66318#discussion_r3744544488",
+     "pr": 66318,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-09",
+     "quote": "imports at the top of the file"
+    },
+    {
+     "comment_id": 3759903875,
+     "url": "https://github.com/pandas-dev/pandas/pull/64535#discussion_r3759903875",
+     "pr": 64535,
+     "author": "mroeschke",
+     "created_at": "2026-08-11",
+     "quote": "Can you make this a `pytest.fixture`?"
+    },
+    {
+     "comment_id": 3761727286,
+     "url": "https://github.com/pandas-dev/pandas/pull/66584#discussion_r3761727286",
+     "pr": 66584,
+     "author": "rhshadrach",
+     "created_at": "2026-08-11",
+     "quote": "Can you keep the style of these tests consistent with other writers and introduce a `tmp_excel` fixture (see test_odswriter.py or test_xlsxwriter.py for examples)."
+    },
+    {
+     "comment_id": 3769629190,
+     "url": "https://github.com/pandas-dev/pandas/pull/64535#discussion_r3769629190",
+     "pr": 64535,
+     "author": "mroeschke",
+     "created_at": "2026-08-12",
+     "quote": "You can also make this a fixture as part of the `BasePlottingTests` I think like\r\n\r\n```python\r\nclass BasePlottingTests:\r\n\r\n    @pytest.fixture\r\n    def plot_data(self, data):\r\n        return pd.DataFrame(...)\r\n\r\n    def test_plot_on_x_axis(self, plot_data):\r\n        ....\r\n```"
+    },
+    {
+     "comment_id": 3846411929,
+     "url": "https://github.com/pandas-dev/pandas/pull/64535#discussion_r3846411929",
+     "pr": 64535,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-24",
+     "quote": "Good point. what about something like\r\n\r\n```\r\n@pytest.fixture\r\ndef mpl(self, request):\r\n    self.skip_if_no_matplotlib()\r\n    return request.getfixturevalue(\"mpl_cleanup\")\r\n\r\n@pytest.fixture(params=[True, False], ids=[\"skipna\", \"no_skipna\"])\r\ndef plot_data(self, data, request, mp"
+    }
+   ]
+  },
+  {
+   "id": "parametrize-over-repetition",
+   "rule": "Parametrize test cases instead of writing repetitive logic for different inputs or engines.",
+   "why": "This reduces code duplication and improves clarity and maintainability of test suites.",
+   "support": 8,
+   "prs": 8,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3142012035,
+     "url": "https://github.com/pandas-dev/pandas/pull/65332#discussion_r3142012035",
+     "pr": 65332,
+     "author": "rhshadrach",
+     "created_at": "2026-04-25",
+     "quote": "Instead of having two tests at once, can you parametrize.\n\n```python\n@pytest.mark.parametrize(\"test_empty\", [True, False])\n```\n\nThen can do:\n\n```python\nif test_empty:\n    df = df.iloc[:0]\n\n...\n\nif test_empty:\n    expected = DataFrame(...)\nelse:\n    expected = DataFrame(...)\n```"
+    },
+    {
+     "comment_id": 3191559227,
+     "url": "https://github.com/pandas-dev/pandas/pull/65052#discussion_r3191559227",
+     "pr": 65052,
+     "author": "rhshadrach",
+     "created_at": "2026-05-05",
+     "quote": "Can you instead parametrize with\n\n    @pytest.mark.parametrize(\"na_position\", [\"first\", \"last\"])\n\nJust need to set `expected` based on the `na_position` value then."
+    },
+    {
+     "comment_id": 3525475679,
+     "url": "https://github.com/pandas-dev/pandas/pull/66046#discussion_r3525475679",
+     "pr": 66046,
+     "author": "jbrockmendel",
+     "created_at": "2026-07-05",
+     "quote": "parametrize over ascending?"
+    },
+    {
+     "comment_id": 3744711611,
+     "url": "https://github.com/pandas-dev/pandas/pull/65349#discussion_r3744711611",
+     "pr": 65349,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-09",
+     "quote": "can you parametrize over engine like other tests"
+    },
+    {
+     "comment_id": 3808072751,
+     "url": "https://github.com/pandas-dev/pandas/pull/65675#discussion_r3808072751",
+     "pr": 65675,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-18",
+     "quote": "i think you need to parametrize over engine to get the old bug"
+    },
+    {
+     "comment_id": 3848421835,
+     "url": "https://github.com/pandas-dev/pandas/pull/66909#discussion_r3848421835",
+     "pr": 66909,
+     "author": "Alvaro-Kothe",
+     "created_at": "2026-08-24",
+     "quote": "Can this be a parametrized test?"
+    },
+    {
+     "comment_id": 3887344354,
+     "url": "https://github.com/pandas-dev/pandas/pull/66659#discussion_r3887344354",
+     "pr": 66659,
+     "author": "Alvaro-Kothe",
+     "created_at": "2026-08-29",
+     "quote": "This should be parametrized on `bias`"
+    },
+    {
+     "comment_id": 3978835865,
+     "url": "https://github.com/pandas-dev/pandas/pull/68206#discussion_r3978835865",
+     "pr": 68206,
+     "author": "rhshadrach",
+     "created_at": "2026-09-10",
+     "quote": "There are a few different paths through the code here. Can you parametrize over three cases: single EA block; two EA blocks; and a NumPy block. Something like:\n\n```\n\"data, dtype\",\n[\n    ({\"a\": [1, 2, 3]}, \"Int64\"),\n    ({\"a\": [1, 2, 3], \"b\": [4, 5, 6]}, \"Int64\"),\n    ({\"a\": [1, 2"
+    }
+   ]
+  },
+  {
+   "id": "github-issue-linking-in-tests",
+   "rule": "Link every new test to its corresponding GitHub issue using a comment with the issue reference format #GHXXXXX.",
+   "why": "This ensures traceability between tests and the issues they address, improving maintainability and context for future contributors.",
+   "support": 7,
+   "prs": 6,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3142009247,
+     "url": "https://github.com/pandas-dev/pandas/pull/65332#discussion_r3142009247",
+     "pr": 65332,
+     "author": "rhshadrach",
+     "created_at": "2026-04-25",
+     "quote": "Add a reference to the GH issue as a comment on the first line.\n\n```suggestion\ndef test_apply_as_index_false_empty_index_name():\n    # https://github.com/pandas-dev/pandas/issues/48135\n    df = DataFrame({\"A\": [4, 4, 4], \"B\": [9, 9, 9]})\n```"
+    },
+    {
+     "comment_id": 3191551426,
+     "url": "https://github.com/pandas-dev/pandas/pull/65052#discussion_r3191551426",
+     "pr": 65052,
+     "author": "rhshadrach",
+     "created_at": "2026-05-05",
+     "quote": "Can you add a reference to the GitHub issue as a comment on the first line of these tests.\n\n    # https://github.com/pandas-dev/pandas/issues/64977"
+    },
+    {
+     "comment_id": 3252783792,
+     "url": "https://github.com/pandas-dev/pandas/pull/65052#discussion_r3252783792",
+     "pr": 65052,
+     "author": "rhshadrach",
+     "created_at": "2026-05-16",
+     "quote": "Your tests no longer have the reference to the issue. Can you restore these on all added tests."
+    },
+    {
+     "comment_id": 3276999079,
+     "url": "https://github.com/pandas-dev/pandas/pull/65675#discussion_r3276999079",
+     "pr": 65675,
+     "author": "rhshadrach",
+     "created_at": "2026-05-20",
+     "quote": "Any added tests need to contain a link to the issue (or PR if there is no issue).\n\n```suggestion\n    # https://github.com/pandas-dev/pandas/issues/65664\n    df = DataFrame({\"old\": [1, 2, 3]})\n```"
+    },
+    {
+     "comment_id": 3365581403,
+     "url": "https://github.com/pandas-dev/pandas/pull/65806#discussion_r3365581403",
+     "pr": 65806,
+     "author": "rhshadrach",
+     "created_at": "2026-06-05",
+     "quote": "Start tests with a ref to the issue.\n\n```suggestion\n    def test_to_dict_index_into_applies_to_nested_mappings(self, df: DataFrame):\n        # https://github.com/pandas-dev/pandas/issues/65778\n```"
+    },
+    {
+     "comment_id": 3761731425,
+     "url": "https://github.com/pandas-dev/pandas/pull/66584#discussion_r3761731425",
+     "pr": 66584,
+     "author": "rhshadrach",
+     "created_at": "2026-08-11",
+     "quote": "Link any new tests back to corresponding issue (or PR if no issue exists).\n\n```suggestion\ndef test_read_covered_table_cell_value(tmp_path):\n    # https://github.com/pandas-dev/pandas/issues/66579\n```"
+    },
+    {
+     "comment_id": 3952767717,
+     "url": "https://github.com/pandas-dev/pandas/pull/66380#discussion_r3952767717",
+     "pr": 66380,
+     "author": "rhshadrach",
+     "created_at": "2026-09-07",
+     "quote": "```suggestion\n        # GH#66372\n```\n\nI don't think we need to repeat the comment again; the GitHub reference is enough. In addition, the format I'm suggesting is more common."
+    }
+   ]
+  },
+  {
+   "id": "prefer-full-object-equality-assertions",
+   "rule": "Use `tm.assert_frame_equal`, `tm.assert_series_equal`, or similar functions to check the full state of objects, including index, columns, and dtypes.",
+   "why": "This ensures comprehensive validation and prevents subtle regressions due to incomplete comparisons.",
+   "support": 5,
+   "prs": 5,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3133571410,
+     "url": "https://github.com/pandas-dev/pandas/pull/65332#discussion_r3133571410",
+     "pr": 65332,
+     "author": "rhshadrach",
+     "created_at": "2026-04-23",
+     "quote": "Can you assert the full result.\n\n```python\nexpected = DataFrame(...)\ntm.assert_frame_equal(result, expected)\n```"
+    },
+    {
+     "comment_id": 3141998870,
+     "url": "https://github.com/pandas-dev/pandas/pull/65360#discussion_r3141998870",
+     "pr": 65360,
+     "author": "rhshadrach",
+     "created_at": "2026-04-25",
+     "quote": "Check the full state of the object (index, columns, dtypes).\n\n```python\nexpected = DataFrame(...)\ntm.assert_result_equal(result, expected)\n```"
+    },
+    {
+     "comment_id": 3317024563,
+     "url": "https://github.com/pandas-dev/pandas/pull/65711#discussion_r3317024563",
+     "pr": 65711,
+     "author": "rhshadrach",
+     "created_at": "2026-05-28",
+     "quote": "Always test the full state of the object, e.g. \n\n```python\nexpected = Series(...)\ntm.assert_series_equal(result, expected)\n```"
+    },
+    {
+     "comment_id": 3369301437,
+     "url": "https://github.com/pandas-dev/pandas/pull/65807#discussion_r3369301437",
+     "pr": 65807,
+     "author": "rhshadrach",
+     "created_at": "2026-06-07",
+     "quote": "Always check the full state when possible - `expected = DataFrame(...)` as above."
+    },
+    {
+     "comment_id": 3575716543,
+     "url": "https://github.com/pandas-dev/pandas/pull/66136#discussion_r3575716543",
+     "pr": 66136,
+     "author": "rhshadrach",
+     "created_at": "2026-07-14",
+     "quote": "Please check the full state of the result.\n\n```python\nexpected = MultIndex(...)\ntm.assert_index_equal(result, expected)\n```"
+    }
+   ]
+  },
+  {
+   "id": "test-edge-cases-and-coverage",
+   "rule": "Ensure test coverage includes edge cases such as large integers, small sample sizes, and non-standard dtypes.",
+   "why": "Comprehensive coverage helps catch regressions in corner cases that are often sources of bugs.",
+   "support": 5,
+   "prs": 5,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3406270352,
+     "url": "https://github.com/pandas-dev/pandas/pull/65869#discussion_r3406270352",
+     "pr": 65869,
+     "author": "jorisvandenbossche",
+     "created_at": "2026-06-12",
+     "quote": "Can you instead do `ser.index = ser.index.astype(object)` so we are actually testing with object dtype?"
+    },
+    {
+     "comment_id": 3745486314,
+     "url": "https://github.com/pandas-dev/pandas/pull/66148#discussion_r3745486314",
+     "pr": 66148,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-09",
+     "quote": "these are still numpy ints.  dont we need to test with an int that doesnt fit in those bounds?"
+    },
+    {
+     "comment_id": 3751391766,
+     "url": "https://github.com/pandas-dev/pandas/pull/66684#discussion_r3751391766",
+     "pr": 66684,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-10",
+     "quote": "lets just test with both np.int32 and np.int64 here"
+    },
+    {
+     "comment_id": 3839309707,
+     "url": "https://github.com/pandas-dev/pandas/pull/66603#discussion_r3839309707",
+     "pr": 66603,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-23",
+     "quote": "can you add something many-digit like pi to the float parametrization"
+    },
+    {
+     "comment_id": 3938515635,
+     "url": "https://github.com/pandas-dev/pandas/pull/66659#discussion_r3938515635",
+     "pr": 66659,
+     "author": "Alvaro-Kothe",
+     "created_at": "2026-09-04",
+     "quote": "Also, does it have test coverage small sample size, where `bias=False` returns `NAN` and `bias=True` doesn't?"
+    }
+   ]
+  },
+  {
+   "id": "use-descriptive-variables-and-comments",
+   "rule": "Use clear variable names and comments that explain the purpose, not just repeat the code.",
+   "why": "Clear naming and meaningful comments improve readability and maintainability of tests and code.",
+   "support": 5,
+   "prs": 5,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3142132745,
+     "url": "https://github.com/pandas-dev/pandas/pull/65342#discussion_r3142132745",
+     "pr": 65342,
+     "author": "rhshadrach",
+     "created_at": "2026-04-25",
+     "quote": "Can you combine these two checks into the same line. Also the comment should explain why, e.g.\n\n    # When result is a Series, there is no other axis to sort."
+    },
+    {
+     "comment_id": 3276994994,
+     "url": "https://github.com/pandas-dev/pandas/pull/65675#discussion_r3276994994",
+     "pr": 65675,
+     "author": "rhshadrach",
+     "created_at": "2026-05-20",
+     "quote": "Comment repeats the code; can you remove."
+    },
+    {
+     "comment_id": 3371752832,
+     "url": "https://github.com/pandas-dev/pandas/pull/65823#discussion_r3371752832",
+     "pr": 65823,
+     "author": "jorisvandenbossche",
+     "created_at": "2026-06-08",
+     "quote": "The logic here is clear, but I was first confused about the name `result_missing_mask`, because you are checking here for the dtypes where the result does _not_ use a mask for the missing values"
+    },
+    {
+     "comment_id": 3408433104,
+     "url": "https://github.com/pandas-dev/pandas/pull/65873#discussion_r3408433104",
+     "pr": 65873,
+     "author": "jbrockmendel",
+     "created_at": "2026-06-13",
+     "quote": "nitpick pls avoid 1-letter variable names"
+    },
+    {
+     "comment_id": 3768800149,
+     "url": "https://github.com/pandas-dev/pandas/pull/65691#discussion_r3768800149",
+     "pr": 65691,
+     "author": "jbrockmendel",
+     "created_at": "2026-08-12",
+     "quote": "this comment isnt adding anything"
+    }
+   ]
+  },
+  {
+   "id": "avoid-unnecessary-complexity-in-tests",
+   "rule": "Use the simplest possible constructs in tests, avoiding unnecessary DataFrame constructions, deep copies, or indirections.",
+   "why": "Simpler tests are easier to understand, debug, and maintain while still validating the intended behavior.",
+   "support": 4,
+   "prs": 3,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3336580516,
+     "url": "https://github.com/pandas-dev/pandas/pull/65052#discussion_r3336580516",
+     "pr": 65052,
+     "author": "jbrockmendel",
+     "created_at": "2026-06-01",
+     "quote": "can we do this without constructing a DataFrame?"
+    },
+    {
+     "comment_id": 3350702221,
+     "url": "https://github.com/pandas-dev/pandas/pull/63635#discussion_r3350702221",
+     "pr": 63635,
+     "author": "jbrockmendel",
+     "created_at": "2026-06-03",
+     "quote": "can you pass deep=False here"
+    },
+    {
+     "comment_id": 3595478244,
+     "url": "https://github.com/pandas-dev/pandas/pull/66238#discussion_r3595478244",
+     "pr": 66238,
+     "author": "WillAyd",
+     "created_at": "2026-07-16",
+     "quote": "Let's get rid of this indirection and just refer to the argument directly"
+    },
+    {
+     "comment_id": 3599286500,
+     "url": "https://github.com/pandas-dev/pandas/pull/66238#discussion_r3599286500",
+     "pr": 66238,
+     "author": "WillAyd",
+     "created_at": "2026-07-16",
+     "quote": "Let's remove unnecessary indirections like this"
+    }
+   ]
+  },
+  {
+   "id": "check-dtype-and-index-codes-correctly",
+   "rule": "Check the dtype of MultiIndex codes and ensure expected and actual dtypes match without relying on `check_dtype=False`.",
+   "why": "Accurate dtype checking prevents silent mismatches and ensures correct behavior across platforms.",
+   "support": 3,
+   "prs": 3,
+   "since": "2026",
+   "evidence": [
+    {
+     "comment_id": 3312301203,
+     "url": "https://github.com/pandas-dev/pandas/pull/65701#discussion_r3312301203",
+     "pr": 65701,
+     "author": "jorisvandenbossche",
+     "created_at": "2026-05-27",
+     "quote": "Can you check the dtype of the codes of `mi2`? Because I think the MultiIndex() constructor will normalize the dtypes, even when constructed this way (that is the reason that in the issue https://github.com/pandas-dev/pandas/issues/65700 I assigned to `_codes` directly to constru"
+    },
+    {
+     "comment_id": 3889687415,
+     "url": "https://github.com/pandas-dev/pandas/pull/63831#discussion_r3889687415",
+     "pr": 63831,
+     "author": "rhshadrach",
+     "created_at": "2026-08-30",
+     "quote": "This PR is directly impacting the dtype, can you refine this test so that you don't need to pass `check_dtype=False`."
+    },
+    {
+     "comment_id": 3940814235,
+     "url": "https://github.com/pandas-dev/pandas/pull/68090#discussion_r3940814235",
+     "pr": 68090,
+     "author": "rhshadrach",
+     "created_at": "2026-09-05",
+     "quote": "Can you instead compare to a hard-coded dict and drop `check_dtype=False`."
+    }
+   ]
+  }
+ ]
+}
