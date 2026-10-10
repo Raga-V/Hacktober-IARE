@@ -114,6 +114,29 @@ pre { background: var(--surface); border: 1px solid var(--line); border-radius: 
   font: 12.5px/1.65 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; color: var(--ink-2); }
 .valid { color: var(--ok); font-weight: 500; font-size: 14px; margin: 0 0 12px; }
 
+/* Checklist */
+.check-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; padding: 18px 0 10px; }
+.check-head p { margin: 0; color: var(--ink-2); font-size: 14.5px; max-width: 560px; }
+.check-count { font: 600 22px var(--serif); font-variant-numeric: tabular-nums; }
+.check-bar { height: 3px; background: var(--line); margin-bottom: 4px; }
+.check-bar div { height: 100%; width: 0; background: var(--ink); transition: width .3s; }
+.citem { display: grid; grid-template-columns: 22px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+.citem input { width: 17px; height: 17px; margin: 3px 0 0; accent-color: var(--ink); cursor: pointer; }
+.citem span { font-size: 15px; line-height: 1.5; }
+.citem small { display: block; color: var(--ink-3); font: 12px var(--mono); margin-top: 3px; }
+.citem input:checked + span { color: var(--ink-3); text-decoration: line-through; text-decoration-color: var(--line-2); }
+.ready { margin-top: 16px; padding: 14px 16px; border: 1px solid var(--ink); border-radius: 6px; font-size: 14.5px; }
+.ready[hidden] { display: none; }
+
+/* Hotspots */
+.hot-intro { padding: 18px 0 6px; color: var(--ink-2); font-size: 14.5px; margin: 0; }
+.hot { display: grid; grid-template-columns: minmax(0, 1.3fr) 1fr; gap: 6px 20px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: center; }
+.hot code { font-size: 13px; overflow-wrap: anywhere; }
+.hot .hbar { display: flex; align-items: center; gap: 10px; font: 12.5px var(--mono); color: var(--ink-3); }
+.hot .hbar i { display: block; height: 8px; background: var(--ink); min-width: 2px; }
+.hot .rules { grid-column: 1 / -1; font-size: 13px; color: var(--ink-2); }
+.hot .rules b { font: 500 12px var(--mono); color: var(--ink-3); margin-right: 4px; }
+
 /* Proof */
 .proof { margin-top: 44px; }
 .proof h2 { font: 600 22px var(--serif); margin: 0 0 4px; }
@@ -197,7 +220,8 @@ async function open(slug, scroll = true) {
   current = slug;
   document.querySelectorAll(".pill").forEach((b) => b.setAttribute("aria-pressed", b.dataset.slug === slug));
   $("#repoInput").value = slug.replace("__", "/");
-  history.replaceState(null, "", `?repo=${encodeURIComponent(slug)}`);
+  const tab = new URLSearchParams(location.search).get("tab");
+  history.replaceState(null, "", `?repo=${encodeURIComponent(slug)}${tab ? `&tab=${encodeURIComponent(tab)}` : ""}`);
   const base = `../out/${slug}/`;
   const [rules, ev, meta, skill] = await Promise.all(
     ["rules.json", "eval.json", "meta.json", "skill.json"].map((f) => get(base + f).catch(() => null)));
@@ -240,6 +264,8 @@ function render({rules, ev, meta, skill, md, base}) {
 
     <div class="tabs" role="tablist">
       <button role="tab" aria-selected="true" data-tab="rules">Rules<span class="count">${n}</span></button>
+      <button role="tab" aria-selected="false" data-tab="checklist">Pre-flight checklist</button>
+      <button role="tab" aria-selected="false" data-tab="hotspots">Hotspots</button>
       <button role="tab" aria-selected="false" data-tab="check">Check a PR</button>
       <button role="tab" aria-selected="false" data-tab="skill">SKILL.md</button>
     </div>
@@ -269,6 +295,23 @@ function render({rules, ev, meta, skill, md, base}) {
           </div>
         </div>`).join("") || `<p class="rule">No rule met the evidence threshold.</p>`}
       </div>
+    </div>
+
+    <div class="panel" id="p-checklist" hidden>
+      <div class="check-head">
+        <p>Before you open a pull request to ${esc(rules.repo)}, check your change against what maintainers keep asking for.</p>
+        <span class="check-count" id="ccount">0 / ${n}</span>
+      </div>
+      <div class="check-bar"><div id="cbar"></div></div>
+      ${rules.rules.map((r, i) => `<label class="citem"><input type="checkbox" data-c="${i}">
+        <span>${esc(r.rule)}<small>${r.support} maintainer comments asked for this</small></span></label>`).join("")}
+      <div class="ready" id="ready" hidden><b>Ready to open your PR.</b> You've covered every rule ${esc(name)} maintainers repeat most.
+        ${openPr ? `Want agents to do this for you? <a href="${esc(openPr)}" target="_blank" rel="noopener">Contribute the skill</a>.` : ""}</div>
+    </div>
+
+    <div class="panel" id="p-hotspots" hidden>
+      <p class="hot-intro">Where in the codebase maintainers enforce these rules, from the files their review comments were left on.</p>
+      <div id="hotList"><p class="hot-intro">Loading…</p></div>
     </div>
 
     <div class="panel" id="p-check" hidden>
@@ -317,12 +360,56 @@ function render({rules, ev, meta, skill, md, base}) {
     document.querySelectorAll(".rule[data-written]").forEach((r) => (r.hidden =
       b.dataset.filter === "unwritten" ? r.dataset.written === "1" : b.dataset.filter === "written" ? r.dataset.written === "0" : false));
   }));
+  const tab = new URLSearchParams(location.search).get("tab");
+  if (tab) document.querySelector(`.tabs [data-tab="${CSS.escape(tab)}"]`)?.click();
+  wireChecklist(n);
+  loadHotspots(rules, base);
   document.querySelectorAll("[data-ev]").forEach((b) => b.addEventListener("click", () => {
     const el = $(`#ev-${b.dataset.ev}`); el.hidden = !el.hidden;
     b.setAttribute("aria-expanded", !el.hidden); b.textContent = el.hidden ? "Show comments" : "Hide comments";
   }));
   $("#checkBtn").addEventListener("click", runCheck);
   setTimeout(() => document.querySelectorAll(".fill").forEach((f) => (f.style.width = f.dataset.w + "%")), 200);
+}
+
+function wireChecklist(n) {
+  const key = `lore-checklist-${current}`;
+  let saved = [];
+  try { saved = JSON.parse(localStorage.getItem(key) || "[]"); } catch {}
+  const boxes = [...document.querySelectorAll("[data-c]")];
+  const update = () => {
+    const done = boxes.filter((b) => b.checked).length;
+    $("#ccount").textContent = `${done} / ${n}`;
+    $("#cbar").style.width = `${n ? (100 * done) / n : 0}%`;
+    $("#ready").hidden = done !== n || !n;
+    try { localStorage.setItem(key, JSON.stringify(boxes.filter((b) => b.checked).map((b) => +b.dataset.c))); } catch {}
+  };
+  boxes.forEach((b) => { b.checked = saved.includes(+b.dataset.c); b.addEventListener("change", update); });
+  update();
+}
+
+async function loadHotspots(rules, base) {
+  let comments = [];
+  try { comments = await get(base + "comments.json"); } catch {}
+  const path = new Map(comments.map((c) => [c.id, c.path]));
+  const areas = new Map();
+  rules.rules.forEach((r, i) => r.evidence.forEach((e) => {
+    const p = path.get(e.comment_id);
+    if (!p) return;
+    const parts = p.split("/");
+    const dir = parts.length > 2 ? parts.slice(0, 3).join("/") + "/" : parts.length > 1 ? parts[0] + "/" : p;
+    const a = areas.get(dir) || {n: 0, rules: new Set()};
+    a.n += 1; a.rules.add(i);
+    areas.set(dir, a);
+  }));
+  const top = [...areas.entries()].sort((x, y) => y[1].n - x[1].n).slice(0, 8);
+  const max = top[0]?.[1].n || 1;
+  $("#hotList").innerHTML = top.map(([dir, a]) => `<div class="hot">
+    <code>${esc(dir)}</code>
+    <div class="hbar"><i style="width:${Math.round((100 * a.n) / max)}%"></i>${a.n}</div>
+    <div class="rules">${[...a.rules].sort((x, y) => x - y).slice(0, 3).map((i) =>
+      `<div><b>${String(i + 1).padStart(2, "0")}</b>${esc(rules.rules[i].rule)}</div>`).join("")}${a.rules.size > 3 ? `<div style="color:var(--ink-3)">+ ${a.rules.size - 3} more rules</div>` : ""}</div>
+  </div>`).join("") || `<p class="hot-intro">No file paths recorded for this repository's evidence.</p>`;
 }
 
 async function runCheck() {
